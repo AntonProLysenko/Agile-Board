@@ -1,11 +1,14 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios'
 import { Link } from 'react-router-dom';
 
 function App() {
   const [tasks, setTasks] = useState({})
   const [buttonPressed, setButtonPressed] = useState (false)
+  const entry = useRef(null)
+  const statusRef = useRef(null)
+
 
 
   useEffect(()=>{
@@ -33,9 +36,7 @@ function App() {
     if (status === 200){
       setButtonPressed(!buttonPressed)
     }else{
-
       console.log("Something went wrong!");
-      
     }
     } catch (error) {
       
@@ -43,6 +44,29 @@ function App() {
       
     }
   };
+
+
+
+
+  const handleSubmit = async (evt) => {
+    evt.preventDefault();
+  
+    try {
+      const { status } = await axios.post('http://localhost:3001/tasks', {
+        entry: entry.current.value,
+        status: statusRef.current.value.toUpperCase,
+      });
+      if (status === 200){//using axios when button clicked(fetchin data again)
+        setButtonPressed(!buttonPressed)
+      }else{
+        console.log("Something went wrong!"); 
+      }
+      statusRef = null
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  
 
   return (
     <div className="App">
@@ -125,6 +149,22 @@ function App() {
         </div>
       </div>
     </div>
+    <div className="formContainer">
+  <form className="form"onSubmit={handleSubmit}>
+    <label>
+      Entry: <input type="text" ref={entry} />
+    </label>
+    <label>
+      Status:
+      <select ref={statusRef}>
+        <option value="to-do">To-Do</option>
+        <option value="pending">Pending</option>
+        <option value="completed">Completed</option>
+      </select>
+    </label>
+    <button type='submit' className="submit" >Add</button>
+  </form>
+</div>
   </div>
   );
 }
