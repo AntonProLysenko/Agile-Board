@@ -1,4 +1,4 @@
-const {Schema, model} = reqire('mongoose')
+const {Schema, model} = require('./connection')
 
 const taskSchema = Schema({
     entry: {
