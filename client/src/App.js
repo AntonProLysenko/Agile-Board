@@ -61,7 +61,7 @@ function App() {
       }else{
         console.log("Something went wrong!"); 
       }
-      statusRef = null
+      entry.current.value = ""
     } catch (err) {
       console.log(err);
     }
