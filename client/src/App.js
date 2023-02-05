@@ -76,8 +76,8 @@ function App() {
     <div className="App">
       <div className="container">
         <div id="to-do" className="section">
-          <h2>To-Do</h2>
           <div className="list">
+            <h2>To-Do</h2>
             {tasks["TO-DO"]
               ? tasks["TO-DO"].map((task) => {
                   return (
@@ -106,8 +106,8 @@ function App() {
           </div>
         </div>
         <div id="pending" className="section">
-          <h2>Pending</h2>
           <div className="list">
+            <h2>Pending</h2>
             {tasks["PENDING"]
               ? tasks["PENDING"].map((task) => {
                   return (
@@ -137,8 +137,8 @@ function App() {
           </div>
         </div>
         <div id="completed" className="section">
-          <h2>Completed</h2>
           <div className="list">
+            <h2>Completed</h2>
             {tasks["COMPLETED"]
               ? tasks["COMPLETED"].map((task) => {
                   return (
@@ -166,6 +166,11 @@ function App() {
               : ""}
           </div>
         </div>
+      </div>
+      <div className="addButton">
+        <button>
+          <i class="fa-sharp fa-solid fa-plus-large"></i> Add New Task
+        </button>
       </div>
       <div className="formContainer">
         <form className="form" onSubmit={handleSubmit}>

@@ -42,7 +42,7 @@ body,
 header,
 h1 {
   text-align: center;
- 
+
   margin: 0;
   padding: 0;
 }
@@ -94,9 +94,9 @@ body{
   align-items: center;
   height: 10vh;
   width: 27vw;
-  border: 3px solid black;
   border-radius: 5px;
-  background-color: #ece9d4;
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .button {
@@ -107,14 +107,18 @@ body{
 .list {
   height: 700px;
   width: 30vw;
-  border: 5px solid black;
   border-radius: 5px;
-  background-color: azure;
+  background-color: rgba(235, 236, 240, 0.9);
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   overflow: auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+}
+
+.list>h2{
+  color:rgb(23 43 78)
 }
 
 .formContainer {
