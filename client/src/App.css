@@ -111,7 +111,7 @@ h1 {
 }
 
 .formContainer {
-  height: 10vh;
+  height: fit-content;
   border: 2px solid black;
   width: 40vw;
   border: 2px solid black;

@@ -173,7 +173,7 @@ function App() {
             Entry: <input type="text" ref={entry} />
           </label>
           <label>
-            Body: <input type="text" ref={body} />
+            Body: <textarea type="text" ref={body} />
           </label>
           <label>
             Status:
