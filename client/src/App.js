@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
+import AddTaskForm from './components/AddTaskForm';
+
 
 
 
@@ -177,28 +179,9 @@ function App() {
           <FontAwesomeIcon icon={faPlus} /> Add New Task
         </button>
       </div>
-      <div className="formContainer">
-        <form className="form" onSubmit={handleSubmit}>
-          <label>
-            Entry: <input type="text" ref={entry} />
-          </label>
-          <label>
-            Body: <textarea type="text" ref={body} />
-          </label>
-          <label>
-            Status:
-            <select ref={statusRef}>
-              <option value="to-do">To-Do</option>
-              <option value="pending">Pending</option>
-              <option value="completed">Completed</option>
-            </select>
-          </label>
-          <button type="submit" className="submit">
-            <FontAwesomeIcon icon={faPlus} /> &nbsp;
-            Add
-          </button>
-        </form>
-      </div>
+
+      <AddTaskForm entry={entry} body={body} statusRef={statusRef} handleSubmit={handleSubmit}/>
+      
     </div>
   );
 }
