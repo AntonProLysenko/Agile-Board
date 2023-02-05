@@ -1,15 +1,7 @@
 import React from 'react'
 
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-
-export default function AddTaskForm({entry, body, statusRef, handleSubmit}) {
-
-
-
-
-
+export default function AddTaskForm({entry, body, statusRef, handleSubmit, plusIcon}) {
   return (
     <div className="formContainer">
       <form className="form" onSubmit={handleSubmit}>
@@ -28,7 +20,7 @@ export default function AddTaskForm({entry, body, statusRef, handleSubmit}) {
           </select>
         </label>
         <button type="submit" className="submit">
-          <FontAwesomeIcon icon={faPlus} /> &nbsp; Add
+          {plusIcon} &nbsp; Add
         </button>
       </form>
     </div>
