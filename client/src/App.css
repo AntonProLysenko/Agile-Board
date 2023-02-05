@@ -42,9 +42,16 @@ body,
 header,
 h1 {
   text-align: center;
-  background-color: burlywood;
+ 
   margin: 0;
   padding: 0;
+}
+body{
+ background-image: url(https://source.unsplash.com/random/2400×1600/?mountainrange);
+  /* background-size:100% 100%; */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .layout {
