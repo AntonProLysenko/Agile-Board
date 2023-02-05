@@ -131,12 +131,13 @@ body{
 }
 
 .formContainer {
-  height: fit-content;
+  height: 50vh;
   width: 40vw;
   margin: 20px, 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* justify-content: center; */
   padding: 5px;
   border-radius: 5px;
   background-color: rgba(235, 236, 240, 0.9);
@@ -147,14 +148,31 @@ body{
   left: 50%;
   transform: translate(-50%,-50%);
 }
+.close{
+  align-self: flex-end;
+  border:none;
+  font-size: x-large;
+  background-color: rgba(255, 255, 255, 0.15);
+}
 
 .form {
   width: inherit;
-  height: inherit;
+  height: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+}
+.form>textarea{
+  height: 30%;
+  width:50%;
+  border: none;
+   border-radius: 2px;
+}
+.form>input{
+  width:50%;
+  border: none;
+  border-radius: 2px;
 }
 
 .submit {
