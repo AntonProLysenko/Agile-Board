@@ -2,6 +2,11 @@ import './App.css';
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios'
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+
+
+
 
 function App() {
   const [tasks, setTasks] = useState({})
@@ -169,7 +174,7 @@ function App() {
       </div>
       <div className="addButton">
         <button>
-          <i class="fa-sharp fa-solid fa-plus-large"></i> Add New Task
+          <FontAwesomeIcon icon={faPlus} /> Add New Task
         </button>
       </div>
       <div className="formContainer">
@@ -189,6 +194,7 @@ function App() {
             </select>
           </label>
           <button type="submit" className="submit">
+            <FontAwesomeIcon icon={faPlus} /> &nbsp;
             Add
           </button>
         </form>
