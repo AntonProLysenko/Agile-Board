@@ -7,15 +7,18 @@ import Lists from "./components/Lists";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 
 
 
 const plusIcon = <FontAwesomeIcon icon={faPlus} />
+const closeIcon = <FontAwesomeIcon icon={faXmark} />;
 
 function App() {
   const [tasks, setTasks] = useState({})
   const [buttonPressed, setButtonPressed] = useState (false)
+  const[isOpen, setIsOpen] = useState(false)
   const entry = useRef(null)
   const body = useRef(null);
   const statusRef = useRef(null)
@@ -84,12 +87,12 @@ function App() {
       <Lists tasks = {tasks} handleClick = {handleClick}/>
       
       <div className="addButton">
-        <button>
+        <button onClick={()=>setIsOpen(true)}>
          {plusIcon} Add New Task
         </button>
       </div>
 
-      <AddTaskForm entry={entry} body={body} statusRef={statusRef} handleSubmit={handleSubmit} plusIcon={plusIcon} />
+      <AddTaskForm open = {isOpen} entry={entry} body={body} statusRef={statusRef} handleSubmit={handleSubmit} onClose={()=>setIsOpen(false)} plusIcon={plusIcon} closeIcon={closeIcon} />
       
     </div>
   );
