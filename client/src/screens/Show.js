@@ -4,9 +4,6 @@ import axios from "axios";
 
 function Show() {
   const idpar = useParams();
-
-  console.log(idpar.id);
-  
   const [task, setTask] = useState({});
   useEffect(() => {
 
@@ -17,6 +14,9 @@ function Show() {
         console.log(data);
         
         setTask(data);
+
+        console.log();
+        
 
       } catch (error) {
         console.log(error)

@@ -55,15 +55,17 @@ function App() {
     try {
       const { status } = await axios.post('http://localhost:3001/tasks', {
         entry: entry.current.value,
-        body: entry.current.value,
+        body: body.current.value,
         status: statusRef.current.value.toUpperCase,
       });
       if (status === 200){//using axios when button clicked(fetchin data again)
         setButtonPressed(!buttonPressed)
+         entry.current.value = "";
+         body.current.value = "";
       }else{
         console.log("Something went wrong!"); 
       }
-      entry.current.value = ""
+      // entry.current.value = ""
     } catch (err) {
       console.log(err);
     }
