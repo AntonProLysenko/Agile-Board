@@ -25,12 +25,13 @@ function Show() {
 
     getTask(idpar.id);
   }, []);
-
+console.log(task)
   return(
 
     <div>
       <h1>{task.entry}</h1>
       <p>{task.body}</p>
+      <p>Last update: {task.updatedAt}</p>
     </div>
   ) 
 }

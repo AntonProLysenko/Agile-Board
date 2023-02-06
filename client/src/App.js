@@ -19,6 +19,7 @@ function App() {
   const [tasks, setTasks] = useState({})
   const [buttonPressed, setButtonPressed] = useState (false)
   const[isOpen, setIsOpen] = useState(false)
+  const[listStatus, setListStatus]= useState()
   const entry = useRef(null)
   const body = useRef(null);
   const statusRef = useRef(null)
@@ -28,10 +29,22 @@ function App() {
   useEffect(()=>{
     const fetchTask = async()=>{
     try {
-      const { data } = await axios.get('http://localhost:3001/tasks/table');//promising to fetch using axios
-        setTasks(data)
+      const { data } = await axios.get("http://localhost:3001/tasks/table"); //promising to fetch using axios
+      setTasks(data);
+
+
+       const lists = document.querySelectorAll(".section");
+       Object.keys(lists).forEach(function (i) {
+         lists[i].addEventListener("click", (evt) => {
+            // evt.stopPropagation()
+
+            console.log(evt.target.id);
+            
+            setListStatus(evt.target.id)
+         });
+       });
     } catch (error) {
-     alert(error);
+     alert("Something went wrong!"+error);
     }
   };
   fetchTask()
@@ -51,7 +64,7 @@ function App() {
       alert("Something went wrong!");
     }
     } catch (error) {
-      alert(error);
+      alert("Something went wrong!"+ error);
     }
   };
 
@@ -76,7 +89,7 @@ function App() {
       }
       // entry.current.value = ""
     } catch (err) {
-      alert(err);
+      alert("Something went wrong!"+err);
     }
   };
   
@@ -84,15 +97,15 @@ function App() {
   return (
     <div className="App">
 
-      <Lists tasks = {tasks} handleClick = {handleClick}/>
+      <Lists tasks = {tasks} handleClick = {handleClick} plusIcon={plusIcon} setIsOpen={setIsOpen}/>
       
-      <div className="addButton">
+      {/* <div className="addButton">
         <button onClick={()=>setIsOpen(true)}>
          {plusIcon} Add New Task
         </button>
-      </div>
+      </div> */}
 
-      <AddTaskForm open = {isOpen} entry={entry} body={body} statusRef={statusRef} handleSubmit={handleSubmit} onClose={()=>setIsOpen(false)} plusIcon={plusIcon} closeIcon={closeIcon} />
+      <AddTaskForm open={isOpen} entry={entry} body={body} statusRef={statusRef} handleSubmit={handleSubmit} onClose={()=>setIsOpen(false)} plusIcon={plusIcon} closeIcon={closeIcon} listStatus = {listStatus}/>
       
     </div>
   );

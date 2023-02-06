@@ -1,17 +1,30 @@
-import React from "react";
 
+import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Lists({ tasks, handleClick }) {
+
+
+export default function Lists({ tasks, handleClick, plusIcon, setIsOpen }) {
+  // if (tasks) {
+  //   const lists = document.querySelectorAll(".list");
+  //   Object.keys(lists).forEach(function (i) {
+  //     lists[i].addEventListener("click", (evt) => {
+  //       // evt.preventDefault()
+  //       console.log(evt.props);
+  //     });
+  //   });
+  // }
+
   return (
     <div className="container">
-      <div id="to-do" className="section">
+      <div className="section">
         <div className="list">
           <h2>To-Do</h2>
+
           {tasks["TO-DO"]
-            ? tasks["TO-DO"].map((task) => {
+            ? tasks["TO-DO"].map((task, id) => {
                 return (
-                  <div className="task">
+                  <div className="task" key={id}>
                     <Link to={`/${task._id}`}>{task.entry}</Link>
 
                     <div className="moveBtn">
@@ -35,15 +48,22 @@ export default function Lists({ tasks, handleClick }) {
                 );
               })
             : ""}
+          <div className="addButton">
+            <button id="to-do" onClick={() => setIsOpen(true)}>
+              {plusIcon} Add New Task
+            </button>
+          </div>
         </div>
       </div>
-      <div id="pending" className="section">
+
+      <div className="section">
         <div className="list">
           <h2>Pending</h2>
           {tasks["PENDING"]
-            ? tasks["PENDING"].map((task) => {
+            ? tasks["PENDING"].map((task, id) => {
+                // console.log(task.status)
                 return (
-                  <div className="task">
+                  <div className="task" key={id}>
                     <Link to={`/${task._id}`}>{task.entry}</Link>
                     <div className="moveBtn">
                       <button
@@ -66,15 +86,21 @@ export default function Lists({ tasks, handleClick }) {
                 );
               })
             : ""}
+          <div className="addButton">
+            <button id="pending" onClick={() => setIsOpen(true)}>
+              {plusIcon} Add New Task
+            </button>
+          </div>
         </div>
       </div>
-      <div id="completed" className="section">
+
+      <div className="section">
         <div className="list">
           <h2>Completed</h2>
           {tasks["COMPLETED"]
-            ? tasks["COMPLETED"].map((task) => {
+            ? tasks["COMPLETED"].map((task, id) => {
                 return (
-                  <div className="task">
+                  <div className="task" key={id}>
                     <Link to={`/${task._id}`}>{task.entry}</Link>
                     <div className="moveBtn">
                       <button
@@ -96,6 +122,11 @@ export default function Lists({ tasks, handleClick }) {
                 );
               })
             : ""}
+          <div className="addButton">
+            <button id="completed" onClick={() => setIsOpen(true)}>
+              {plusIcon} Add New Task
+            </button>
+          </div>
         </div>
       </div>
     </div>
