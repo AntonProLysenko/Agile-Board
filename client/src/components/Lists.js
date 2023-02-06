@@ -1,8 +1,8 @@
-import React from 'react'
+import React from "react";
 
 import { Link } from "react-router-dom";
 
-export default function Lists({tasks, handleClick}) {
+export default function Lists({ tasks, handleClick }) {
   return (
     <div className="container">
       <div id="to-do" className="section">
@@ -13,7 +13,8 @@ export default function Lists({tasks, handleClick}) {
                 return (
                   <div className="task">
                     <Link to={`/${task._id}`}>{task.entry}</Link>
-                    <div>
+
+                    <div className="moveBtn">
                       <button
                         onClick={() => {
                           handleClick("PENDING", task._id);
@@ -21,6 +22,7 @@ export default function Lists({tasks, handleClick}) {
                       >
                         Pending
                       </button>
+
                       <button
                         onClick={() => {
                           handleClick("COMPLETED", task._id);
@@ -43,7 +45,7 @@ export default function Lists({tasks, handleClick}) {
                 return (
                   <div className="task">
                     <Link to={`/${task._id}`}>{task.entry}</Link>
-                    <div>
+                    <div className="moveBtn">
                       <button
                         onClick={() => {
                           handleClick("TO-DO", task._id);
@@ -74,7 +76,7 @@ export default function Lists({tasks, handleClick}) {
                 return (
                   <div className="task">
                     <Link to={`/${task._id}`}>{task.entry}</Link>
-                    <div>
+                    <div className="moveBtn">
                       <button
                         onClick={() => {
                           handleClick("PENDING", task._id);

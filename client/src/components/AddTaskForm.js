@@ -34,7 +34,7 @@ export default function AddTaskForm({open, entry, body, statusRef, handleSubmit,
               <option value="completed">Completed</option>
             </select>
           </label>
-          <button type="submit" className="submit">
+          <button type="submit" className="button">
             {plusIcon} &nbsp; Add
           </button>
         </form>

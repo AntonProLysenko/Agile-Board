@@ -1,53 +1,18 @@
-.App {
-  text-align: center;
+*{
+  margin: 0;
+  padding: 0;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-
 body,
 header,
 h1 {
   text-align: center;
-
   margin: 0;
   padding: 0;
 }
 body{
- background-image: url(https://source.unsplash.com/random/2400×1600/?mountainrange);
+  height: 100vh;
+  width:100vw;
+ background-image: url(https://source.unsplash.com/random/3840x2160/?wallpapers);
   /* background-size:100% 100%; */
   background-position: center;
   background-repeat: no-repeat;
@@ -87,7 +52,7 @@ body{
   height: 80vh;
   width: 100vw;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-around;
 }
 .section {
@@ -108,14 +73,12 @@ body{
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.button {
-  height: 35px;
-  width: 50px;
-}
 
 .list {
-  height: 700px;
+  height: fit-content;
+  max-height: 80vh;
   width: 30vw;
+  padding: 10px;
   border-radius: 5px;
   background-color: rgba(235, 236, 240, 0.9);
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
@@ -128,6 +91,17 @@ body{
 
 .list>h2{
   color:rgb(23 43 78)
+}
+.moveBtn{
+ width:30%;
+ display: flex;
+ justify-content: space-around
+}
+.moveBtn>button{
+  padding: 3px;
+  border:none;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 .formContainer {
@@ -173,10 +147,6 @@ body{
   width:50%;
   border: none;
   border-radius: 2px;
-}
-
-.submit {
-  width: 150px;
 }
 
 .showPage {
