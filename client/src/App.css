@@ -25,6 +25,7 @@ body{
 
 .title {
   font-size: 50px;
+ 
 }
 
 .App {
@@ -132,6 +133,25 @@ body{
   font-size: x-large;
   background-color: rgba(255, 255, 255, 0.15);
 }
+
+.trashBin{
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  font-size: xx-large;
+  color: whitesmoke;
+  /* box-shadow: 0px 0px 20px 7px #1C1C1C; */
+  border-radius: 250%;
+  align-self: flex-end;
+  margin-right: 30px;
+  padding: 0;
+}
+.fa-trash-can{
+  filter:drop-shadow(1px 1px 1px  rgb(11, 11, 11))}
+
+
+/* .fa-trash-can{text-shadow:1px 6px rgba(0, 0, 0, 0.5)}
+
+.fa-trash-can{box-shadow:0 .5rem 1rem 0 rgba(0, 0, 0, 0.5),0 .375rem 1.25rem 0 rgba(0, 0, 0, 0.19)} */
 
 .form {
   width: inherit;

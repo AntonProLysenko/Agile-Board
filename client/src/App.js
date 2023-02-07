@@ -136,10 +136,10 @@ function App() {
         closeIcon={closeIcon}
         listStatus={listStatus}
       />
-      
+
       <TrashBin tasks={tasks} open={showTrashBin} handleClick={handleClick} onClose={() => setShowTrashBin(false)} closeIcon={closeIcon} />
 
-      <button onClick={() => setShowTrashBin(true)}>{TrashBinIcon}</button>
+      <i className='trashBin' onClick={() => setShowTrashBin(true)}>{TrashBinIcon}</i>
     </div>
   );
 }
