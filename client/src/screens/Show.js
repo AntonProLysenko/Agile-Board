@@ -26,12 +26,19 @@ const handleArchivation = async (statusChange,currentStatus, id) => {
 
     console.log(task.prevStatus);
     
+    if (currentStatus !== "ARCHIVE"){
+        const { status, prevStatus } = await axios.put(`http://localhost:3001/tasks/${id}`, {
+          status: statusChange,
+          prevStatus: currentStatus,
+          
+        });
+    }else{
+      await axios.delete(`http://localhost:3001/tasks/${id}`);
+    }
 
-    const { status, prevStatus } = await axios.put(`http://localhost:3001/tasks/${id}`, {
-      status: statusChange,
-      prevStatus: currentStatus,
 
-    });
+    // console.log(status);
+    
     // if (status === 200 && prevStatus ===200) {
     //   // setButtonPressed(!buttonPressed);
     // } else {
@@ -46,9 +53,15 @@ const handleArchivation = async (statusChange,currentStatus, id) => {
       <h1>{task.entry}</h1>
       <p>{task.body}</p>
       <p>Last update: {task.updatedAt}</p>
-      <button onClick={() => {handleArchivation("ARCHIVE", task.status, task._id); navigation(`/`);}}>
+      {task.status === "ARCHIVE"
+         ?<button onClick={() => {handleArchivation("ARCHIVE", task.status, task._id); navigation(`/`);}}>
+        Delete Forever
+      </button>
+      :<button onClick={() => {handleArchivation("ARCHIVE", task.status, task._id); navigation(`/`);}}>
         Delete
       </button>
+      }
+      
     </div>
   ); 
 }
