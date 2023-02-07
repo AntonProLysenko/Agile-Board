@@ -9,17 +9,20 @@ import TrashBin from './components/TrashBin';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 
 
 
 const plusIcon = <FontAwesomeIcon icon={faPlus} />
 const closeIcon = <FontAwesomeIcon icon={faXmark} />;
+const TrashBinIcon = <FontAwesomeIcon icon={faTrashCan} />;
 
 function App() {
   const [tasks, setTasks] = useState({})
   const [buttonPressed, setButtonPressed] = useState (false)
   const[isOpen, setIsOpen] = useState(false)
+  const[showTrashBin, setShowTrashBin] = useState(false)
   const[listStatus, setListStatus]= useState()
   const entry = useRef(null)
   const body = useRef(null);
@@ -133,7 +136,10 @@ function App() {
         closeIcon={closeIcon}
         listStatus={listStatus}
       />
-      <TrashBin tasks={tasks} handleClick={handleClick} />
+      
+      <TrashBin tasks={tasks} open={showTrashBin} handleClick={handleClick} onClose={() => setShowTrashBin(false)} closeIcon={closeIcon} />
+
+      <button onClick={() => setShowTrashBin(true)}>{TrashBinIcon}</button>
     </div>
   );
 }

@@ -6,33 +6,19 @@ export default function AddTaskForm({open, entry, body, statusRef, handleSubmit,
 
   return (
     <div className="overlay">
-      <div className="formContainer">
+      <div className="moduleContainer">
         <button className="close" onClick={onClose}>
-          {closeIcon}
+          x
         </button>
         <form className="form" onSubmit={handleSubmit}>
           <input type="text" ref={entry} placeholder="Enter title" />
 
-          <textarea
-            type="text"
-            ref={body}
-            placeholder="Enter detailed information or hints here"
-          />
+          <textarea type="text" ref={body} placeholder="Enter detailed information or hints here"/>
 
-          {/* <label>
-            Status:
-            <select ref={statusRef}>
-              <option defaultValue={listStatus}>
-                {listStatus.charAt(0).toUpperCase()+ listStatus.slice(1)}
-              </option>
-              <option value="to-do">To-Do</option>
-              <option value="pending">Pending</option>
-              <option value="completed">Completed</option>
-            </select>
-          </label> */}
           <button type="submit" className="button">
-            {plusIcon} &nbsp; Add
+            {plusIcon}
           </button>
+
         </form>
       </div>
     </div>

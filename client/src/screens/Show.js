@@ -6,7 +6,7 @@ function Show() {
   const idpar = useParams();
   const navigation = useNavigate();
   const [task, setTask] = useState({});
-  // const [buttonPressed, setButtonPressed] = useState(false);
+
   useEffect(() => {
 
     async function getTask(id) {
@@ -19,18 +19,15 @@ function Show() {
     }
     getTask(idpar.id);
   }, []);
-console.log(task)
 
+
+  
 const handleArchivation = async (statusChange,currentStatus, id) => {
-  try {
-
-    console.log(task.prevStatus);
-    
+  try { 
     if (currentStatus !== "ARCHIVE"){
-        const { status, prevStatus } = await axios.put(`http://localhost:3001/tasks/${id}`, {
+       await axios.put(`http://localhost:3001/tasks/${id}`, {
           status: statusChange,
-          prevStatus: currentStatus,
-          
+          prevStatus: currentStatus,   
         });
     }else{
       await axios.delete(`http://localhost:3001/tasks/${id}`);
@@ -58,7 +55,7 @@ const handleArchivation = async (statusChange,currentStatus, id) => {
         Delete Forever
       </button>
       :<button onClick={() => {handleArchivation("ARCHIVE", task.status, task._id); navigation(`/`);}}>
-        Delete
+        Archivate
       </button>
       }
       

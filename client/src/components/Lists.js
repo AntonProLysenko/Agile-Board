@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 
 
-export default function Lists({ tasks, handleClick, plusIcon, setIsOpen }) {
+export default function Lists({ tasks, handleClick, setIsOpen }) {
 
 
 
@@ -17,7 +17,7 @@ export default function Lists({ tasks, handleClick, plusIcon, setIsOpen }) {
             <h2>To-Do</h2>
 
               <button className="titleBtn" id="to-do" onClick={() => setIsOpen(true)}>
-                {plusIcon}
+              +
               </button>
 
           </div>
@@ -31,19 +31,20 @@ export default function Lists({ tasks, handleClick, plusIcon, setIsOpen }) {
                     <div className="moveBtn">
                       <button
                         onClick={() => {
+                          handleClick("COMPLETED", task._id);
+                        }}
+                      >
+                        Completed
+                      </button>
+                      
+                      <button
+                        onClick={() => {
                           handleClick("PENDING", task._id);
                         }}
                       >
                         Pending
                       </button>
 
-                      <button
-                        onClick={() => {
-                          handleClick("COMPLETED", task._id);
-                        }}
-                      >
-                        Completed
-                      </button>
                     </div>
                   </div>
                 );
@@ -57,7 +58,7 @@ export default function Lists({ tasks, handleClick, plusIcon, setIsOpen }) {
           <div className="listTitle">
             <h2>Pending</h2>
             <button className="titleBtn" id="pending" onClick={() => setIsOpen(true)}>
-              {plusIcon} her
+             +
             </button>
           </div>
 
@@ -95,7 +96,7 @@ export default function Lists({ tasks, handleClick, plusIcon, setIsOpen }) {
           <div className="listTitle">
             <h2>Completed</h2>
             <button className="titleBtn" id="completed" onClick={() => setIsOpen(true)}>
-              {plusIcon}
+             +
             </button>
           </div>
 
