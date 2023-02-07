@@ -1,9 +1,10 @@
 import{useState, useEffect} from "react"
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Show() {
   const idpar = useParams();
+  const navigation = useNavigate();
   const [task, setTask] = useState({});
   // const [buttonPressed, setButtonPressed] = useState(false);
   useEffect(() => {
@@ -31,11 +32,11 @@ const handleArchivation = async (statusChange,currentStatus, id) => {
       prevStatus: currentStatus,
 
     });
-    if (status === 200 && prevStatus ===200) {
-      // setButtonPressed(!buttonPressed);
-    } else {
-      alert("Something went wrong!");
-    }
+    // if (status === 200 && prevStatus ===200) {
+    //   // setButtonPressed(!buttonPressed);
+    // } else {
+    //   alert("Something went wrong!");
+    // }
   } catch (error) {
     alert("Something went wrong!" + error);
   }
@@ -45,7 +46,7 @@ const handleArchivation = async (statusChange,currentStatus, id) => {
       <h1>{task.entry}</h1>
       <p>{task.body}</p>
       <p>Last update: {task.updatedAt}</p>
-      <button onClick={() => {handleArchivation("ARCHIVE", task.status, task._id);}}>
+      <button onClick={() => {handleArchivation("ARCHIVE", task.status, task._id); navigation(`/`);}}>
         Delete
       </button>
     </div>
