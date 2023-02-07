@@ -19,7 +19,7 @@ export default function AddTaskForm({open, entry, body, statusRef, handleSubmit,
             placeholder="Enter detailed information or hints here"
           />
 
-          <label>
+          {/* <label>
             Status:
             <select ref={statusRef}>
               <option defaultValue={listStatus}>
@@ -29,7 +29,7 @@ export default function AddTaskForm({open, entry, body, statusRef, handleSubmit,
               <option value="pending">Pending</option>
               <option value="completed">Completed</option>
             </select>
-          </label>
+          </label> */}
           <button type="submit" className="button">
             {plusIcon} &nbsp; Add
           </button>

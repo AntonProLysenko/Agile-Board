@@ -81,12 +81,18 @@ function App() {
   
     try {
 
+      console.log(listStatus);
+      
       const { status } = await axios.post("http://localhost:3001/tasks", {
         entry: entry.current.value,
         body: body.current.value,
-        status: statusRef.current.value.toUpperCase(),
+        // status: statusRef.current.value.toUpperCase(),
+        status: listStatus.toUpperCase(),
         prevStatus: "",
       });
+
+      console.log(tasks);
+      
       if (status === 200){//using axios when button clicked(fetchin data again)
         setButtonPressed(!buttonPressed)
          entry.current.value = "";
