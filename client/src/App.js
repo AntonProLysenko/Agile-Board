@@ -4,6 +4,7 @@ import axios from 'axios'
 
 import AddTaskForm from "./components/AddTaskForm";
 import Lists from "./components/Lists";
+import TrashBin from './components/TrashBin';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -33,16 +34,20 @@ function App() {
       setTasks(data);
 
 
-       const lists = document.querySelectorAll(".section");
-       Object.keys(lists).forEach(function (i) {
-         lists[i].addEventListener("click", (evt) => {
-            // evt.stopPropagation()
+       const titleBtn = document.querySelectorAll(".titleBtn");
+       console.log(titleBtn.childNodes);
+       Object.keys(titleBtn).forEach(function (i) {
+         titleBtn[i].addEventListener("click", (evt) => {
+          //  evt.stopPropagation();
 
-            console.log(evt.target.id);
-            
-            setListStatus(evt.target.id)
+          //  console.log(evt.target);
+
+           setListStatus(evt.target.id);
          });
        });
+      //  titleBtn.children.addEventListener("click", (evt)=>{
+      //     evt.stopPropagation();
+      //  })
     } catch (error) {
      alert("Something went wrong!"+error);
     }
@@ -75,10 +80,12 @@ function App() {
     evt.preventDefault();
   
     try {
-      const { status } = await axios.post('http://localhost:3001/tasks', {
+
+      const { status } = await axios.post("http://localhost:3001/tasks", {
         entry: entry.current.value,
         body: body.current.value,
-        status: statusRef.current.value.toUpperCase,
+        status: statusRef.current.value.toUpperCase(),
+        prevStatus: "",
       });
       if (status === 200){//using axios when button clicked(fetchin data again)
         setButtonPressed(!buttonPressed)
@@ -96,17 +103,31 @@ function App() {
 
   return (
     <div className="App">
+      <Lists
+        tasks={tasks}
+        handleClick={handleClick}
+        plusIcon={plusIcon}
+        setIsOpen={setIsOpen}
+      />
 
-      <Lists tasks = {tasks} handleClick = {handleClick} plusIcon={plusIcon} setIsOpen={setIsOpen}/>
-      
       {/* <div className="addButton">
         <button onClick={()=>setIsOpen(true)}>
          {plusIcon} Add New Task
         </button>
       </div> */}
 
-      <AddTaskForm open={isOpen} entry={entry} body={body} statusRef={statusRef} handleSubmit={handleSubmit} onClose={()=>setIsOpen(false)} plusIcon={plusIcon} closeIcon={closeIcon} listStatus = {listStatus}/>
-      
+      <AddTaskForm
+        open={isOpen}
+        entry={entry}
+        body={body}
+        statusRef={statusRef}
+        handleSubmit={handleSubmit}
+        onClose={() => setIsOpen(false)}
+        plusIcon={plusIcon}
+        closeIcon={closeIcon}
+        listStatus={listStatus}
+      />
+      <TrashBin tasks={tasks} handleClick={handleClick} />
     </div>
   );
 }

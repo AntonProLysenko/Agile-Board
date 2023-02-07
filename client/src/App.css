@@ -60,19 +60,6 @@ body{
   flex-direction: column;
 }
 
-.task {
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  height: 10vh;
-  width: 27vw;
-  border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.7);
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-}
-
 
 .list {
   height: fit-content;
@@ -88,15 +75,32 @@ body{
   justify-content: flex-start;
   align-items: center;
 }
-
-.list>h2{
-  color:rgb(23 43 78)
+.listTitle{
+  width:40%;
+  display: flex;
+  justify-content: space-around;
+  color:rgb(23 43 78);  
 }
+
+.task {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 10vh;
+  width: 27vw;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
 .moveBtn{
  width:30%;
  display: flex;
  justify-content: space-around
 }
+
 .moveBtn>button{
   padding: 3px;
   border:none;
