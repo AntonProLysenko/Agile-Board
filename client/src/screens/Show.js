@@ -9,8 +9,7 @@ function Show({ buttonPressed, setButtonPressed }) {
   const navigation = useNavigate();
   const [task, setTask] = useState({});
 
-  //  const { state = {} } = location;
-  //  const { modal } = {state};
+ 
 
   useEffect(() => {
     async function getTask(id) {
@@ -55,30 +54,33 @@ function Show({ buttonPressed, setButtonPressed }) {
   return (
     <>
       <Layout />
-      <div className={"showPage"}>
-        <Link to="/">Back</Link>
-        <h1>{task.entry}</h1>
-        <p>{task.body}</p>
-        <p>Last update: {task.updatedAt}</p>
-        {task.status === "ARCHIVE" ? (
-          <button
-            onClick={() => {
-              handleArchivation("ARCHIVE", task.status, task._id);
-              navigation(`/`);
-            }}
-          >
-            Delete Forever
-          </button>
-        ) : (
-          <button
-            onClick={() => {
-              handleArchivation("ARCHIVE", task.status, task._id);
-              navigation(`/`);
-            }}
-          >
-            Archivate
-          </button>
-        )}
+      <div className="showOverlay">
+        <div className={"showPage"}>
+          <Link to="/">Back</Link>
+          <h1>{task.entry}</h1>
+          <p>{task.body}</p>
+          <p>Last update: {task.updatedAt}</p>
+
+          {task.status === "ARCHIVE" ? (
+            <button
+              onClick={() => {
+                handleArchivation("ARCHIVE", task.status, task._id);
+                navigation(`/`);
+              }}
+            >
+              Delete Forever
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                handleArchivation("ARCHIVE", task.status, task._id);
+                navigation(`/`);
+              }}
+            >
+              Archivate
+            </button>
+          )}
+        </div>
       </div>
     </>
   );
