@@ -1,7 +1,10 @@
 import './App.css';
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios'
+import {BrowserRouter as Router, Routes, Route,} from "react-router-dom";
 
+import Layout from "./screens/layout/Layout";
+import Show from "./screens/Show";
 import AddTaskForm from "./components/AddTaskForm";
 import Lists from "./components/Lists";
 import TrashBin from './components/TrashBin';
@@ -38,19 +41,11 @@ function App() {
 
 
        const titleBtn = document.querySelectorAll(".titleBtn");
-       console.log(titleBtn.childNodes);
        Object.keys(titleBtn).forEach(function (i) {
          titleBtn[i].addEventListener("click", (evt) => {
-          //  evt.stopPropagation();
-
-          //  console.log(evt.target);
-
            setListStatus(evt.target.id);
          });
        });
-      //  titleBtn.children.addEventListener("click", (evt)=>{
-      //     evt.stopPropagation();
-      //  })
     } catch (error) {
      alert("Something went wrong!"+error);
     }
@@ -112,6 +107,11 @@ function App() {
 
   return (
     <div className="App">
+      <Routes>
+        <Route path="/" element={<Layout />} />
+        <Route path=":id" element={<Show buttonPressed={buttonPressed} setButtonPressed={setButtonPressed} />} />
+      </Routes>
+
       <Lists
         tasks={tasks}
         handleClick={handleClick}
@@ -137,9 +137,17 @@ function App() {
         listStatus={listStatus}
       />
 
-      <TrashBin tasks={tasks} open={showTrashBin} handleClick={handleClick} onClose={() => setShowTrashBin(false)} closeIcon={closeIcon} />
+      <TrashBin
+        tasks={tasks}
+        open={showTrashBin}
+        handleClick={handleClick}
+        onClose={() => setShowTrashBin(false)}
+        closeIcon={closeIcon}
+      />
 
-      <i className='trashBin' onClick={() => setShowTrashBin(true)}>{TrashBinIcon}</i>
+      <i className="trashBin" onClick={() => setShowTrashBin(true)}>
+        {TrashBinIcon}
+      </i>
     </div>
   );
 }

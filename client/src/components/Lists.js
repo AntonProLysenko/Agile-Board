@@ -5,10 +5,9 @@ import { Link } from "react-router-dom";
 
 
 
-export default function Lists({ tasks, handleClick, setIsOpen }) {
+export default function Lists({ tasks, handleClick, setIsOpen,location }) {
 
-
-
+ 
   return (
     <div className="container">
       <div className="section">
@@ -26,7 +25,7 @@ export default function Lists({ tasks, handleClick, setIsOpen }) {
             ? tasks["TO-DO"].map((task, id) => {
                 return (
                   <div className="task" key={id}>
-                    <Link to={`/${task._id}`}>{task.entry}</Link>
+                    <Link to={{pathname:`/${task._id}`,state:{modal:true} }}>{task.entry}</Link>
 
                     <div className="moveBtn">
                       <button

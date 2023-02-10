@@ -138,7 +138,7 @@ body{
   border: none;
   background-color: rgba(0, 0, 0, 0);
   font-size: xx-large;
-  color: white;
+  color: whitesmoke;
   border-radius: 250%;
   align-self: flex-end;
   margin-right: 30px;
@@ -174,13 +174,17 @@ body{
 }
 
 .showPage {
-  width: 100vw;
-  height: 100vh;
+  width: 50vw;
+  height: 50vh;
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: burlywood;
+  /* background-color: burlywood; */
 }
 
 /* .taskContainer {
