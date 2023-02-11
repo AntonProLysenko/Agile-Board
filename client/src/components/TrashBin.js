@@ -6,7 +6,7 @@ export default function TrashBin({ tasks, handleClick, open, closeIcon, onClose 
 
   return (
     <div className="overlay">
-      <div className="moduleContainer">
+      <div className="modalContainer">
         <button className="close" onClick={onClose}>
           x
         </button>

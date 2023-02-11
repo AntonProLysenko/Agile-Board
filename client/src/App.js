@@ -24,9 +24,10 @@ const TrashBinIcon = <FontAwesomeIcon icon={faTrashCan} />;
 function App() {
   const [tasks, setTasks] = useState({})
   const [buttonPressed, setButtonPressed] = useState (false)
-  const[isOpen, setIsOpen] = useState(false)
+  const[isOpen, setIsOpen] = useState(false)//show form
   const[showTrashBin, setShowTrashBin] = useState(false)
   const[listStatus, setListStatus]= useState()
+  
   const entry = useRef(null)
   const body = useRef(null);
   const statusRef = useRef(null)
@@ -78,18 +79,13 @@ function App() {
     evt.preventDefault();
   
     try {
-
-      console.log(listStatus);
       
       const { status } = await axios.post("http://localhost:3001/tasks", {
         entry: entry.current.value,
         body: body.current.value,
-        // status: statusRef.current.value.toUpperCase(),
         status: listStatus.toUpperCase(),
         prevStatus: "",
       });
-
-      console.log(tasks);
       
       if (status === 200){//using axios when button clicked(fetchin data again)
         setButtonPressed(!buttonPressed)
@@ -141,13 +137,11 @@ function App() {
         tasks={tasks}
         open={showTrashBin}
         handleClick={handleClick}
-        onClose={() => setShowTrashBin(false)}
         closeIcon={closeIcon}
+        onClose={() => setShowTrashBin(false)}
       />
 
-      <i className="trashBin" onClick={() => setShowTrashBin(true)}>
-        {TrashBinIcon}
-      </i>
+      <i className="trashBin" onClick={() => setShowTrashBin(true)}> {TrashBinIcon} </i>
     </div>
   );
 }

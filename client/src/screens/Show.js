@@ -55,11 +55,17 @@ function Show({ buttonPressed, setButtonPressed }) {
     <>
       <Layout />
       <div className="showOverlay">
-        <div className={"showPage"}>
-          <Link to="/">Back</Link>
-          <h1>{task.entry}</h1>
+        <div className="modalContainer">
+          <Link className="close" to="/">
+            <button className="close">x</button>
+          </Link>
+          <h1 className="listTitle">{task.entry}</h1>
+
+          <p className="date">
+            Last Update: {new Date(task.updatedAt).toLocaleString()}
+          </p>
+
           <p>{task.body}</p>
-          <p>Last update: {task.updatedAt}</p>
 
           {task.status === "ARCHIVE" ? (
             <button
@@ -71,14 +77,17 @@ function Show({ buttonPressed, setButtonPressed }) {
               Delete Forever
             </button>
           ) : (
-            <button
-              onClick={() => {
-                handleArchivation("ARCHIVE", task.status, task._id);
-                navigation(`/`);
-              }}
-            >
-              Archivate
-            </button>
+            <div>
+              <button
+                onClick={() => {
+                  handleArchivation("ARCHIVE", task.status, task._id);
+                  navigation(`/`);
+                }}
+              >
+                Archivate
+              </button>
+              <button>Edit</button>
+            </div>
           )}
         </div>
       </div>

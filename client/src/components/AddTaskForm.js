@@ -1,12 +1,12 @@
 import React from 'react'
 
 
-export default function AddTaskForm({open, entry, body, statusRef, handleSubmit, onClose, plusIcon, closeIcon, listStatus}) {
+export default function AddTaskForm({open, entry, body, handleSubmit, onClose, plusIcon}) {
     if(!open) return null
 
   return (
     <div className="overlay">
-      <div className="moduleContainer">
+      <div className="modalContainer">
         <button className="close" onClick={onClose}>
           x
         </button>
