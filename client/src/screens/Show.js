@@ -19,7 +19,7 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen, task, setTask }) {
       }
     }
     getTask(idpar.id);
-  }, []);
+  }, [buttonPressed]);
 
   const handleArchivation = async (statusChange, currentStatus, id) => {
     try {

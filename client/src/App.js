@@ -1,7 +1,7 @@
 import './App.css';
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios'
-import {Routes, Route, useNavigate} from "react-router-dom";
+import {Routes, Route} from "react-router-dom";
 
 import Layout from "./screens/layout/Layout";
 import Show from "./screens/Show";
@@ -100,20 +100,31 @@ function App() {
     }
   };
 
-    const handleUpdate = async (id) => {
-  
+    const handleUpdate = async (evt, id) => {
+      evt.preventDefault()
       try {
          const { status } = await axios.put(`http://localhost:3001/tasks/${id}`, {
            entry: entry.current.value,
            body: body.current.value,
            status: task.status,
            prevStatus: task.prevStatus,
-    });
+    });     
+        if (status === 200) {
+         
+          setButtonPressed(!buttonPressed);
+          setIsOpen(false);
+          entry.current.value = "";
+          body.current.value = "";
+        
+        } else {
+          alert("Something went wrong!");
+        }
 
       } catch (error) {
         alert(error)
       }
     };
+  
   
 
   return (
