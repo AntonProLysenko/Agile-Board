@@ -45,6 +45,7 @@ body{
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
 }
 
 .container {
@@ -125,6 +126,8 @@ body{
   top:50%;
   left: 50%;
   transform: translate(-50%,-50%);
+
+  z-index: 100000000;
 }
 .close{
   align-self: flex-end;
@@ -172,7 +175,7 @@ body{
   border-radius: 2px;
 }
 
-.showPage {
+/* .showPage {
   width: 50vw;
   height: 50vh;
   position: absolute;
@@ -184,8 +187,8 @@ body{
   justify-content: center;
   align-items: center;
   background-color: burlywood;
-  /* z-index: 1000; */
-}
+  /* z-index: 1000; 
+} */
 .showOverlay{
     position: fixed;
   top: 0;
@@ -193,7 +196,7 @@ body{
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.7);
-  z-index: 10000;
+  z-index: 100;
 }
 
 /* .taskContainer {

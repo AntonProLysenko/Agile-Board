@@ -1,7 +1,7 @@
 import './App.css';
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios'
-import {BrowserRouter as Router, Routes, Route,} from "react-router-dom";
+import {Routes, Route, useNavigate} from "react-router-dom";
 
 import Layout from "./screens/layout/Layout";
 import Show from "./screens/Show";
@@ -22,15 +22,18 @@ const closeIcon = <FontAwesomeIcon icon={faXmark} />;
 const TrashBinIcon = <FontAwesomeIcon icon={faTrashCan} />;
 
 function App() {
-  const [tasks, setTasks] = useState({})
-  const [buttonPressed, setButtonPressed] = useState (false)
-  const[isOpen, setIsOpen] = useState(false)//show form
-  const[showTrashBin, setShowTrashBin] = useState(false)
-  const[listStatus, setListStatus]= useState()
-  
+  const [tasks, setTasks] = useState({})//for lists of tasks
+  const [task, setTask] = useState({}); // for single task in Show
+  const [buttonPressed, setButtonPressed] = useState (false)//used for refetching data on status change
+  const [isOpen, setIsOpen] = useState(false)//show create/edit form
+  const [showTrashBin, setShowTrashBin] = useState(false)
+  const [listStatus, setListStatus]= useState()
+
   const entry = useRef(null)
   const body = useRef(null);
   const statusRef = useRef(null)
+
+  const navigation = useNavigate();
 
 
 
@@ -105,7 +108,18 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Layout />} />
-        <Route path=":id" element={<Show buttonPressed={buttonPressed} setButtonPressed={setButtonPressed} />} />
+        <Route
+          path=":id"
+          element={
+            <Show
+              task={task}
+              setTask = {setTask}
+              buttonPressed={buttonPressed}
+              setButtonPressed={setButtonPressed}
+              setIsOpen={setIsOpen}
+            />
+          }
+        />
       </Routes>
 
       <Lists
@@ -113,6 +127,7 @@ function App() {
         handleClick={handleClick}
         plusIcon={plusIcon}
         setIsOpen={setIsOpen}
+        setTask = {setTask}
       />
 
       {/* <div className="addButton">
@@ -127,10 +142,11 @@ function App() {
         body={body}
         statusRef={statusRef}
         handleSubmit={handleSubmit}
-        onClose={() => setIsOpen(false)}
+        onClose={() => {setIsOpen(false);}}
         plusIcon={plusIcon}
         closeIcon={closeIcon}
         listStatus={listStatus}
+        task = {task}
       />
 
       <TrashBin

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 
 
-export default function Lists({ tasks, handleClick, setIsOpen,location }) {
+export default function Lists({ tasks, handleClick, setIsOpen, setTask }) {
 
  
   return (
@@ -15,7 +15,7 @@ export default function Lists({ tasks, handleClick, setIsOpen,location }) {
           <div className="listTitle">
             <h2>To-Do</h2>
 
-              <button className="titleBtn" id="to-do" onClick={() => setIsOpen(true)}>
+              <button className="titleBtn" id="to-do" onClick={() =>  {setTask({}); setIsOpen(true)}}>
               +
               </button>
 
@@ -56,7 +56,7 @@ export default function Lists({ tasks, handleClick, setIsOpen,location }) {
         <div className="list">
           <div className="listTitle">
             <h2>Pending</h2>
-            <button className="titleBtn" id="pending" onClick={() => setIsOpen(true)}>
+            <button className="titleBtn" id="pending"  onClick={() =>  {setTask({}); setIsOpen(true)}}>
              +
             </button>
           </div>
@@ -94,7 +94,7 @@ export default function Lists({ tasks, handleClick, setIsOpen,location }) {
         <div className="list">
           <div className="listTitle">
             <h2>Completed</h2>
-            <button className="titleBtn" id="completed" onClick={() => setIsOpen(true)}>
+            <button className="titleBtn" id="completed" onClick={() =>  {setTask({}); setIsOpen(true)}}>
              +
             </button>
           </div>

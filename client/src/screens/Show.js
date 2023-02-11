@@ -4,12 +4,10 @@ import axios from "axios";
 
 import Layout from "./layout/Layout";
 
-function Show({ buttonPressed, setButtonPressed }) {
+function Show({ buttonPressed, setButtonPressed, setIsOpen, task, setTask }) {
   const idpar = useParams();
   const navigation = useNavigate();
-  const [task, setTask] = useState({});
-
- 
+  
 
   useEffect(() => {
     async function getTask(id) {
@@ -26,10 +24,13 @@ function Show({ buttonPressed, setButtonPressed }) {
   const handleArchivation = async (statusChange, currentStatus, id) => {
     try {
       if (currentStatus !== "ARCHIVE") {
-         const { status } = await axios.put(`http://localhost:3001/tasks/${id}`, {
-          status: statusChange,
-          prevStatus: currentStatus,
-        });
+        const { status } = await axios.put(
+          `http://localhost:3001/tasks/${id}`,
+          {
+            status: statusChange,
+            prevStatus: currentStatus,
+          }
+        );
         if (status === 200) {
           setButtonPressed(!buttonPressed);
         } else {
@@ -50,6 +51,13 @@ function Show({ buttonPressed, setButtonPressed }) {
     } catch (error) {
       alert("Something went wrong!" + error);
     }
+  };
+
+  const handleEdit = () => {
+    setIsOpen(true);
+    console.log(task)
+    try {
+    } catch (error) {}
   };
   return (
     <>
@@ -86,7 +94,7 @@ function Show({ buttonPressed, setButtonPressed }) {
               >
                 Archivate
               </button>
-              <button>Edit</button>
+              <button onClick={handleEdit}>Edit</button>
             </div>
           )}
         </div>
