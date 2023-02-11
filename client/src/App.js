@@ -33,9 +33,6 @@ function App() {
   const body = useRef(null);
   const statusRef = useRef(null)
 
-  const navigation = useNavigate();
-
-
 
   useEffect(()=>{
     const fetchTask = async()=>{
@@ -102,6 +99,21 @@ function App() {
       alert("Something went wrong!"+err);
     }
   };
+
+    const handleUpdate = async (id) => {
+  
+      try {
+         const { status } = await axios.put(`http://localhost:3001/tasks/${id}`, {
+           entry: entry.current.value,
+           body: body.current.value,
+           status: task.status,
+           prevStatus: task.prevStatus,
+    });
+
+      } catch (error) {
+        alert(error)
+      }
+    };
   
 
   return (
@@ -142,10 +154,10 @@ function App() {
         body={body}
         statusRef={statusRef}
         handleSubmit={handleSubmit}
+        handleUpdate = {handleUpdate}
         onClose={() => {setIsOpen(false);}}
         plusIcon={plusIcon}
         closeIcon={closeIcon}
-        listStatus={listStatus}
         task = {task}
       />
 

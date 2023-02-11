@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-export default function AddTaskForm({open, entry, body, handleSubmit, onClose, plusIcon, task}) {
+export default function AddTaskForm({open, entry, body, handleSubmit, handleUpdate, onClose, plusIcon, task}) {
     if(!open) return null
 
 
@@ -15,7 +15,7 @@ export default function AddTaskForm({open, entry, body, handleSubmit, onClose, p
           <button className="close" onClick={onClose}>
             x
           </button>
-          <form className="form" onSubmit={handleSubmit}>
+          <form className="form" onSubmit={() => handleUpdate(task._id)}>
             <input type="text" ref={entry} placeholder="Enter title"  defaultValue = {task.entry}/>
 
             <textarea type="text" ref={body}      placeholder="Enter detailed information or hints here" defaultValue = {task.body}/>

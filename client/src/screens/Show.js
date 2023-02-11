@@ -40,25 +40,13 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen, task, setTask }) {
         await axios.delete(`http://localhost:3001/tasks/${id}`);
         setButtonPressed(!buttonPressed);
       }
-
-      // console.log(status);
-
-      // if (status === 200 && prevStatus ===200) {
-      //   // setButtonPressed(!buttonPressed);
-      // } else {
-      //   alert("Something went wrong!");
-      // }
     } catch (error) {
       alert("Something went wrong!" + error);
     }
   };
 
-  const handleEdit = () => {
-    setIsOpen(true);
-    console.log(task)
-    try {
-    } catch (error) {}
-  };
+
+
   return (
     <>
       <Layout />
@@ -94,7 +82,7 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen, task, setTask }) {
               >
                 Archivate
               </button>
-              <button onClick={handleEdit}>Edit</button>
+              <button onClick={()=>setIsOpen(true)}>Edit</button>
             </div>
           )}
         </div>
