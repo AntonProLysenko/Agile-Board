@@ -112,6 +112,7 @@ body{
 .modalContainer {
   height: 50vh;
   width: 40vw;
+  overflow-y: scroll;
   margin: 20px, 0;
   display: flex;
   flex-direction: column;
