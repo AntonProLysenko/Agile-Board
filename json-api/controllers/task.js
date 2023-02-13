@@ -9,8 +9,15 @@ const Task = require('../models/Task')
 // GET
 router.get ('/', (req,res)=>{
     Task.find({},(err, foundTasks)=>{
+       // foundTasks = foundTasks.filter(foundTasks =>  foundTasks.username === req.user.name)
+        
+        
+        
         if(!err){
-            res.status(200).json(foundTasks)
+            res.status(200).json(foundTasks.filter(task => task.username === req.user.name));
+
+            // console.log(foundTasks.entry);
+            
         }else{
             res.status(400).send(err)
         }

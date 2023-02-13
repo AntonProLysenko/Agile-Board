@@ -14,6 +14,7 @@ const taskSchema = Schema(
       enum: ["TO-DO", "PENDING", "COMPLETED", "ARCHIVED"], //limiting status properties only to alocated values
     },
     prevStatus:String,
+    username: String,
   },
   {
     timestamps: true,
