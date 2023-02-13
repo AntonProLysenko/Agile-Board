@@ -17,6 +17,7 @@ router.get ('/', (req,res)=>{
     })
 });
 
+//sorting tasks by the status
 router.get('/table',(req,res)=>{
     Task.find({},(err, foundTasks)=>{
         if(!err){
@@ -47,7 +48,7 @@ router.post('/', (req,res)=>{
 })
 
 
-//SHOW
+//READ
 router.get('/:id', (req,res)=>{
     Task.findById(req.params.id, (err,foundTask)=>{
         if(!err){
@@ -75,7 +76,7 @@ router.put('/:id', (req,res)=>{
 
 
 
-//Delete
+//DELETE
 router.delete('/:id', (req,res)=>{
     Task.findByIdAndDelete(req.params.id, (err)=>{
         if(!err){
