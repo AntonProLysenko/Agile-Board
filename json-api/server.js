@@ -16,6 +16,7 @@ require('./models/connection')
 //Midlware
 app.use(cors())
 app.use(express.json())
+
 function authenticateToken(req,res,next){
     const authHeader = req.headers['authorization']
     const token = authHeader&&authHeader.split(" ")[1];
@@ -32,7 +33,8 @@ function authenticateToken(req,res,next){
 
 }
 //Routes
-app.use("/tasks",authenticateToken, taskRouter)
+// app.use("/tasks", authenticateToken, taskRouter);
+app.use("/tasks",taskRouter)
 
 app.post('/login', (req,res) =>{
     //Authenticate user

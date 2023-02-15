@@ -14,10 +14,8 @@ router.get ('/', (req,res)=>{
         
         
         if(!err){
-            res.status(200).json(foundTasks.filter(task => task.username === req.user.name));
-
-            // console.log(foundTasks.entry);
-            
+            res.status(200).json(foundTasks);
+            // res.status(200).json(foundTasks.filter(task => task.username === req.user.name));            
         }else{
             res.status(400).send(err)
         }

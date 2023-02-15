@@ -22,6 +22,7 @@ const closeIcon = <FontAwesomeIcon icon={faXmark} />;
 const TrashBinIcon = <FontAwesomeIcon icon={faTrashCan} />;
 
 function App() {
+  const [user, setUser] = useState(null)
   const [tasks, setTasks] = useState({})//for lists of tasks
   const [task, setTask] = useState({}); // for single task in Show
   const [buttonPressed, setButtonPressed] = useState (false)//used for refetching data on status change
@@ -85,6 +86,7 @@ function App() {
         body: body.current.value,
         status: listStatus.toUpperCase(),
         prevStatus: "",
+        username: "Katya",
       });
       
       if (status === 200){//using axios when button clicked(fetchin data again)
@@ -108,6 +110,7 @@ function App() {
            body: body.current.value,
            status: task.status,
            prevStatus: task.prevStatus,
+           username: task.usename
     });     
         if (status === 200) {
          
@@ -126,63 +129,73 @@ function App() {
     };
   
   
-
   return (
+    
+
     <div className="App">
-      <Routes>
-        <Route path="/" element={<Layout />} />
-        <Route
-          path=":id"
-          element={
-            <Show
-              task={task}
-              setTask = {setTask}
-              buttonPressed={buttonPressed}
-              setButtonPressed={setButtonPressed}
-              setIsOpen={setIsOpen}
-            />
-          }
+      { user?
+      <>
+        <Routes>
+          <Route path="/" element={<Layout />} />
+          <Route
+            path=":id"
+            element={
+              <Show
+                task={task}
+                setTask = {setTask}
+                buttonPressed={buttonPressed}
+                setButtonPressed={setButtonPressed}
+                setIsOpen={setIsOpen}
+              />
+            }
+          />
+        </Routes>
+
+        <Lists
+          tasks={tasks}
+          handleClick={handleClick}
+          plusIcon={plusIcon}
+          setIsOpen={setIsOpen}
+          setTask = {setTask}
         />
-      </Routes>
 
-      <Lists
-        tasks={tasks}
-        handleClick={handleClick}
-        plusIcon={plusIcon}
-        setIsOpen={setIsOpen}
-        setTask = {setTask}
-      />
+      { /* <div className="addButton">
+          <button onClick={()=>setIsOpen(true)}>
+          {plusIcon} Add New Task
+          </button>
+          </div> */}
 
-      {/* <div className="addButton">
-        <button onClick={()=>setIsOpen(true)}>
-         {plusIcon} Add New Task
-        </button>
-      </div> */}
+        <AddTaskForm
+          open={isOpen}
+          entry={entry}
+          body={body}
+          statusRef={statusRef}
+          handleSubmit={handleSubmit}
+          handleUpdate = {handleUpdate}
+          onClose={() => {setIsOpen(false);}}
+          plusIcon={plusIcon}
+          closeIcon={closeIcon}
+          task = {task}
+        />
 
-      <AddTaskForm
-        open={isOpen}
-        entry={entry}
-        body={body}
-        statusRef={statusRef}
-        handleSubmit={handleSubmit}
-        handleUpdate = {handleUpdate}
-        onClose={() => {setIsOpen(false);}}
-        plusIcon={plusIcon}
-        closeIcon={closeIcon}
-        task = {task}
-      />
+        <TrashBin
+          tasks={tasks}
+          open={showTrashBin}
+          handleClick={handleClick}
+          closeIcon={closeIcon}
+          onClose={() => setShowTrashBin(false)}
+        />
 
-      <TrashBin
-        tasks={tasks}
-        open={showTrashBin}
-        handleClick={handleClick}
-        closeIcon={closeIcon}
-        onClose={() => setShowTrashBin(false)}
-      />
-
-      <i className="trashBin" onClick={() => setShowTrashBin(true)}> {TrashBinIcon} </i>
+        <i className="trashBin" onClick={() => setShowTrashBin(true)}> {TrashBinIcon} </i>
+    </>
+    :
+   <h1>Please Log-in</h1>
+}
     </div>
-  );
+  
+      )
+
+
 }
 
 export default App;
