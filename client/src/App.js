@@ -4,7 +4,9 @@ import axios from 'axios'
 import {Routes, Route} from "react-router-dom";
 
 import Layout from "./screens/layout/Layout";
-import Show from "./screens/Show";
+import AuthPage from './screens/AuthPage';
+
+import Show from "./components/Show";
 import AddTaskForm from "./components/AddTaskForm";
 import Lists from "./components/Lists";
 import TrashBin from './components/TrashBin';
@@ -13,6 +15,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+
 
 
 
@@ -189,7 +192,10 @@ function App() {
         <i className="trashBin" onClick={() => setShowTrashBin(true)}> {TrashBinIcon} </i>
     </>
     :
+    <>
    <h1>Please Log-in</h1>
+   <AuthPage />
+    </>
 }
     </div>
   

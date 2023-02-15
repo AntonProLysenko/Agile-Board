@@ -49,5 +49,5 @@ app.post('/login', (req,res) =>{
 
 
 app.listen(PORT,()=>{
-    console.log('Listening on port: ' + PORT)
+    console.log('Express is istening on port: ' + PORT)
 })
