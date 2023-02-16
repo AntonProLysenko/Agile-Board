@@ -10,6 +10,5 @@ Content-Type: application/json
     "user":{
         "name":"Katya",
         "email":"123",
-        "password":"123"
     }
 }
