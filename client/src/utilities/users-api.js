@@ -8,8 +8,6 @@ const res = await fetch("http://localhost:3001/api/users",{
     headers : { 'Content-Type': 'application/json' },
     body: JSON.stringify(userData)
 });
-console.log("here");
-
 if (res.ok){
     return res.json()
 }else{

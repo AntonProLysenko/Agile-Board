@@ -2,13 +2,30 @@ const express = require("express");
 const router = express.Router();
 const User = require('../models/user')
 
-// const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
+// const { create } = require("../models/user");
 // const bcrypt = require("bcrypt");
 
 
 
+function createJWT(user) {
+  return jwt.sign(
+    // data payload
+    { user },
+    process.env.SECRET,
+    { expiresIn: "6h" }
+  );
+}
 // POST /api/users
-router.post('/', create)
+router.post('/', async (req, res)=>{
+ try {
+    const user = await User.create(req.body)
+    const token = createJWT(user)
+     res.json(token);
+ } catch (error) {
+    res.status(400).json(error)
+ }
+})
 
 
 module.exports = router;
@@ -30,15 +47,6 @@ module.exports = router;
 // };
 
 
-function create(req, res) {
-  // Baby step...
-  res.json({
-    user: {
-      name: req.body.name,
-      email: req.body.email,
-    },
-  });
-}
 // async function create(req, res) {
 //   try {
 //     // Add the user to the database
