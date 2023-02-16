@@ -1,9 +1,25 @@
-// const express = require("express");
-// const router = express.Router();
-// const User = require('../models/user')
+const express = require("express");
+const router = express.Router();
+const User = require('../models/user')
 
 // const jwt = require("jsonwebtoken");
 // const bcrypt = require("bcrypt");
+
+
+
+// POST /api/users
+router.post('/', create)
+
+
+module.exports = router;
+
+
+
+
+
+
+
+
 
 
 
@@ -13,6 +29,16 @@
 //   checkToken,
 // };
 
+
+function create(req, res) {
+  // Baby step...
+  res.json({
+    user: {
+      name: req.body.name,
+      email: req.body.email,
+    },
+  });
+}
 // async function create(req, res) {
 //   try {
 //     // Add the user to the database

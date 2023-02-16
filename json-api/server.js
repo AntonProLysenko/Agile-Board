@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken')
 const PORT = process.env.PORT || 3001
 
 const taskRouter = require('./controllers/task')
+const userRouter = require("./controllers/user");
 
 
 
@@ -35,15 +36,16 @@ function authenticateToken(req,res,next){
 //Routes
 // app.use("/tasks", authenticateToken, taskRouter);
 app.use("/tasks",taskRouter)
+app.use("/api/users", userRouter);
 
-app.post('/login', (req,res) =>{
-    //Authenticate user
-    const username = req.body.username
-    const user = {name:username}
+// app.post('/login', (req,res) =>{
+//     //Authenticate user
+//     const username = req.body.username
+//     const user = {name:username}
 
-    const acessToken = jwt.sign(user, process.env.SECRET)
-    res.json({acessToken: acessToken})
-})
+//     const acessToken = jwt.sign(user, process.env.SECRET)
+//     res.json({acessToken: acessToken})
+// })
 
 
 

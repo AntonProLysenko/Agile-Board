@@ -3,9 +3,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiS2F0eWEiL
 
 ###
 
-POST http://localhost:3001/login
+POST http://localhost:3001/api/users
 Content-Type: application/json
 
 {
-    "username":"Katya"
+    "user":{
+        "name":"Katya",
+        "email":"123",
+        "password":"123"
+    }
 }
