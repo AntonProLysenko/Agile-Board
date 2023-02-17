@@ -18,21 +18,20 @@ require('./models/connection')
 app.use(cors())
 app.use(express.json())
 
-function authenticateToken(req,res,next){
-    const authHeader = req.headers['authorization']
-    const token = authHeader&&authHeader.split(" ")[1];
-    if(token ===null)return res.sendStatus(401)
+// function authenticateToken(req,res,next){
+//     const authHeader = req.headers['authorization']
+//     const token = authHeader&&authHeader.split(" ")[1];
+//     if(token ===null)return res.sendStatus(401)
 
-    jwt.verify(token, process.env.SECRET, (err, user)=>{
-        if(!err){
-            req.user = user
-            next()
-        }else{
-            return res.sendStatus(403)
-        }
-    })
-
-}
+//     jwt.verify(token, process.env.SECRET, (err, user)=>{
+//         if(!err){
+//             req.user = user
+//             next()
+//         }else{
+//             return res.sendStatus(403)
+//         }
+//     })
+// }
 //Routes
 // app.use("/tasks", authenticateToken, taskRouter);
 app.use("/tasks",taskRouter)

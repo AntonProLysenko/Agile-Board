@@ -89,7 +89,7 @@ function App() {
         body: body.current.value,
         status: listStatus.toUpperCase(),
         prevStatus: "",
-        username: "Katya",
+        // username: "Katya",
       });
       
       if (status === 200){//using axios when button clicked(fetchin data again)

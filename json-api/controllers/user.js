@@ -22,8 +22,9 @@ router.post('/', async (req, res)=>{
     const user = await User.create(req.body)
     const token = createJWT(user)
      res.json(token);
- } catch (error) {
-    res.status(400).json(error)
+ } 
+ catch (error) {
+    res.status(440).json(error)
  }
 })
 
