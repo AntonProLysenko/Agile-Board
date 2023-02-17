@@ -8,7 +8,7 @@ const res = await fetch("http://localhost:3001/api/users",{
     headers : { 'Content-Type': 'application/json' },
     body: JSON.stringify(userData)
 });
-if (res.ok){
+if (res.ok){//if success
     return res.json()
 }else{
     throw new Error("Invalid Sign Up")
