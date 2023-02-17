@@ -14,10 +14,14 @@ import AddTaskForm from "./components/AddTaskForm";
 import Lists from "./components/Lists";
 import TrashBin from './components/TrashBin';
 
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+// import { faPersonFromPortal } from "@fortawesome/free-solid-svg-icons";
+
 
 
 
@@ -26,6 +30,8 @@ import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 const plusIcon = <FontAwesomeIcon icon={faPlus} />
 const closeIcon = <FontAwesomeIcon icon={faXmark} />;
 const TrashBinIcon = <FontAwesomeIcon icon={faTrashCan} />;
+const logOutIcon = <FontAwesomeIcon icon={faRightFromBracket} />;
+;
 
 function App() {
   const [user, setUser] = useState(userService.getUser());
@@ -196,12 +202,12 @@ function App() {
 
         <i className="trashBin" onClick={() => setShowTrashBin(true)}> {TrashBinIcon} </i>
 
-        <h5 onClick={()=>{setUser(null); userService.logOut()}}>Log Out</h5>
+        <div onClick={()=>{setUser(null); userService.logOut()}}> Log {logOutIcon}</div>
     </>
     :
     <>
    <h1>Please Log-in</h1>
-   <AuthPage />
+   <AuthPage setUser= {setUser} />
     </>
 }
     </div>
