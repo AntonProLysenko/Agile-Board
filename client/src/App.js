@@ -2,7 +2,9 @@ import './App.css';
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios'
 import {Routes, Route} from "react-router-dom";
-import { getUser } from './utilities/user-service';
+
+// import { getUser } from './utilities/user-service';
+import * as userService from './utilities/user-service'
 
 import Layout from "./screens/layout/Layout";
 import AuthPage from './screens/AuthPage';
@@ -26,7 +28,7 @@ const closeIcon = <FontAwesomeIcon icon={faXmark} />;
 const TrashBinIcon = <FontAwesomeIcon icon={faTrashCan} />;
 
 function App() {
-  const [user, setUser] = useState(getUser())
+  const [user, setUser] = useState(userService.getUser());
   const [tasks, setTasks] = useState({})//for lists of tasks
   const [task, setTask] = useState({}); // for single task in Show
   const [buttonPressed, setButtonPressed] = useState (false)//used for refetching data on status change
@@ -131,6 +133,8 @@ function App() {
         alert(error)
       }
     };
+
+
   
   
   return (
@@ -140,7 +144,7 @@ function App() {
       { user?
       <>
         <Routes>
-          <Route path="/" element={<Layout />} />
+          <Route path="/" element={<Layout user = {user.name} />} />
           <Route
             path=":id"
             element={
@@ -191,6 +195,8 @@ function App() {
         />
 
         <i className="trashBin" onClick={() => setShowTrashBin(true)}> {TrashBinIcon} </i>
+
+        <h5 onClick={()=>{setUser(null); userService.logOut()}}>Log Out</h5>
     </>
     :
     <>

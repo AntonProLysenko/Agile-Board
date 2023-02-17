@@ -1,11 +1,11 @@
 import '../../App.css';
 import { Outlet } from 'react-router-dom';
 
-const Layout = () => {
+const Layout = ({user}) => {
   return (
     <div className="layout">
       <header>
-       <h1 className="title">Trello</h1>  {/* //Will always be displayed */}
+       <h1 className="title">{user}'s Trello board</h1>  {/* //Will always be displayed */}
       </header>
       <main>
         <Outlet />  {/* // Where the rest of our components will be displayed*/}
@@ -15,4 +15,4 @@ const Layout = () => {
 };
 
 export default Layout;
-console.log();
+
