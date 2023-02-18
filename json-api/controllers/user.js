@@ -28,6 +28,19 @@ router.post('/', async (req, res)=>{
  }
 })
 
+// POST /api/users/login
+router.post('/login', async(req,res)=>{
+    try {
+        const user = await User.findOne({email: req.body.email})//finding user based on email
+         if (!user) throw new Error();
+         const match = await bcrypt.compare(req.body.password, user.password);//comparing entered password to users password
+         if(!match) throw new Error()
+         res.json(createJWT(user));
+
+    } catch (error) {
+        res.status(440).json(error);
+    }
+})
 
 module.exports = router;
 

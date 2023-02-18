@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 //The SALT_ROUNDS variable determines how much processing time it will take to perform the hash
 const SALT_ROUNDS = 6;
 const userSchema = Schema({
- name: {type: String, required: true},
+ name: {type: String, required: true, trim: true,},
   email: {
     type: String,
     unique: true,

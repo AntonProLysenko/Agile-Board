@@ -4,15 +4,30 @@ export async function signUp(userData) {
 
 
 const res = await fetch("http://localhost:3001/api/users",{
-    method: "POST",
-    headers : { 'Content-Type': 'application/json' },
-    body: JSON.stringify(userData)
-});
-if (res.ok){//if success
-    return res.json()
-}else{
-    throw new Error("Invalid Sign Up")
+        method: "POST",
+        headers : { 'Content-Type': 'application/json' },
+        body: JSON.stringify(userData)
+    });
+    if (res.ok){//if success
+        return res.json()
+    }else{
+        throw new Error("Invalid Sign Up")
+    }
 }
+
+
+export async function logIn(credentials){
+    const res = await fetch("http://localhost:3001/api/users/login",{
+          method: "POST",
+        headers : { 'Content-Type': 'application/json' },
+        body: JSON.stringify(credentials)
+
+    })
+     if (res.ok){//if success
+        return res.json()
+    }else{
+        throw new Error("Invalid Sign Up")
+    }
 }
 
 

@@ -3,8 +3,8 @@ import { useState, useEffect, useRef } from 'react';
 import axios from 'axios'
 import {Routes, Route} from "react-router-dom";
 
-// import { getUser } from './utilities/user-service';
-import * as userService from './utilities/user-service'
+import { getUser, logOut } from './utilities/user-service';
+// import * as userService from './utilities/user-service'
 
 import Layout from "./screens/layout/Layout";
 import AuthPage from './screens/AuthPage';
@@ -34,7 +34,7 @@ const logOutIcon = <FontAwesomeIcon icon={faRightFromBracket} />;
 ;
 
 function App() {
-  const [user, setUser] = useState(userService.getUser());
+  const [user, setUser] = useState(getUser());
   const [tasks, setTasks] = useState({})//for lists of tasks
   const [task, setTask] = useState({}); // for single task in Show
   const [buttonPressed, setButtonPressed] = useState (false)//used for refetching data on status change
@@ -202,7 +202,7 @@ function App() {
 
         <i className="trashBin" onClick={() => setShowTrashBin(true)}> {TrashBinIcon} </i>
 
-        <div onClick={()=>{setUser(null); userService.logOut()}}> Log {logOutIcon}</div>
+        <div onClick={()=>{setUser(null); logOut()}}> Log {logOutIcon}</div>
     </>
     :
     <>
