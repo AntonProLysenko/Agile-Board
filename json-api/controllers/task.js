@@ -7,27 +7,34 @@ const Task = require('../models/Task')
 //CRUD
 
 // GET
-router.get ('/', (req,res)=>{
-    Task.find({},(err, foundTasks)=>{
-       // foundTasks = foundTasks.filter(foundTasks =>  foundTasks.username === req.user.name)
-        if(!err){
-            res.status(200).json(foundTasks);
-            // res.status(200).json(foundTasks.filter(task => task.username === req.user.name));            
-        }else{
-            res.status(400).send(err)
-        }
-    })
-});
+// router.get ('/table', (req,res)=>{
+//     Task.find({},(err, foundTasks)=>{
+//        // foundTasks = foundTasks.filter(foundTasks =>  foundTasks.username === req.user.name)
+//         if(!err){
+//             res.status(200).json(foundTasks);            
+//             // res.status(200).json(foundTasks.filter(task => task.username === req.user.name));            
+//         }else{
+//             res.status(400).send(err)
+//         }
+//     })
+// });
 
 //sorting tasks by the status
 router.get('/table',(req,res)=>{
     Task.find({},(err, foundTasks)=>{
         if(!err){
+            foundTasks = foundTasks.filter(task => task.user === "123@123")
+
+            console.log(foundTasks);
+            
             const formatedData = foundTasks.reduce((accumulator, task)=>{//reduce will return an object instead array with props: status
                 accumulator[task.status] = accumulator[task.status]? [...accumulator[task.status],task]:   [task]
                 return accumulator//always return acc in reduce func
-            }, {})//definig that it will be an obj
+            }, {})//definig that it will be an obj;
             res.status(200).json(formatedData)
+
+
+            
         }else{
             res.status(400).send(err)
         }

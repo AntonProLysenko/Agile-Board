@@ -93,12 +93,14 @@ function App() {
   
     try {
       
+      console.log(user.email);
+      
       const { status } = await axios.post("http://localhost:3001/tasks", {
         entry: entry.current.value,
         body: body.current.value,
         status: listStatus.toUpperCase(),
         prevStatus: "",
-        // username: "Katya",
+        user: user.email,
       });
       
       if (status === 200){//using axios when button clicked(fetchin data again)
