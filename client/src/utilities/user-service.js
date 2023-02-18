@@ -8,13 +8,15 @@ export  async function signUp(userData) {
 }
 
 
+
+
 export function getToken () {
     const token = localStorage.getItem("token")//in getItem we only specify the key of the item
     if (!token) return null
-    const tokenPayloadString = token.split ('.')[1]
-    const decodedPayload = atob(tokenPayloadString)
-    const payload = JSON.parse(decodedPayload);
-    // const payload = JSON.parse(atob(token.split('.')[1]))
+    // const tokenPayloadString = token.split ('.')[1]
+    // const decodedPayload = atob(tokenPayloadString)
+    // const parsePayload = JSON.parse(decodedPayload)
+    const payload = JSON.parse(atob(token.split('.')[1]))
 
     if(payload.exp < Date.now()/1000){
         localStorage.removeItem("token")
@@ -30,10 +32,9 @@ export function getUser(){
     return token ? JSON.parse(atob(token.split('.')[1])).user : null
 }
 
-
-export async function logIn(credentials){
+export async function logIn(credentials) {
   const token = await usersApi.logIn(credentials);
-  localStorage.setItem("token", token); 
+  localStorage.setItem("token", token);
   return getUser();
 }
 
