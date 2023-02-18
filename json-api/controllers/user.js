@@ -4,7 +4,7 @@ const User = require('../models/user')
 
 const jwt = require("jsonwebtoken");
 // const { create } = require("../models/user");
-// const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt");
 
 
 
@@ -30,17 +30,16 @@ router.post('/', async (req, res)=>{
 
 // POST /api/users/login
 router.post('/login', async(req,res)=>{
-       const user = await User.findOne({ email: req.body.email }); //finding user based on email
-       if (!user) throw new Error();
-       const match = await bcrypt.compare(req.body.password, user.password); //comparing entered password to users password
-       if (!match) throw new Error();
-       res.json(createJWT(user));
-    // try {
-   
+    try {
+        const user = await User.findOne({email: req.body.email})//finding user based on email
+         if (!user) throw new Error(); console.log("firs");
+          const match = await bcrypt.compare(req.body.password, user.password);//comparing entered password to users password
+         if(!match) throw new Error()
+         res.json(createJWT(user));
 
-    // } catch (error) {
-    //     res.status(448).json(error);
-    // }
+    } catch (error) {
+        res.status(404).json(error);
+    }
 })
 
 module.exports = router;

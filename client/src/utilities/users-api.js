@@ -26,7 +26,7 @@ export async function logIn(credentials){
      if (res.ok){//if success
         return res.json()
     }else{
-        throw new Error("Invalid Sign Up")
+        throw new Error("Invalid Log In")
     }
 }
 
