@@ -52,8 +52,6 @@ function App() {
     try {
       const { data } = await axios.get("http://localhost:3001/tasks/table"); //promising to fetch using axios
       setTasks(data);
-
-
        const titleBtn = document.querySelectorAll(".titleBtn");
        Object.keys(titleBtn).forEach(function (i) {
          titleBtn[i].addEventListener("click", (evt) => {
@@ -93,7 +91,6 @@ function App() {
   
     try {
       
-      console.log(user.email);
       
       const { status } = await axios.post("http://localhost:3001/tasks", {
         entry: entry.current.value,

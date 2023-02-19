@@ -3,10 +3,10 @@ const router = express.Router();
 const User = require('../models/user')
 
 const jwt = require("jsonwebtoken");
-const { create } = require("../models/user");
 const bcrypt = require("bcrypt");
 
-
+// let currentUser
+const getCurrentUser = require("./task");
 
 function createJWT(user) {
   return jwt.sign(
@@ -32,17 +32,21 @@ router.post('/', async (req, res)=>{
 router.post('/login', async(req,res)=>{
     try {
         const user = await User.findOne({email: req.body.email})//finding user based on email
-         if (!user) throw new Error(); console.log("firs");
+         if (!user) throw new Error();
           const match = await bcrypt.compare(req.body.password, user.password);//comparing entered password to users password
          if(!match) throw new Error()
          res.json(createJWT(user));
+         await getCurrentUser.getCurrentUser(user)
+         //currentUser=user
 
     } catch (error) {
         res.status(404).json(error);
     }
 })
 
-module.exports = router;
+// module.exports = { currentUser,router };
+module.exports =  {router}
+
 
 
 

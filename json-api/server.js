@@ -11,6 +11,8 @@ const userRouter = require("./controllers/user");
 
 
 
+
+
 //connection
 require('./models/connection')
 
@@ -34,8 +36,8 @@ app.use(express.json())
 // }
 //Routes
 // app.use("/tasks", authenticateToken, taskRouter);
-app.use("/tasks",taskRouter)
-app.use("/api/users", userRouter);
+app.use("/tasks",taskRouter.router)
+app.use("/api/users", userRouter.router);
 
 // app.post('/login', (req,res) =>{
 //     //Authenticate user

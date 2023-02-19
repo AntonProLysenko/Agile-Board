@@ -1,44 +1,52 @@
 const express  = require ('express')
 const router = express.Router()
 const Task = require('../models/Task')
+const User = require ('../models/user')
 
+// let thisUser = require("./user")
+let currentUser
 
 
 //CRUD
 
 // GET
-// router.get ('/table', (req,res)=>{
-//     Task.find({},(err, foundTasks)=>{
-//        // foundTasks = foundTasks.filter(foundTasks =>  foundTasks.username === req.user.name)
-//         if(!err){
-//             res.status(200).json(foundTasks);            
-//             // res.status(200).json(foundTasks.filter(task => task.username === req.user.name));            
-//         }else{
-//             res.status(400).send(err)
-//         }
-//     })
-// });
-
-//sorting tasks by the status
-router.get('/table',(req,res)=>{
+router.get ('/', (req,res)=>{
+   
     Task.find({},(err, foundTasks)=>{
+       
+       // foundTasks = foundTasks.filter(foundTasks =>  foundTasks.username === req.user.name)
         if(!err){
-            foundTasks = foundTasks.filter(task => task.user === "123@123")
-
-            console.log(foundTasks);
-            
-            const formatedData = foundTasks.reduce((accumulator, task)=>{//reduce will return an object instead array with props: status
-                accumulator[task.status] = accumulator[task.status]? [...accumulator[task.status],task]:   [task]
-                return accumulator//always return acc in reduce func
-            }, {})//definig that it will be an obj;
-            res.status(200).json(formatedData)
-
-
-            
+            res.status(200).json(foundTasks);            
+            // res.status(200).json(foundTasks.filter(task => task.username === req.user.name));            
         }else{
             res.status(400).send(err)
         }
     })
+});
+
+//sorting tasks by the status
+router.get('/table', (req,res)=>{
+// const user     =  User.findOne({email: "123@123"})
+//   console.log("user", user);
+
+
+
+  Task.find({}, async (err, foundTasks) => {
+    if (!err) {
+            console.log("currentUser", currentUser);
+            if (currentUser) foundTasks = await foundTasks.filter((task) => task.user === currentUser.email);
+      const formatedData = foundTasks.reduce((accumulator, task) => {
+        //reduce will return an object instead array with props: status
+        accumulator[task.status] = accumulator[task.status]
+          ? [...accumulator[task.status], task]
+          : [task];
+        return accumulator; //always return acc in reduce func
+      }, {}); //definig that it will be an obj;
+      res.status(200).json(formatedData);
+    } else {
+      res.status(400).send(err);
+    }
+  });
 })
 
 
@@ -95,6 +103,8 @@ router.delete('/:id', (req,res)=>{
         }
     })
 })
+async function getCurrentUser(user){
+   return currentUser = user
+}
 
-
-module.exports = router
+module.exports = {getCurrentUser,router}
