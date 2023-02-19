@@ -143,75 +143,85 @@ function App() {
   
   
   return (
-    
-
     <div className="App">
-      { user?
-      <>
-        <Routes>
-          <Route path="/" element={<Layout user = {user.name} />} />
-          <Route
-            path=":id"
-            element={
-              <Show
-                task={task}
-                setTask = {setTask}
-                buttonPressed={buttonPressed}
-                setButtonPressed={setButtonPressed}
-                setIsOpen={setIsOpen}
-              />
-            }
+      {user ? (
+        <>
+          <Routes>
+            <Route path="/" element={<Layout user={user.name} />} />
+            <Route
+              path=":id"
+              element={
+                <Show
+                  task={task}
+                  setTask={setTask}
+                  buttonPressed={buttonPressed}
+                  setButtonPressed={setButtonPressed}
+                  setIsOpen={setIsOpen}
+                />
+              }
+            />
+          </Routes>
+
+          <Lists
+            tasks={tasks}
+            handleClick={handleClick}
+            plusIcon={plusIcon}
+            setIsOpen={setIsOpen}
+            setTask={setTask}
           />
-        </Routes>
 
-        <Lists
-          tasks={tasks}
-          handleClick={handleClick}
-          plusIcon={plusIcon}
-          setIsOpen={setIsOpen}
-          setTask = {setTask}
-        />
-
-      { /* <div className="addButton">
+          {/* <div className="addButton">
           <button onClick={()=>setIsOpen(true)}>
           {plusIcon} Add New Task
           </button>
           </div> */}
 
-        <AddTaskForm
-          open={isOpen}
-          entry={entry}
-          body={body}
-          statusRef={statusRef}
-          handleSubmit={handleSubmit}
-          handleUpdate = {handleUpdate}
-          onClose={() => {setIsOpen(false);}}
-          plusIcon={plusIcon}
-          closeIcon={closeIcon}
-          task = {task}
-        />
+          <AddTaskForm
+            open={isOpen}
+            entry={entry}
+            body={body}
+            statusRef={statusRef}
+            handleSubmit={handleSubmit}
+            handleUpdate={handleUpdate}
+            onClose={() => {
+              setIsOpen(false);
+            }}
+            plusIcon={plusIcon}
+            closeIcon={closeIcon}
+            task={task}
+          />
 
-        <TrashBin
-          tasks={tasks}
-          open={showTrashBin}
-          handleClick={handleClick}
-          closeIcon={closeIcon}
-          onClose={() => setShowTrashBin(false)}
-        />
+          <TrashBin
+            tasks={tasks}
+            open={showTrashBin}
+            handleClick={handleClick}
+            closeIcon={closeIcon}
+            onClose={() => setShowTrashBin(false)}
+          />
 
-        <i className="trashBin" onClick={() => setShowTrashBin(true)}> {TrashBinIcon} </i>
+          <i className="trashBin" onClick={() => setShowTrashBin(true)}>
+            {" "}
+            {TrashBinIcon}{" "}
+          </i>
 
-        <div onClick={()=>{setUser(null); logOut()}}> Log {logOutIcon}</div>
-    </>
-    :
-    <>
-   <h1>Please Log-in</h1>
-   <AuthPage setUser= {setUser} />
-    </>
-}
+          <div
+            onClick={() => {
+              setUser(null);
+              logOut();
+            }}
+          >
+            {" "}
+            Log {logOutIcon}
+          </div>
+        </>
+      ) : (
+        <>
+          <h1>Please Log-in</h1>
+          <AuthPage setUser={setUser} setButtonPressed={setButtonPressed} buttonPressed = {buttonPressed} />
+        </>
+      )}
     </div>
-  
-      )
+  );
 
 
 }

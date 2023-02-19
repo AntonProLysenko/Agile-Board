@@ -10,19 +10,19 @@ let currentUser
 //CRUD
 
 // GET
-router.get ('/', (req,res)=>{
+// router.get ('/', (req,res)=>{
    
-    Task.find({},(err, foundTasks)=>{
+//     Task.find({},(err, foundTasks)=>{
        
-       // foundTasks = foundTasks.filter(foundTasks =>  foundTasks.username === req.user.name)
-        if(!err){
-            res.status(200).json(foundTasks);            
-            // res.status(200).json(foundTasks.filter(task => task.username === req.user.name));            
-        }else{
-            res.status(400).send(err)
-        }
-    })
-});
+//        // foundTasks = foundTasks.filter(foundTasks =>  foundTasks.username === req.user.name)
+//         if(!err){
+//             res.status(200).json(foundTasks);            
+//             // res.status(200).json(foundTasks.filter(task => task.username === req.user.name));            
+//         }else{
+//             res.status(400).send(err)
+//         }
+//     })
+// });
 
 //sorting tasks by the status
 router.get('/table', (req,res)=>{
@@ -34,15 +34,19 @@ router.get('/table', (req,res)=>{
   Task.find({}, async (err, foundTasks) => {
     if (!err) {
             console.log("currentUser", currentUser);
-            if (currentUser) foundTasks = await foundTasks.filter((task) => task.user === currentUser.email);
-      const formatedData = foundTasks.reduce((accumulator, task) => {
-        //reduce will return an object instead array with props: status
-        accumulator[task.status] = accumulator[task.status]
-          ? [...accumulator[task.status], task]
-          : [task];
-        return accumulator; //always return acc in reduce func
-      }, {}); //definig that it will be an obj;
-      res.status(200).json(formatedData);
+            if (currentUser){
+
+                foundTasks = await foundTasks.filter((task) => task.user === currentUser.email);
+                 const formatedData = foundTasks.reduce((accumulator, task) => {
+                   //reduce will return an object instead array with props: status
+                   accumulator[task.status] = accumulator[task.status]
+                     ? [...accumulator[task.status], task]
+                     : [task];
+                   return accumulator; //always return acc in reduce func
+                 }, {}); //definig that it will be an obj;
+                 res.status(200).json(formatedData);
+            } 
+     
     } else {
       res.status(400).send(err);
     }
