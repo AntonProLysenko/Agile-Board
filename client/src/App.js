@@ -26,12 +26,12 @@ import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 
 
+const BASIC_URL = process.env.REACT_APP_BASIC_URL;
 
 const plusIcon = <FontAwesomeIcon icon={faPlus} />
 const closeIcon = <FontAwesomeIcon icon={faXmark} />;
 const TrashBinIcon = <FontAwesomeIcon icon={faTrashCan} />;
 const logOutIcon = <FontAwesomeIcon icon={faRightFromBracket} />;
-;
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -50,7 +50,7 @@ function App() {
   useEffect(()=>{
     const fetchTask = async()=>{
     try {
-      const { data } = await axios.get("http://localhost:3001/tasks/table"); //promising to fetch using axios
+      const { data } = await axios.get(`${BASIC_URL}/tasks/table`); //promising to fetch using axios
       setTasks(data);
        const titleBtn = document.querySelectorAll(".titleBtn");
        Object.keys(titleBtn).forEach(function (i) {
@@ -70,7 +70,7 @@ function App() {
 
   const handleClick = async (statusChange, id) => {
     try {
-      const { status } = await axios.put(`http://localhost:3001/tasks/${id}`, {
+      const { status } = await axios.put(`${BASIC_URL}/tasks/${id}`, {
       status: statusChange,
     });
     if (status === 200){
@@ -92,7 +92,7 @@ function App() {
     try {
       
       
-      const { status } = await axios.post("http://localhost:3001/tasks", {
+      const { status } = await axios.post(`${BASIC_URL}/tasks`, {
         entry: entry.current.value,
         body: body.current.value,
         status: listStatus.toUpperCase(),
@@ -116,7 +116,7 @@ function App() {
     const handleUpdate = async (evt, id) => {
       evt.preventDefault()
       try {
-         const { status } = await axios.put(`http://localhost:3001/tasks/${id}`, {
+         const { status } = await axios.put(`${BASIC_URL}/tasks/${id}`, {
            entry: entry.current.value,
            body: body.current.value,
            status: task.status,

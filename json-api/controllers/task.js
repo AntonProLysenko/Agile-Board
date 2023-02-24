@@ -10,19 +10,19 @@ let currentUser
 //CRUD
 
 // GET
-// router.get ('/', (req,res)=>{
+router.get ('/', (req,res)=>{
    
-//     Task.find({},(err, foundTasks)=>{
+    Task.find({},(err, foundTasks)=>{
        
-//        // foundTasks = foundTasks.filter(foundTasks =>  foundTasks.username === req.user.name)
-//         if(!err){
-//             res.status(200).json(foundTasks);            
-//             // res.status(200).json(foundTasks.filter(task => task.username === req.user.name));            
-//         }else{
-//             res.status(400).send(err)
-//         }
-//     })
-// });
+       // foundTasks = foundTasks.filter(foundTasks =>  foundTasks.username === req.user.name)
+        if(!err){
+            res.status(200).json(foundTasks);            
+            // res.status(200).json(foundTasks.filter(task => task.username === req.user.name));            
+        }else{
+            res.status(400).send(err)
+        }
+    })
+});
 
 //sorting tasks by the status
 router.get('/table', (req,res)=>{
