@@ -35,8 +35,8 @@ router.post('/login', async(req,res)=>{
          if (!user) throw new Error();
           const match = await bcrypt.compare(req.body.password, user.password);//comparing entered password to users password
          if(!match) throw new Error()
-         res.json(createJWT(user));
          await getCurrentUser.getCurrentUser(user)
+         res.json(createJWT(user));
          //currentUser=user
 
     } catch (error) {

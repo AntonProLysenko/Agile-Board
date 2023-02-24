@@ -47,23 +47,23 @@ function App() {
   const statusRef = useRef(null)
 
 
-  useEffect(()=>{
-    const fetchTask = async()=>{
-    try {
-      const { data } = await axios.get(`${BASIC_URL}/tasks/table`); //promising to fetch using axios
-      setTasks(data);
-       const titleBtn = document.querySelectorAll(".titleBtn");
-       Object.keys(titleBtn).forEach(function (i) {
-         titleBtn[i].addEventListener("click", (evt) => {
-           setListStatus(evt.target.id);
-         });
-       });
-    } catch (error) {
-     alert("Something went wrong!"+error);
-    }
-  };
-  fetchTask()
-  },[buttonPressed])
+  useEffect(() => {
+    const fetchTask = async () => {
+      try {
+        const { data } = await axios.get(`${BASIC_URL}/tasks/table`); //promising to fetch using axios
+        setTasks(data);
+        const titleBtn = document.querySelectorAll(".titleBtn");
+        Object.keys(titleBtn).forEach(function (i) {
+          titleBtn[i].addEventListener("click", (evt) => {
+            setListStatus(evt.target.id);
+          });
+        });
+      } catch (error) {
+        alert("Something went wrong!" + error);
+      }
+    };
+    fetchTask();
+  }, [buttonPressed, user]);
 
 
 
@@ -147,7 +147,7 @@ function App() {
       {user ? (
         <>
           <Routes>
-            <Route path="/" element={<Layout user={user.name} />} />
+            <Route path="/" element={<Layout user={user.name} setUser = {setUser} logOut={logOut} logOutIcon={logOutIcon} />} />
             <Route
               path=":id"
               element={
@@ -205,15 +205,7 @@ function App() {
             {TrashBinIcon}{" "}
           </i>
 
-          <div
-            onClick={() => {
-              setUser(null);
-              logOut();
-            }}
-          >
-            {" "}
-            Log {logOutIcon}
-          </div>
+         
         </>
       ) : (
         <>

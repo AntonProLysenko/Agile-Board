@@ -6,7 +6,7 @@ export default function AuthPage({setUser,setButtonPressed, buttonPressed}) {
   return (
     <div>
       AuthPage
-      <SignUpForm setUser={setUser} />
+      <SignUpForm setUser={setUser} setButtonPressed  = {setButtonPressed} buttonPressed= {buttonPressed}/>
       <LoginForm setUser={setUser} setButtonPressed  = {setButtonPressed} buttonPressed= {buttonPressed}/>
     </div>
   );

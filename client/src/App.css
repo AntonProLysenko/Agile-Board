@@ -147,6 +147,11 @@ body{
   margin-right: 30px;
   padding: 0;
 }
+.logOut{
+  color: whitesmoke;
+  font-size: x-large;
+  filter:drop-shadow(1px 1px 8px  rgb(0, 0, 0))
+}
 .fa-trash-can{
   filter:drop-shadow(1px 1px 10px  rgb(0, 0, 0))
 }
