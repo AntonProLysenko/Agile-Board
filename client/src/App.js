@@ -157,6 +157,7 @@ function App() {
                   buttonPressed={buttonPressed}
                   setButtonPressed={setButtonPressed}
                   setIsOpen={setIsOpen}
+                  BASIC_URL={BASIC_URL}
                 />
               }
             />
@@ -217,7 +218,11 @@ function App() {
       ) : (
         <>
           <h1>Please Log-in</h1>
-          <AuthPage setUser={setUser} setButtonPressed={setButtonPressed} buttonPressed = {buttonPressed} />
+          <AuthPage
+            setUser={setUser}
+            setButtonPressed={setButtonPressed}
+            buttonPressed={buttonPressed}
+          />
         </>
       )}
     </div>
