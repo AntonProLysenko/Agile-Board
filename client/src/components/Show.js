@@ -34,7 +34,7 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen, task, setTask, BASIC
           alert("Something went wrong!");
         }
       } else {
-        await axios.delete(`http://localhost:3001/tasks/${id}`);
+        await axios.delete(`${BASIC_URL}/tasks/${id}`);
         setButtonPressed(!buttonPressed);
       }
     } catch (error) {

@@ -4,6 +4,7 @@ import axios from 'axios'
 import {Routes, Route} from "react-router-dom";
 
 import { getUser, logOut } from './utilities/user-service';
+import * as usersService from "./utilities/user-service";
 // import * as userService from './utilities/user-service'
 
 import Layout from "./screens/layout/Layout";
@@ -35,6 +36,11 @@ const logOutIcon = <FontAwesomeIcon icon={faRightFromBracket} />;
 
 function App() {
   const [user, setUser] = useState(getUser());
+  const [error, setError] = useState("");
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: "",
+  });
   const [tasks, setTasks] = useState({})//for lists of tasks
   const [task, setTask] = useState({}); // for single task in Show
   const [buttonPressed, setButtonPressed] = useState (false)//used for refetching data on status change
@@ -50,7 +56,16 @@ function App() {
   useEffect(() => {
     const fetchTask = async () => {
       try {
-        const { data } = await axios.get(`${BASIC_URL}/tasks/table`); //promising to fetch using axios
+        const { data } = await axios.get(`http://localhost:3001/tasks/table`); //promising to fetch using axios
+        // data = Object.entries(data);
+   
+        console.log(credentials);
+
+        console.log( data);
+        
+        
+        // data = data.filter((task) => task.user === user.email);
+
         setTasks(data);
         const titleBtn = document.querySelectorAll(".titleBtn");
         Object.keys(titleBtn).forEach(function (i) {
@@ -63,7 +78,7 @@ function App() {
       }
     };
     fetchTask();
-  }, [buttonPressed, user]);
+  },[buttonPressed]);
 
 
 
@@ -83,7 +98,27 @@ function App() {
     }
   };
 
+async function handleLogin(evt) {
+    // Prevent form from being submitted to the server
+    evt.preventDefault();
 
+    try {
+      // The promise returned by the signUp service method
+      // will resolve to the user object included in the
+      // payload of the JSON Web Token (JWT)
+      // setButtonPressed(!buttonPressed);
+      const user = await usersService.logIn(credentials);
+      setUser(user);
+      setButtonPressed(!buttonPressed);
+    } catch {
+      setError("Log In Failed - Try Again");
+    }
+  }
+
+    function handleChange(evt) {
+      setCredentials({ ...credentials, [evt.target.name]: evt.target.value });
+      setError("");
+    }
 
 
   const handleSubmit = async (evt) => {
@@ -169,6 +204,7 @@ function App() {
             plusIcon={plusIcon}
             setIsOpen={setIsOpen}
             setTask={setTask}
+            user = {user}
           />
 
           {/* <div className="addButton">
@@ -214,6 +250,10 @@ function App() {
             setUser={setUser}
             setButtonPressed={setButtonPressed}
             buttonPressed={buttonPressed}
+            handleLogin={handleLogin}
+            credentials={credentials}
+            handleChange={handleChange}
+            error={error}
           />
         </>
       )}

@@ -5,10 +5,15 @@ import { Link } from "react-router-dom";
 
 
 
-export default function Lists({ tasks, handleClick, setIsOpen, setTask }) {
+export default function Lists({ user, tasks, handleClick, setIsOpen, setTask }) {
 
- 
-  return (
+   
+    return (
+      
+<>
+      {user?
+      
+   
     <div className="container">
       <div className="section">
         <div className="list">
@@ -127,5 +132,16 @@ export default function Lists({ tasks, handleClick, setIsOpen, setTask }) {
         </div>
       </div>
     </div>
-  );
+        : 
+      <div>Loading</div>
+            }
+    </>
+    )
+    
+            
+  
+  
 }
+
+
+

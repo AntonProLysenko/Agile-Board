@@ -13,7 +13,7 @@ let currentUser
 router.get ('/', (req,res)=>{
    
     Task.find({},(err, foundTasks)=>{
-       
+      
        // foundTasks = foundTasks.filter(foundTasks =>  foundTasks.username === req.user.name)
         if(!err){
             res.status(200).json(foundTasks);            
@@ -21,6 +21,7 @@ router.get ('/', (req,res)=>{
         }else{
             res.status(400).send(err)
         }
+    
     })
 });
 
@@ -31,12 +32,12 @@ router.get('/table', (req,res)=>{
 
 
 
-  Task.find({}, async (err, foundTasks) => {
+  Task.find({},  (err, foundTasks) => {
     if (!err) {
             console.log("currentUser", currentUser);
             if (currentUser){
 
-                foundTasks = await foundTasks.filter((task) => task.user === currentUser.email);
+                foundTasks =  foundTasks.filter((task) => task.user === currentUser.email);
                  const formatedData = foundTasks.reduce((accumulator, task) => {
                    //reduce will return an object instead array with props: status
                    accumulator[task.status] = accumulator[task.status]
@@ -45,7 +46,7 @@ router.get('/table', (req,res)=>{
                    return accumulator; //always return acc in reduce func
                  }, {}); //definig that it will be an obj;
                  res.status(200).json(formatedData);
-            } 
+                }
      
     } else {
       res.status(400).send(err);

@@ -1,37 +1,12 @@
-import { useState } from "react";
-import * as usersService from "../utilities/user-service";
 
-export default function LoginForm({ setUser, setButtonPressed, buttonPressed }) {
-  const [credentials, setCredentials] = useState({
-    email: "",
-    password: "",
-  });
-  const [error, setError] = useState("");
+export default function LoginForm({ setUser, setButtonPressed, buttonPressed, handleLogin, credentials, handleChange, error }) {
 
-  function handleChange(evt) {
-    setCredentials({ ...credentials, [evt.target.name]: evt.target.value });
-    setError("");
-  }
 
-  async function handleSubmit(evt) {
-    // Prevent form from being submitted to the server
-    evt.preventDefault();
-    setButtonPressed(!buttonPressed);
-    try {
-      // The promise returned by the signUp service method
-      // will resolve to the user object included in the
-      // payload of the JSON Web Token (JWT)
-   
-      const user = await usersService.logIn(credentials);
-      setUser(user);
-    } catch {
-      setError("Log In Failed - Try Again");
-    }
-  }
+  
 
   return (
     <div>
-      <div className="form-container" onSubmit={handleSubmit}>
+      <div className="form-container" onSubmit={handleLogin}>
         <form autoComplete="off">
           <label>Email</label>
           <input
