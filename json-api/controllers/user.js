@@ -44,6 +44,13 @@ router.post('/login', async(req,res)=>{
     }
 })
 
+//GET/api/users/check-token
+router.get("/check-token",async (req,res)=>{
+  // req.user will always be there for you when a token is sent
+  console.log("req.user", req.user);
+  res.json(req.exp);
+});
+
 // module.exports = { currentUser,router };
 module.exports =  {router}
 

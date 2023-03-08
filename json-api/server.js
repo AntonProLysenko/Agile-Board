@@ -1,7 +1,8 @@
 require('dotenv').config();
 const express = require('express')
 const app = express ();
-cors = require ('cors')
+const cors = require ('cors')
+const path = require("path");
 
 const jwt = require('jsonwebtoken')
 const PORT = process.env.PORT || 3001
@@ -19,6 +20,9 @@ require('./models/connection')
 //Midlware
 app.use(cors())
 app.use(express.json())
+
+app.use(express.static(path.join(__dirname, "build")));
+app.use(require("./models/checkToken"));
 
 // function authenticateToken(req,res,next){
 //     const authHeader = req.headers['authorization']

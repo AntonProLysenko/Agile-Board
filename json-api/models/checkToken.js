@@ -20,4 +20,7 @@ module.exports = function (req, res, next) {
     req.user = null;
     return next();
   }
+
+  console.log('Chek'+req.user);
+  
 };
