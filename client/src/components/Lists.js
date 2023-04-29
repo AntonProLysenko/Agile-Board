@@ -6,11 +6,15 @@ import { Link } from "react-router-dom";
 
 
 export default function Lists({ user, tasks, handleClick, setIsOpen, setTask }) {
-
-   
+ // data = data.filter((tasks) => tasks.user === userInfo.user.email);
+  //  tasks = tasks.filter((currentTasks)=>currentTasks.user === user.email)
     return (
       
 <>
+
+{console.log("LIST " + user.name)}
+{console.log("LIST " + JSON.stringify(tasks))}
+
       {user?
       
    
@@ -28,6 +32,7 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask }) 
 
           {tasks["TO-DO"]
             ? tasks["TO-DO"].map((task, id) => {
+              if (task.user === user.email){
                 return (
                   <div className="task" key={id}>
                     <Link to={{pathname:`/${task._id}`,state:{modal:true} }}>{task.entry}</Link>
@@ -51,9 +56,9 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask }) 
 
                     </div>
                   </div>
-                );
+                );}
               })
-            : ""}
+            : "Loading..."}
         </div>
       </div>
 
@@ -91,7 +96,7 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask }) 
                   </div>
                 );
               })
-            : ""}
+            : "Loading..."}
         </div>
       </div>
 
@@ -128,7 +133,7 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask }) 
                   </div>
                 );
               })
-            : ""}
+            : "Loading..."}
         </div>
       </div>
     </div>

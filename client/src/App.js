@@ -56,16 +56,28 @@ function App() {
   useEffect(() => {
     const fetchTask = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:3001/tasks/table`); //promising to fetch using axios
+        let { data } = await axios.get(`http://localhost:3001/tasks/table`); //promising to fetch using axios
         // data = Object.entries(data);
    
-        console.log(credentials);
+        // console.log("credentials"+ credentials);
 
-        console.log( data);
+        // console.log("data " +data);
         
-        
+
+
+//         let token = localStorage.getItem("token");
+//          const userInfo = JSON.parse(atob( token.split(".")[1]));
+//                 console.log("user " + {userInfo});
+//                 console.log("App.js User is " + userInfo.user.name);
+
+// console.log("function");
+
+//                 console.log(getUser());
+                
         // data = data.filter((task) => task.user === user.email);
-
+        // foundTasks =  foundTasks.filter((task) => task.user === currentUser.email); //filtering data by the current user in backend
+        // data = data.filter((tasks) => tasks.user === userInfo.user.email);
+        // console.log("data " + JSON.stringify(data));
         setTasks(data);
         const titleBtn = document.querySelectorAll(".titleBtn");
         Object.keys(titleBtn).forEach(function (i) {
@@ -245,16 +257,12 @@ async function handleLogin(evt) {
         </>
       ) : (
         <>
-          <h1>Please Log-in</h1>
-          <AuthPage
-            setUser={setUser}
-            setButtonPressed={setButtonPressed}
-            buttonPressed={buttonPressed}
-            handleLogin={handleLogin}
-            credentials={credentials}
-            handleChange={handleChange}
-            error={error}
-          />
+        {console.log("here")}
+
+         <h1>Please Log-in</h1>
+        <Routes>
+            <Route path="/" element={<AuthPage setUser={setUser} setButtonPressed={setButtonPressed} buttonPressed={buttonPressed} handleLogin={handleLogin} credentials={credentials} handleChange={handleChange} error={error}/>} />
+        </Routes>
         </>
       )}
     </div>

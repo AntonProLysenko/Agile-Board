@@ -18,6 +18,9 @@ export function getToken () {
     // const parsePayload = JSON.parse(decodedPayload)
     const payload = JSON.parse(atob(token.split('.')[1]))
 
+    // console.log("front-end User is "+ payload.user.name);
+    
+
     if(payload.exp < Date.now()/1000){
         localStorage.removeItem("token")
         return null
