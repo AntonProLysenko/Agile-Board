@@ -257,8 +257,6 @@ async function handleLogin(evt) {
         </>
       ) : (
         <>
-        {console.log("here")}
-
          <h1>Please Log-in</h1>
         <Routes>
             <Route path="/" element={<AuthPage setUser={setUser} setButtonPressed={setButtonPressed} buttonPressed={buttonPressed} handleLogin={handleLogin} credentials={credentials} handleChange={handleChange} error={error}/>} />

@@ -12,8 +12,8 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask }) 
       
 <>
 
-{console.log("LIST " + user.name)}
-{console.log("LIST " + JSON.stringify(tasks))}
+{/* {console.log("LIST " + user.name)}
+{console.log("LIST " + JSON.stringify(tasks))} */}
 
       {user?
       
@@ -73,6 +73,7 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask }) 
 
           {tasks["PENDING"]
             ? tasks["PENDING"].map((task, id) => {
+              if (task.user === user.email){
                 return (
                   <div className="task" key={id}>
                     <Link to={`/${task._id}`}>{task.entry}</Link>
@@ -94,7 +95,7 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask }) 
                       </button>
                     </div>
                   </div>
-                );
+                );}
               })
             : "Loading..."}
         </div>
@@ -111,6 +112,7 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask }) 
 
           {tasks["COMPLETED"]
             ? tasks["COMPLETED"].map((task, id) => {
+              if (task.user === user.email){
                 return (
                   <div className="task" key={id}>
                     <Link to={`/${task._id}`}>{task.entry}</Link>
@@ -131,7 +133,7 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask }) 
                       </button>
                     </div>
                   </div>
-                );
+                );}
               })
             : "Loading..."}
         </div>
