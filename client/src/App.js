@@ -122,6 +122,7 @@ async function handleLogin(evt) {
       const user = await usersService.logIn(credentials);
       setUser(user);
       setButtonPressed(!buttonPressed);
+      setCredentials({email:"", password:""})//clearing form
     } catch {
       setError("Log In Failed - Try Again");
     }
