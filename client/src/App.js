@@ -199,11 +199,11 @@ async function handleLogin(evt) {
           </div>
          </header>
           <Routes>
-            <Route path ="/" element = {<Lists tasks={tasks} handleClick={handleClick} plusIcon={plusIcon} setIsOpen={setIsOpen} setTask={setTask} user={user}/>}/>
+            <Route path ="/" element = {<Layout/>}/>{/*Added "/" to layout to prevent warning, cannot add it to Lists, since it dissapears on Show page */}
             {/* <Route path="/" element={ <Layout userName={user.name} setUser={setUser} logOut={logOut} logOutIcon={logOutIcon}/> }/> */}
             <Route path=":id" element={ <Show task={task} setTask={setTask} buttonPressed={buttonPressed} setButtonPressed={setButtonPressed} setIsOpen={setIsOpen} BASIC_URL={BASIC_URL}/>}/>
           </Routes>
-
+          <Lists tasks={tasks} handleClick={handleClick} plusIcon={plusIcon} setIsOpen={setIsOpen} setTask={setTask} user={user}/>
            
 
           
