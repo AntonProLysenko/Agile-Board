@@ -3,6 +3,8 @@ const router = express.Router()
 const Task = require('../models/Task')
 const User = require ('../models/user')
 
+const checkToken = require ("../models/checkToken")
+
 // let thisUser = require("./user")
 let currentUser
 
@@ -32,12 +34,22 @@ router.get('/table', (req,res)=>{
 
 
 
+
   Task.find({},  (err, foundTasks) => {
     if (!err) {
-            console.log("currentUser", currentUser);
-            if (currentUser){
 
-                foundTasks =  foundTasks.filter((task) => task.user === currentUser.email);
+     
+        
+        
+
+        
+            // console.log("currentUser", currentUser);
+            // if (currentUser){
+
+                // foundTasks =  foundTasks.filter((task) => task.user === currentUser.email); //filtering data by the current user in backend
+
+                // console.log("foundTasks " + JSON.stringify(foundTasks));
+                
                  const formatedData = foundTasks.reduce((accumulator, task) => {
                    //reduce will return an object instead array with props: status
                    accumulator[task.status] = accumulator[task.status]
@@ -46,10 +58,10 @@ router.get('/table', (req,res)=>{
                    return accumulator; //always return acc in reduce func
                  }, {}); //definig that it will be an obj;
                  res.status(200).json(formatedData);
-                }
+                // }
      
     } else {
-      res.status(400).send(err);
+      res.status(404).send(err);
     }
   });
 })
@@ -108,6 +120,8 @@ router.delete('/:id', (req,res)=>{
         }
     })
 })
+
+
 async function getCurrentUser(user){
    return currentUser = user
 }

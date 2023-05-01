@@ -21,6 +21,6 @@ module.exports = function (req, res, next) {
     return next();
   }
 
-  console.log('Chek'+req.user);
+  //console.log(req.user.email);
   
 };

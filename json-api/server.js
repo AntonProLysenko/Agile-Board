@@ -7,6 +7,7 @@ const path = require("path");
 const jwt = require('jsonwebtoken')
 const PORT = process.env.PORT || 3001
 
+const token = require("./models/checkToken")
 const taskRouter = require('./controllers/task')
 const userRouter = require("./controllers/user");
 
@@ -22,7 +23,7 @@ app.use(cors())
 app.use(express.json())
 
 app.use(express.static(path.join(__dirname, "build")));
-app.use(require("./models/checkToken"));
+app.use(token);
 
 // function authenticateToken(req,res,next){
 //     const authHeader = req.headers['authorization']
@@ -40,8 +41,8 @@ app.use(require("./models/checkToken"));
 // }
 //Routes
 // app.use("/tasks", authenticateToken, taskRouter);
-app.use("/tasks",taskRouter.router)
-app.use("/api/users", userRouter.router);
+app.use("/tasks", token,taskRouter.router);
+app.use("/api/users",token, userRouter.router);
 
 // app.post('/login', (req,res) =>{
 //     //Authenticate user
@@ -56,5 +57,5 @@ app.use("/api/users", userRouter.router);
 
 
 app.listen(PORT,()=>{
-    console.log('Express is istening on port: ' + PORT)
+    console.log('Express is listening on port: ' + PORT)
 })

@@ -21,6 +21,10 @@ router.post('/', async (req, res)=>{
  try {
     const user = await User.create(req.body)
     const token = createJWT(user)
+    getCurrentUser.getCurrentUser(user);
+
+    // console.log("this"+user);
+    
      res.json(token);
  } 
  catch (error) {
@@ -47,7 +51,7 @@ router.post('/login', async(req,res)=>{
 //GET/api/users/check-token
 router.get("/check-token",async (req,res)=>{
   // req.user will always be there for you when a token is sent
-  console.log("req.user", req.user);
+  // console.log("req.user", req.user);
   res.json(req.exp);
 });
 

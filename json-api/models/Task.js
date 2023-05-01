@@ -16,6 +16,7 @@ const taskSchema = Schema(
     },
     prevStatus:String,
     user: String,
+    board: String,
   },
   {
     timestamps: true,
