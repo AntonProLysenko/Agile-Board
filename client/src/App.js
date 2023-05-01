@@ -137,8 +137,6 @@ async function handleLogin(evt) {
     evt.preventDefault();
   
     try {
-      
-      
       const { status } = await axios.post(`${BASIC_URL}/tasks`, {
         entry: entry.current.value,
         body: body.current.value,
@@ -154,7 +152,7 @@ async function handleLogin(evt) {
       }else{
         alert("Something went wrong!"); 
       }
-      // entry.current.value = ""
+     
     } catch (err) {
       alert("Something went wrong!"+err);
     }
@@ -193,31 +191,22 @@ async function handleLogin(evt) {
     <div className="App">
       {user ? (
         <>
+         <header>
+          <h1 className="title">{user.name[0].toUpperCase()+user.name.slice(1).toLowerCase()}'s Trello board</h1>
+          <div>
+            <span className='logOut' onClick={() => {setUser(null); logOut();}}>Log {logOutIcon}</span>
+            {/* <button onClick={handleCheckToken}>Check token exparation</button> */}
+          </div>
+         </header>
           <Routes>
-            <Route path="/" element={<Layout user={user.name} setUser = {setUser} logOut={logOut} logOutIcon={logOutIcon} />} />
-            <Route
-              path=":id"
-              element={
-                <Show
-                  task={task}
-                  setTask={setTask}
-                  buttonPressed={buttonPressed}
-                  setButtonPressed={setButtonPressed}
-                  setIsOpen={setIsOpen}
-                  BASIC_URL={BASIC_URL}
-                />
-              }
-            />
+            <Route path ="/" element = {<Lists tasks={tasks} handleClick={handleClick} plusIcon={plusIcon} setIsOpen={setIsOpen} setTask={setTask} user={user}/>}/>
+            {/* <Route path="/" element={ <Layout userName={user.name} setUser={setUser} logOut={logOut} logOutIcon={logOutIcon}/> }/> */}
+            <Route path=":id" element={ <Show task={task} setTask={setTask} buttonPressed={buttonPressed} setButtonPressed={setButtonPressed} setIsOpen={setIsOpen} BASIC_URL={BASIC_URL}/>}/>
           </Routes>
 
-          <Lists
-            tasks={tasks}
-            handleClick={handleClick}
-            plusIcon={plusIcon}
-            setIsOpen={setIsOpen}
-            setTask={setTask}
-            user = {user}
-          />
+           
+
+          
 
           {/* <div className="addButton">
           <button onClick={()=>setIsOpen(true)}>
@@ -225,16 +214,7 @@ async function handleLogin(evt) {
           </button>
           </div> */}
 
-          <AddTaskForm
-            open={isOpen}
-            entry={entry}
-            body={body}
-            statusRef={statusRef}
-            handleSubmit={handleSubmit}
-            handleUpdate={handleUpdate}
-            onClose={() => {
-              setIsOpen(false);
-            }}
+          <AddTaskForm open={isOpen} entry={entry} body={body} statusRef={statusRef} handleSubmit={handleSubmit} handleUpdate={handleUpdate}onClose={() => { setIsOpen(false);}}
             plusIcon={plusIcon}
             closeIcon={closeIcon}
             task={task}
@@ -242,25 +222,34 @@ async function handleLogin(evt) {
 
           <TrashBin
             tasks={tasks}
+            user={user}
             open={showTrashBin}
             handleClick={handleClick}
             closeIcon={closeIcon}
             onClose={() => setShowTrashBin(false)}
           />
 
-          <i className="trashBin" onClick={() => setShowTrashBin(true)}>
-            {" "}
-            {TrashBinIcon}{" "}
-          </i>
-
-         
+          <i className="trashBin" onClick={() => setShowTrashBin(true)}> {TrashBinIcon} </i>
         </>
       ) : (
         <>
-         <h1>Please Log-in</h1>
-        <Routes>
-            <Route path="/" element={<AuthPage setUser={setUser} setButtonPressed={setButtonPressed} buttonPressed={buttonPressed} handleLogin={handleLogin} credentials={credentials} handleChange={handleChange} error={error}/>} />
-        </Routes>
+          <h1>Please Log-in</h1>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <AuthPage
+                  setUser={setUser}
+                  setButtonPressed={setButtonPressed}
+                  buttonPressed={buttonPressed}
+                  handleLogin={handleLogin}
+                  credentials={credentials}
+                  handleChange={handleChange}
+                  error={error}
+                />
+              }
+            />
+          </Routes>
         </>
       )}
     </div>

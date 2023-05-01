@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-export default function TrashBin({ tasks, handleClick, open, closeIcon, onClose }) {
+export default function TrashBin({ tasks, user, handleClick, open, closeIcon, onClose }) {
   if (!open) return null;
 
   return (
@@ -18,6 +18,7 @@ export default function TrashBin({ tasks, handleClick, open, closeIcon, onClose 
 
             {tasks["ARCHIVE"]
               ? tasks["ARCHIVE"].map((task, id) => {
+                if (task.user === user.email){
                   return (
                     <div className="task" key={id}>
                       <Link to={`/${task._id}`}>{task.entry}</Link>
@@ -38,7 +39,7 @@ export default function TrashBin({ tasks, handleClick, open, closeIcon, onClose 
                         </button> */}
                       </div>
                     </div>
-                  );
+                  );}
                 })
               : "No archived tasks"}
           </div>
