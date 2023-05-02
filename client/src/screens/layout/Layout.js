@@ -12,7 +12,7 @@ const Layout = ({userName, setUser, logOut, logOutIcon}) => {
       <header>
        {/* <h1 className="title">{userName}'s Trello board</h1>  //Will always be displayed */}
 
-  {    console.log(userName)}
+ 
        
         {/*<div>
             <span className='logOut' onClick={() => {setUser(null); logOut();}}>Log {logOutIcon}</span>
