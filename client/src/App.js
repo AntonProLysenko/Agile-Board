@@ -14,6 +14,7 @@ import Show from "./components/Show";
 import AddTaskForm from "./components/AddTaskForm";
 import Lists from "./components/Lists";
 import TrashBin from './components/TrashBin';
+// import logo from '../assets/logo.png'
 
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -193,7 +194,7 @@ async function handleLogin(evt) {
       {user ? (
         <>
          <header>
-          <div className="header">
+          <img src={require('./assets/logo.png')} alt='logo'/>
             <div>
               <p className="title">Welcome, {user.name[0].toUpperCase()+user.name.slice(1).toLowerCase()}</p>
             </div>
@@ -201,7 +202,7 @@ async function handleLogin(evt) {
               <span className='logOut' onClick={() => {setUser(null); logOut();}}>Sign Out {logOutIcon}</span>
               {/* <button onClick={handleCheckToken}>Check token exparation</button> */}
             </div>
-            </div>
+
          </header>
           <Routes>
             <Route path ="/" element = {<Layout/>}/>{/*Added "/" to layout to prevent warning, cannot add it to Lists, since it dissapears on Show page */}
