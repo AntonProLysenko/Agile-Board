@@ -193,11 +193,15 @@ async function handleLogin(evt) {
       {user ? (
         <>
          <header>
-          <h1 className="title">{user.name[0].toUpperCase()+user.name.slice(1).toLowerCase()}'s Trello board</h1>
-          <div>
-            <span className='logOut' onClick={() => {setUser(null); logOut();}}>Log {logOutIcon}</span>
-            {/* <button onClick={handleCheckToken}>Check token exparation</button> */}
-          </div>
+          <div className="header">
+            <div>
+              <p className="title">Welcome, {user.name[0].toUpperCase()+user.name.slice(1).toLowerCase()}</p>
+            </div>
+            <div>
+              <span className='logOut' onClick={() => {setUser(null); logOut();}}>Sign Out {logOutIcon}</span>
+              {/* <button onClick={handleCheckToken}>Check token exparation</button> */}
+            </div>
+            </div>
          </header>
           <Routes>
             <Route path ="/" element = {<Layout/>}/>{/*Added "/" to layout to prevent warning, cannot add it to Lists, since it dissapears on Show page */}

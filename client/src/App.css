@@ -4,29 +4,33 @@
 }
 body,
 header,
-h1 {
+.layout {
   text-align: center;
   margin: 0;
   padding: 0;
 }
+.header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
 body{
   height: 100vh;
   width:100vw;
- background-image: url(https://source.unsplash.com/random/3840x2160/?wallpapers);
+ background-image: url(https://source.unsplash.com/random/3840x2160/?day-time-landscape-wallpaper);
   /* background-size:100% 100%; */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-
-.layout {
-  margin: 0;
+button{
+  cursor: pointer;
 }
 
-.title {
+/* .title {
   font-size: 50px;
  
-}
+} */
 
 .App {
   width: 100vw;
@@ -99,6 +103,7 @@ body{
   border:none;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  
 }
 .overlay{
   position: fixed;
@@ -177,11 +182,13 @@ body{
   align-self: flex-end;
   margin-right: 30px;
   padding: 0;
+  cursor: pointer;
 }
 .logOut{
   color: whitesmoke;
   font-size: x-large;
-  filter:drop-shadow(1px 1px 8px  rgb(0, 0, 0))
+  filter:drop-shadow(1px 1px 8px  rgb(0, 0, 0));
+  cursor:pointer;
 }
 .fa-trash-can{
   filter:drop-shadow(1px 1px 10px  rgb(0, 0, 0))
@@ -227,7 +234,7 @@ body{
   /* z-index: 1000; 
 } */
 .showOverlay{
-    position: fixed;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
