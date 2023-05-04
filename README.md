@@ -3,8 +3,9 @@ the app has separeted backend deployed on render so on first log in give it a ti
 
 use 
 
-login 123@123
+login test@test
 
-pass:123
+pass:test
 
-https://task-tacker-nsx7riebu-antonprolysenko.vercel.app
+https://task-tacker.vercel.app
+
