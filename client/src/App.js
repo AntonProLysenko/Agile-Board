@@ -59,7 +59,7 @@ function App() {
   useEffect(() => {
     const fetchTask = async () => {
       try {
-        let { data } = await axios.get(`http://localhost:3001/tasks/table`); //promising to fetch using axios
+        let { data } = await axios.get(`${BASIC_URL}/tasks/table`); //promising to fetch using axios
         // data = Object.entries(data);
    
         // console.log("credentials"+ credentials);
