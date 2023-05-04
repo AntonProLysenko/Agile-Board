@@ -20,7 +20,6 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask }) 
    
     <div className="container">
       <div className="section">
-        <div className="list">
           <div className="listTitle">
             <h2>To-Do</h2>
 
@@ -29,6 +28,7 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask }) 
               </button>
 
           </div>
+        <div className="list">
 
           {tasks["TO-DO"]
             ? tasks["TO-DO"].map((task, id) => {
@@ -36,7 +36,11 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask }) 
                 return (
                   <div className="task" key={id}>
                     <Link to={{pathname:`/${task._id}`,state:{modal:true} }}>{task.entry[0].toUpperCase()+task.entry.slice(1).toLowerCase()}</Link>
-
+                    {task.body.length>0?
+                    <div>A</div>
+                    :
+                    <div></div>
+                    }
                     <div className="moveBtn">
                       <button
                         onClick={() => {
@@ -63,13 +67,13 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask }) 
       </div>
 
       <div className="section">
-        <div className="list">
           <div className="listTitle">
             <h2>Pending</h2>
             <button className="titleBtn" id="pending"  onClick={() =>  {setTask({}); setIsOpen(true)}}>
              +
             </button>
           </div>
+        <div className="list">
 
           {tasks["PENDING"]
             ? tasks["PENDING"].map((task, id) => {
@@ -77,6 +81,11 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask }) 
                 return (
                   <div className="task" key={id}>
                     <Link to={`/${task._id}`}>{task.entry[0].toUpperCase()+task.entry.slice(1).toLowerCase()}</Link>
+                    {task.body.length>0?
+                    <div>A</div>
+                    :
+                    <div></div>
+                    }
                     <div className="moveBtn">
                       <button
                         onClick={() => {
@@ -102,13 +111,13 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask }) 
       </div>
 
       <div className="section">
-        <div className="list">
           <div className="listTitle">
             <h2>Completed</h2>
             <button className="titleBtn" id="completed" onClick={() =>  {setTask({}); setIsOpen(true)}}>
              +
             </button>
           </div>
+        <div className="list">
 
           {tasks["COMPLETED"]
             ? tasks["COMPLETED"].map((task, id) => {
@@ -116,6 +125,11 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask }) 
                 return (
                   <div className="task" key={id}>
                     <Link to={`/${task._id}`}>{task.entry[0].toUpperCase()+task.entry.slice(1).toLowerCase()}</Link>
+                    {task.body.length>0?
+                    <div>A</div>
+                    :
+                    <div></div>
+                    }
                     <div className="moveBtn">
                       <button
                         onClick={() => {
