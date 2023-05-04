@@ -12,7 +12,8 @@ header,
 header{
   width:100vw;
   height: 80px;
-  background-color: #215052;
+  background-color: rgba(28, 52, 77, 0.99);
+
 
   display: flex;
   flex-direction: row;
@@ -74,7 +75,7 @@ header>img{
   width: 30vw;
   padding: 10px;
   border-radius: 5px;
-  background-color: rgba(235, 236, 240, 0.9);
+  background-color:  rgba(255, 255, 255, 0.9) ;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   overflow: auto;
   display: flex;
@@ -98,7 +99,7 @@ header>img{
   height: 10vh;
   width: 27vw;
   border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(239, 238, 255, 0.6) ;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
