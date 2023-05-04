@@ -21,11 +21,15 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask }) 
     <div className="container">
       <div className="section">
           <div className="listTitle">
+             
+              <div className="pseudo"></div>{//Pseudo element for aligning items to the very left and even center
+              }
             <h2>To-Do</h2>
 
               <button className="titleBtn" id="to-do" onClick={() =>  {setTask({}); setIsOpen(true)}}>
               +
               </button>
+             
 
           </div>
         <div className="list">
@@ -68,6 +72,8 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask }) 
 
       <div className="section">
           <div className="listTitle">
+            <div className="pseudo"></div>{//Pseudo element for aligning items to the very left and even center
+              }
             <h2>Pending</h2>
             <button className="titleBtn" id="pending"  onClick={() =>  {setTask({}); setIsOpen(true)}}>
              +
@@ -112,6 +118,8 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask }) 
 
       <div className="section">
           <div className="listTitle">
+            <div className="pseudo"></div>{//Pseudo element for aligning items to the very left and even center
+              }
             <h2>Completed</h2>
             <button className="titleBtn" id="completed" onClick={() =>  {setTask({}); setIsOpen(true)}}>
              +
