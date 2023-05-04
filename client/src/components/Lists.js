@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 
 
-export default function Lists({ user, tasks, handleClick, setIsOpen, setTask }) {
+export default function Lists({ user, tasks, handleClick, setIsOpen, setTask, checkListIcon }) {
  // data = data.filter((tasks) => tasks.user === userInfo.user.email);
   //  tasks = tasks.filter((currentTasks)=>currentTasks.user === user.email)
     return (
@@ -39,12 +39,9 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask }) 
               if (task.user === user.email){
                 return (
                   <div className="task" key={id}>
-                    <Link to={{pathname:`/${task._id}`,state:{modal:true} }}>{task.entry[0].toUpperCase()+task.entry.slice(1).toLowerCase()}</Link>
-                    {task.body.length>0?
-                    <div>A</div>
-                    :
-                    <div></div>
-                    }
+                     <Link to={`/${task._id}`}>
+                      {task.body.length > 0 && <span>{checkListIcon} </span>} {task.entry[0].toUpperCase() + task.entry.slice(1).toLowerCase()}
+                   </Link> 
                     <div className="moveBtn">
                       <button
                         onClick={() => {
@@ -86,12 +83,9 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask }) 
               if (task.user === user.email){
                 return (
                   <div className="task" key={id}>
-                    <Link to={`/${task._id}`}>{task.entry[0].toUpperCase()+task.entry.slice(1).toLowerCase()}</Link>
-                    {task.body.length>0?
-                    <div>A</div>
-                    :
-                    <div></div>
-                    }
+                     <Link to={`/${task._id}`}>
+                      {task.body.length > 0 && <span>{checkListIcon} </span>} {task.entry[0].toUpperCase() + task.entry.slice(1).toLowerCase()}
+                    </Link>
                     <div className="moveBtn">
                       <button
                         onClick={() => {
@@ -132,12 +126,10 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask }) 
               if (task.user === user.email){
                 return (
                   <div className="task" key={id}>
-                    <Link to={`/${task._id}`}>{task.entry[0].toUpperCase()+task.entry.slice(1).toLowerCase()}</Link>
-                    {task.body.length>0?
-                    <div>A</div>
-                    :
-                    <div></div>
-                    }
+                    <Link to={`/${task._id}`}>
+                      {task.body.length > 0 && <span>{checkListIcon} </span>} {task.entry[0].toUpperCase() + task.entry.slice(1).toLowerCase()}
+                    </Link>
+
                     <div className="moveBtn">
                       <button
                         onClick={() => {

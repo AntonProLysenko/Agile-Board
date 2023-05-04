@@ -22,6 +22,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { faListCheck } from "@fortawesome/free-solid-svg-icons";
 // import { faPersonFromPortal } from "@fortawesome/free-solid-svg-icons";
 
 
@@ -34,6 +35,7 @@ const plusIcon = <FontAwesomeIcon icon={faPlus} />
 const closeIcon = <FontAwesomeIcon icon={faXmark} />;
 const TrashBinIcon = <FontAwesomeIcon icon={faTrashCan} />;
 const logOutIcon = <FontAwesomeIcon icon={faRightFromBracket} />;
+const checkListIcon = <FontAwesomeIcon icon={faListCheck} />;
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -209,7 +211,7 @@ async function handleLogin(evt) {
             {/* <Route path="/" element={ <Layout userName={user.name} setUser={setUser} logOut={logOut} logOutIcon={logOutIcon}/> }/> */}
             <Route path=":id" element={ <Show task={task} setTask={setTask} buttonPressed={buttonPressed} setButtonPressed={setButtonPressed} setIsOpen={setIsOpen} BASIC_URL={BASIC_URL}/>}/>
           </Routes>
-          <Lists tasks={tasks} handleClick={handleClick} plusIcon={plusIcon} setIsOpen={setIsOpen} setTask={setTask} user={user}/>
+          <Lists tasks={tasks} handleClick={handleClick} plusIcon={plusIcon} checkListIcon={checkListIcon} setIsOpen={setIsOpen} setTask={setTask} user={user}/>
            
 
           
