@@ -11,7 +11,7 @@ header,
 }
 header{
   width:100vw;
-  height: 80px;
+  height: 60px;
   background-color: rgba(28, 52, 77, 0.99);
 
 
@@ -21,6 +21,23 @@ header{
   justify-content: space-around;
 
   margin-bottom: 10px;
+}
+
+header>img{
+  height: 60px;
+  filter:drop-shadow(0px 0px 7px  rgb(0, 0, 0));
+}
+.title {
+  font-size: large;
+  color: whitesmoke;
+   filter:drop-shadow(1px 1px 8px  rgb(0, 0, 0));
+}
+
+.logOut{
+  color: whitesmoke;
+  font-size: large;
+  filter:drop-shadow(1px 1px 8px  rgb(0, 0, 0));
+  cursor:pointer;
 }
 
 body{
@@ -35,13 +52,8 @@ body{
 button{
   cursor: pointer;
 }
-header>img{
-  height: 80px;
-}
-/* .title {
-  font-size: 50px;
- 
-} */
+
+
 
 .App {
   width: 100vw;
@@ -74,7 +86,7 @@ header>img{
   max-height: 80vh;
   width: 30vw;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 15px;
   background-color:  rgba(255, 255, 255, 0.9) ;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   overflow: auto;
@@ -91,16 +103,23 @@ header>img{
 }
 
 .task {
-  margin: 10px;
+  margin: 10px 0px 10px 0px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
   height: 10vh;
-  width: 27vw;
-  border-radius: 5px;
+  width: 95%;
+  border-radius: 15px;
   background-color: rgba(239, 238, 255, 0.6) ;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.task>a{
+  text-decoration: none;
+  color:rgb(23 43 78); 
+  font-weight:bold;
+  font-size: medium;
 }
 
 .moveBtn{
@@ -195,12 +214,7 @@ header>img{
   padding: 0;
   cursor: pointer;
 }
-.logOut{
-  color: whitesmoke;
-  font-size: x-large;
-  filter:drop-shadow(1px 1px 8px  rgb(0, 0, 0));
-  cursor:pointer;
-}
+
 .fa-trash-can{
   filter:drop-shadow(1px 1px 10px  rgb(0, 0, 0))
 }

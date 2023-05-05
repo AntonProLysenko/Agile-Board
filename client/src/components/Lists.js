@@ -35,7 +35,7 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask }) 
               if (task.user === user.email){
                 return (
                   <div className="task" key={id}>
-                    <Link to={{pathname:`/${task._id}`,state:{modal:true} }}>{task.entry}</Link>
+                    <Link to={{pathname:`/${task._id}`,state:{modal:true} }}>{task.entry[0].toUpperCase()+task.entry.slice(1).toLowerCase()}</Link>
 
                     <div className="moveBtn">
                       <button
@@ -76,7 +76,7 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask }) 
               if (task.user === user.email){
                 return (
                   <div className="task" key={id}>
-                    <Link to={`/${task._id}`}>{task.entry}</Link>
+                    <Link to={`/${task._id}`}>{task.entry[0].toUpperCase()+task.entry.slice(1).toLowerCase()}</Link>
                     <div className="moveBtn">
                       <button
                         onClick={() => {
@@ -115,7 +115,7 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask }) 
               if (task.user === user.email){
                 return (
                   <div className="task" key={id}>
-                    <Link to={`/${task._id}`}>{task.entry}</Link>
+                    <Link to={`/${task._id}`}>{task.entry[0].toUpperCase()+task.entry.slice(1).toLowerCase()}</Link>
                     <div className="moveBtn">
                       <button
                         onClick={() => {

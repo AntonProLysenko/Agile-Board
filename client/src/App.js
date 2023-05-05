@@ -195,11 +195,11 @@ async function handleLogin(evt) {
         <>
          <header>
           <img src={require('./assets/logo.png')} alt='logo'/>
-            <div>
-              <p className="title">Welcome, {user.name[0].toUpperCase()+user.name.slice(1).toLowerCase()}</p>
+            <div className="title">
+              <p>Welcome, {user.name[0].toUpperCase()+user.name.slice(1).toLowerCase()}!</p>
             </div>
-            <div>
-              <span className='logOut' onClick={() => {setUser(null); logOut();}}>Sign Out {logOutIcon}</span>
+            <div className='logOut'>
+              <span  onClick={() => {setUser(null); logOut();}}>Sign Out {logOutIcon}</span>
               {/* <button onClick={handleCheckToken}>Check token exparation</button> */}
             </div>
 
