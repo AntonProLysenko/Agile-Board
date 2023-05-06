@@ -36,7 +36,7 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask, ch
 
           {tasks["TO-DO"]
             ? tasks["TO-DO"].map((task, id) => {
-              if (task.user === user.email){
+              // if (task.user === user.email){
                 return (
                   <div className="task" key={id}>
                      <Link to={`/${task._id}`}>
@@ -61,8 +61,9 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask, ch
 
                     </div>
                   </div>
-                );}
-              })
+                );
+              // }
+            })
             : "Loading..."}
         </div>
       </div>

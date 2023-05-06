@@ -4,7 +4,6 @@ const BASIC_URL = process.env.REACT_APP_BASIC_URL;
 
 export async function signUp(userData) {
   //   return sendRequest("/api/users", "POST", userData);
-
   const res = await fetch(`${BASIC_URL}/api/users`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -28,7 +27,7 @@ export async function logIn(credentials) {
     //if success
     return res.json();
   } else {
-    throw new Error("Invalid Log In");
+    throw new Error("Invalid Email or Password");
   }
 }
 

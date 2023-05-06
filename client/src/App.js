@@ -23,6 +23,7 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { faListCheck } from "@fortawesome/free-solid-svg-icons";
+import { checkToken } from './utilities/users-api';
 // import { faPersonFromPortal } from "@fortawesome/free-solid-svg-icons";
 
 
@@ -58,6 +59,7 @@ function App() {
 
   useEffect(() => {
     const fetchTask = async () => {
+      usersService.checkToken()
       try {
         let { data } = await axios.get(`${BASIC_URL}/tasks/table`); //promising to fetch using axios
         // data = Object.entries(data);
@@ -124,6 +126,7 @@ async function handleLogin(evt) {
       // setButtonPressed(!buttonPressed);
       const user = await usersService.logIn(credentials);
       setUser(user);
+      usersService.checkToken();
       setButtonPressed(!buttonPressed);
       setCredentials({email:"", password:""})//clearing form
     } catch {
@@ -188,6 +191,11 @@ async function handleLogin(evt) {
       }
     };
 
+    async function handleCheckToken (){
+      usersService.checkToken()
+      alert("Clicked")
+    }
+
 
   
   
@@ -202,7 +210,7 @@ async function handleLogin(evt) {
             </div>
             <div className='logOut'>
               <span  onClick={() => {setUser(null); logOut();}}>Sign Out {logOutIcon}</span>
-              {/* <button onClick={handleCheckToken}>Check token exparation</button> */}
+              <button onClick={handleCheckToken}>Check token exparation</button>
             </div>
 
          </header>
