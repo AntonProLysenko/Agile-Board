@@ -2,7 +2,7 @@ const { Schema, model} = require("./connection");
 const bcrypt = require("bcrypt");
 
 //The SALT_ROUNDS variable determines how much processing time it will take to perform the hash
-const SALT_ROUNDS = 6;
+
 const userSchema = Schema({
  name: {type: String, required: true, trim: true,},
   email: {
@@ -29,6 +29,8 @@ const userSchema = Schema({
   }
 });
 
+
+const SALT_ROUNDS = 6;
 //Middleware that will hash the password anytime the password has changed
 userSchema.pre('save', async function(next) {
   // 'this' is the user doc

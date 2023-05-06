@@ -40,13 +40,15 @@ router.get('/table', (req,res)=>{
 
      
         
+
+        // console.log('checkToken', req.user);
         
 
         
-            // console.log("currentUser", currentUser);
-            // if (currentUser){
+            console.log("currentUser", currentUser);
+            if (currentUser){
 
-                // foundTasks =  foundTasks.filter((task) => task.user === currentUser.email); //filtering data by the current user in backend
+                foundTasks =  foundTasks.filter((task) => task.user === currentUser.email); //filtering data by the current user in backend
 
                 // console.log("foundTasks " + JSON.stringify(foundTasks));
                 
@@ -58,7 +60,7 @@ router.get('/table', (req,res)=>{
                    return accumulator; //always return acc in reduce func
                  }, {}); //definig that it will be an obj;
                  res.status(200).json(formatedData);
-                // }
+                }
      
     } else {
       res.status(404).send(err);
