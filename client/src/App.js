@@ -59,7 +59,6 @@ function App() {
 
   useEffect(() => {
     const fetchTask = async () => {
-      usersService.checkToken()
       try {
         let { data } = await axios.get(`${BASIC_URL}/tasks/table`); //promising to fetch using axios
         // data = Object.entries(data);
@@ -94,6 +93,7 @@ function App() {
         alert("Something went wrong!" + error);
       }
     };
+    usersService.checkToken();
     fetchTask();
   },[buttonPressed]);
 
@@ -191,10 +191,10 @@ async function handleLogin(evt) {
       }
     };
 
-    async function handleCheckToken (){
-      usersService.checkToken()
-      alert("Clicked")
-    }
+    // async function handleCheckToken (){
+    //   usersService.checkToken()
+    //   alert("Clicked")
+    // }
 
 
   
@@ -210,7 +210,7 @@ async function handleLogin(evt) {
             </div>
             <div className='logOut'>
               <span  onClick={() => {setUser(null); logOut();}}>Sign Out {logOutIcon}</span>
-              <button onClick={handleCheckToken}>Check token exparation</button>
+
             </div>
 
          </header>
