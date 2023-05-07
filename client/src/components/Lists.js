@@ -81,7 +81,7 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask, ch
 
           {tasks["PENDING"]
             ? tasks["PENDING"].map((task, id) => {
-              if (task.user === user.email){
+              // if (task.user === user.email){
                 return (
                   <div className="task" key={id}>
                      <Link to={`/${task._id}`}>
@@ -105,7 +105,8 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask, ch
                       </button>
                     </div>
                   </div>
-                );}
+                );
+              // }
               })
             : "Loading..."}
         </div>
@@ -124,7 +125,7 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask, ch
 
           {tasks["COMPLETED"]
             ? tasks["COMPLETED"].map((task, id) => {
-              if (task.user === user.email){
+              // if (task.user === user.email){
                 return (
                   <div className="task" key={id}>
                     <Link to={`/${task._id}`}>
@@ -148,7 +149,8 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask, ch
                       </button>
                     </div>
                   </div>
-                );}
+                );
+              // }
               })
             : "Loading..."}
         </div>
