@@ -13,13 +13,10 @@ let currentUser
 
 // GET
 router.get ('/', (req,res)=>{
-   
     Task.find({},(err, foundTasks)=>{
-      
-       // foundTasks = foundTasks.filter(foundTasks =>  foundTasks.username === req.user.name)
         if(!err){
-            res.status(200).json(foundTasks);            
-            // res.status(200).json(foundTasks.filter(task => task.username === req.user.name));            
+                res.status(200).json(foundTasks);            
+       
         }else{
             res.status(400).send(err)
         }
@@ -29,39 +26,19 @@ router.get ('/', (req,res)=>{
 
 //sorting tasks by the status
 router.get('/table', (req,res)=>{
-// const user     =  User.findOne({email: "123@123"})
-//   console.log("user", user);
-
-
-
-
   Task.find({},  (err, foundTasks) => {
-    if (!err) {
-
-     
-        
-
-        // console.log('checkToken', req.user);
-        
-
-        
-            console.log("currentUser", currentUser);
-            if (currentUser){
-
-                foundTasks =  foundTasks.filter((task) => task.user === currentUser.email); //filtering data by the current user in backend
-
-                // console.log("foundTasks " + JSON.stringify(foundTasks));
-                
-                 const formatedData = foundTasks.reduce((accumulator, task) => {
-                   //reduce will return an object instead array with props: status
-                   accumulator[task.status] = accumulator[task.status]
-                     ? [...accumulator[task.status], task]
-                     : [task];
-                   return accumulator; //always return acc in reduce func
-                 }, {}); //definig that it will be an obj;
-                 res.status(200).json(formatedData);
-                }
-     
+    if (!err) {  
+        if (currentUser){
+            foundTasks =  foundTasks.filter((task) => task.user === currentUser.email); //filtering data by the current user in backend                         
+            const formatedData = foundTasks.reduce((accumulator, task) => {
+            //reduce will return an object instead array with props: status
+            accumulator[task.status] = accumulator[task.status]
+                ? [...accumulator[task.status], task]
+                : [task];
+            return accumulator; //always return acc in reduce func
+            }, {}); //definig that it will be an obj;
+            res.status(200).json(formatedData);
+        }
     } else {
       res.status(404).send(err);
     }
