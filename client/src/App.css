@@ -345,14 +345,14 @@ button{
   border-radius: 5px;
   background-color: whitesmoke;
   min-width:99%;
-  margin-bottom: 10px;
+  margin-bottom: 2.5vh;
 }
 .emptyInstructions{
   border-radius: 5px;
   background-color: whitesmoke;
   min-width:99%;
   min-height:50px ;
-  margin-bottom: 10px;
+  margin-bottom: 2.5vh;
 }
 
 ol{
@@ -436,6 +436,9 @@ ol>li{
   width:50%;
   border: none;
    border-radius: 2px;
+   -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 .form>input{
   width:50%;
