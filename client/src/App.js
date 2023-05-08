@@ -166,7 +166,7 @@ function App() {
     try {
       const { status } = await axios.post(`${BASIC_URL}/tasks`, {
         entry: entry.current.value,
-        body: body.current.value,
+        body: body.current.value.split("."),
         status: listStatus.toUpperCase(),
         prevStatus: "",
         user: user.email,
@@ -190,7 +190,7 @@ function App() {
       try {
          const { status } = await axios.put(`${BASIC_URL}/tasks/${id}`, {
            entry: entry.current.value,
-           body: body.current.value,
+           body: body.current.value.split("."),
            status: task.status,
            prevStatus: task.prevStatus,
            username: task.usename

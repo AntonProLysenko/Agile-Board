@@ -4,10 +4,11 @@ import axios from "axios";
 
 import Layout from "../screens/layout/Layout";
 
-function Show({ buttonPressed, setButtonPressed, setIsOpen, open, onClose, task, setTask, BASIC_URL }) {
+function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, open, onClose, BASIC_URL }) {
   const idpar = useParams();
   const navigation = useNavigate();
-  
+
+
 
   useEffect(() => {
     async function getTask(id) {
@@ -42,18 +43,19 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen, open, onClose, task,
     }
   };
 
-
   // if (!open) return null;
-  return (
+
+  return task ? (
     <>
+      {/* {task && task.body.split(".")} */}
+
+      {console.log(task.body)}
       <Layout />
       <div className="overlay" onClick={onClose}>
         <div className="modalContainer">
-
-            <button className="close" onClick={onClose}>
-              x
-            </button>
-
+          <button className="close" onClick={onClose}>
+            x
+          </button>
 
           <h1 className="listTitle">{task.entry}</h1>
 
@@ -61,7 +63,23 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen, open, onClose, task,
             Last Update: {new Date(task.updatedAt).toLocaleString()}
           </p>
 
-          <p>{task.body}</p>
+{/* {task.body.length>1? task.body.map((p,idx)=>{
+  <ol>
+    return (
+      <li>
+          <p key = {idx}>{p}</p>
+             </li> 
+          )
+        </ol>
+        
+        }
+        ):<p>
+          task.body
+
+        </p>
+        } */}
+      
+    
 
           {task.status === "ARCHIVE" ? (
             <button
@@ -88,6 +106,8 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen, open, onClose, task,
         </div>
       </div>
     </>
+  ) : (
+    <>Loading!</>
   );
 }
 

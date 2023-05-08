@@ -34,7 +34,7 @@ export default function Lists({ emptyData, tasks, setShowOpen, handleClick, setI
                 return (
                   <div className="task" key={id}>
                      <Link to={`/${task._id}`} onClick={setShowOpen(true)}>
-                      {task.body.length > 0 && <span>{checkListIcon} </span>} {task.entry[0].toUpperCase() + task.entry.slice(1).toLowerCase()}
+                      {task.body.length >= 1 && <span>{checkListIcon} </span>} {task.entry[0].toUpperCase() + task.entry.slice(1).toLowerCase()}
                    </Link> 
                     <div className="moveBtn">
                       <button
@@ -79,7 +79,7 @@ export default function Lists({ emptyData, tasks, setShowOpen, handleClick, setI
                 return (
                   <div className="task" key={id}>
                      <Link to={`/${task._id}`}>
-                      {task.body.length > 0 && <span>{checkListIcon} </span>} {task.entry[0].toUpperCase() + task.entry.slice(1).toLowerCase()}
+                      {task.body.length >= 1 && <span>{checkListIcon} </span>} {task.entry[0].toUpperCase() + task.entry.slice(1).toLowerCase()}
                     </Link>
                     <div className="moveBtn">
                       <button
@@ -122,7 +122,7 @@ export default function Lists({ emptyData, tasks, setShowOpen, handleClick, setI
                 return (
                   <div className="task" key={id}>
                     <Link to={`/${task._id}`}>
-                      {task.body.length > 0 && <span>{checkListIcon} </span>} {task.entry[0].toUpperCase() + task.entry.slice(1).toLowerCase()}
+                      {task.body.length >= 1 && <span>{checkListIcon} </span>} {task.entry[0].toUpperCase() + task.entry.slice(1).toLowerCase()}
                     </Link>
 
                     <div className="moveBtn">
