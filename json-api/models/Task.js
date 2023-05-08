@@ -6,7 +6,7 @@ const taskSchema = Schema(
       required: true,
       type: String,
     },
-    body: Array ,
+    body: String ,
     
     status: {
       type: String,
