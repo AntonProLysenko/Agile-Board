@@ -23,7 +23,6 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { faListCheck } from "@fortawesome/free-solid-svg-icons";
-import { checkToken } from './utilities/users-api';
 // import { faPersonFromPortal } from "@fortawesome/free-solid-svg-icons";
 
 
@@ -46,6 +45,7 @@ function App() {
     password: "",
   });
   const [tasks, setTasks] = useState({})//for lists of tasks
+  const [emptyData, setEmptyData] = useState(true)//for loading in Lists.js
   const [task, setTask] = useState({}); // for single task in Show
   const [buttonPressed, setButtonPressed] = useState (false)//used for refetching data on status change
   const [isOpen, setIsOpen] = useState(false)//show create/edit form
@@ -61,28 +61,8 @@ function App() {
     const fetchTask = async () => {
       try {
         let { data } = await axios.get(`${BASIC_URL}/tasks/table`); //promising to fetch using axios
-        // data = Object.entries(data);
-   
-        // console.log("credentials"+ credentials);
-
-        // console.log("data " +data);
-        
-
-
-//         let token = localStorage.getItem("token");
-//          const userInfo = JSON.parse(atob( token.split(".")[1]));
-//                 console.log("user " + {userInfo});
-//                 console.log("App.js User is " + userInfo.user.name);
-
-// console.log("function");
-
-//                 console.log(getUser());
-                
-        // data = data.filter((task) => task.user === user.email);
-        // foundTasks =  foundTasks.filter((task) => task.user === currentUser.email); //filtering data by the current user in backend
-        // data = data.filter((tasks) => tasks.user === userInfo.user.email);
-        // console.log("data " + JSON.stringify(data));
         setTasks(data);
+        setEmptyData(false)
         const titleBtn = document.querySelectorAll(".titleBtn");
         Object.keys(titleBtn).forEach(function (i) {
           titleBtn[i].addEventListener("click", (evt) => {
@@ -191,10 +171,6 @@ async function handleLogin(evt) {
       }
     };
 
-    // async function handleCheckToken (){
-    //   usersService.checkToken()
-    //   alert("Clicked")
-    // }
 
 
   
@@ -219,7 +195,7 @@ async function handleLogin(evt) {
             {/* <Route path="/" element={ <Layout userName={user.name} setUser={setUser} logOut={logOut} logOutIcon={logOutIcon}/> }/> */}
             <Route path=":id" element={ <Show task={task} setTask={setTask} buttonPressed={buttonPressed} setButtonPressed={setButtonPressed} setIsOpen={setIsOpen} BASIC_URL={BASIC_URL}/>}/>
           </Routes>
-          <Lists tasks={tasks} handleClick={handleClick} plusIcon={plusIcon} checkListIcon={checkListIcon} setIsOpen={setIsOpen} setTask={setTask} user={user}/>
+          <Lists tasks={tasks} handleClick={handleClick} plusIcon={plusIcon} checkListIcon={checkListIcon} setIsOpen={setIsOpen} setTask={setTask} emptyData={emptyData}/>
            
 
           

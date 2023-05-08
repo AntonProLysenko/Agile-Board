@@ -49,6 +49,7 @@ export async function checkToken() {
   return sendRequest(`${BASIC_URL}/api/users/check-token`);
 }
 
+
 async function sendRequest(url, method = 'GET', payload = null) {
   // Fetch accepts an options object as the 2nd argument
   // used to include a data payload, set headers, etc.
@@ -58,6 +59,7 @@ async function sendRequest(url, method = 'GET', payload = null) {
     options.body = JSON.stringify(payload);
   }
     const token = getToken();
+
  if (token) {
    // Ensure the headers object exists
    options.headers = options.headers || {};
@@ -68,5 +70,5 @@ async function sendRequest(url, method = 'GET', payload = null) {
   const res = await fetch(url, options);
   // res.ok will be false if the status code set to 4xx in the controller action
   if (res.ok) return res.json();
-  // throw new Error("Bad Request");
+  throw new Error("Bad Request");
 }

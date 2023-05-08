@@ -5,17 +5,11 @@ import { Link } from "react-router-dom";
 
 
 
-export default function Lists({ user, tasks, handleClick, setIsOpen, setTask, checkListIcon }) {
- // data = data.filter((tasks) => tasks.user === userInfo.user.email);
-  //  tasks = tasks.filter((currentTasks)=>currentTasks.user === user.email)
+export default function Lists({ emptyData, tasks, handleClick, setIsOpen, setTask, checkListIcon }) {
     return (
       
 <>
-
-{/* {console.log("LIST " + user.name)}
-{console.log("LIST " + JSON.stringify(tasks))} */}
-
-      {user?
+      {!emptyData?
       
    
     <div className="container">
@@ -64,7 +58,7 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask, ch
                 );
               // }
             })
-            : "Loading..."}
+            : "No Tasks"}
         </div>
       </div>
 
@@ -108,7 +102,7 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask, ch
                 );
               // }
               })
-            : "Loading..."}
+            : "No Tasks"}
         </div>
       </div>
 
@@ -125,7 +119,6 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask, ch
 
           {tasks["COMPLETED"]
             ? tasks["COMPLETED"].map((task, id) => {
-              // if (task.user === user.email){
                 return (
                   <div className="task" key={id}>
                     <Link to={`/${task._id}`}>
@@ -152,13 +145,60 @@ export default function Lists({ user, tasks, handleClick, setIsOpen, setTask, ch
                 );
               // }
               })
-            : "Loading..."}
+            : "No Tasks"}!
         </div>
       </div>
     </div>
         : 
-      <div>Loading</div>
-            }
+     <div className="container">
+      <div className="section">
+          <div className="listTitle">
+             
+              <div className="pseudo"></div>{//Pseudo element for aligning items to the very left and even center
+              }
+            <h2>To-Do</h2>
+
+            <button className="pseudo titleBtn" id="pending"  onClick={() =>  {setTask({}); setIsOpen(true)}}>
+              +
+            </button>
+             
+
+          </div>
+        <div className="list">
+         Loading...
+        </div>
+      </div>
+
+      <div className="section">
+          <div className="listTitle">
+            <div className="pseudo"></div>{//Pseudo element for aligning items to the very left and even center
+              }
+            <h2>Pending</h2>
+            <button className="pseudo titleBtn" id="pending"  onClick={() =>  {setTask({}); setIsOpen(true)}}>
+              +
+            </button>
+          </div>
+        <div className="list">
+
+         Loading...
+        </div>
+      </div>
+
+      <div className="section">
+          <div className="listTitle">
+            <div className="pseudo"></div>{//Pseudo element for aligning items to the very left and even center
+              }
+            <h2>Completed</h2>
+            <button className="pseudo titleBtn" id="pending"  onClick={() =>  {setTask({}); setIsOpen(true)}}>
+              +
+            </button>
+          </div>
+        <div className="list">
+             Loading...
+        </div>
+      </div>
+    </div>
+}
     </>
     )
     
