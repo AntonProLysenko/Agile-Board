@@ -73,8 +73,11 @@ function App() {
         alert("Something went wrong!" + error);
       }
     };
-    usersService.checkToken();
-    fetchTask();
+
+    if (user) { 
+      fetchTask(); usersService.checkToken(); console.log("fetching");
+    }
+    
   },[buttonPressed]);
 
 
@@ -106,8 +109,8 @@ async function handleLogin(evt) {
       // setButtonPressed(!buttonPressed);
       const user = await usersService.logIn(credentials);
       setUser(user);
-      usersService.checkToken();
       setButtonPressed(!buttonPressed);
+      usersService.checkToken();
       setCredentials({email:"", password:""})//clearing form
     } catch {
       setError("Log In Failed - Try Again");

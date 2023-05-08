@@ -145,7 +145,7 @@ export default function Lists({ emptyData, tasks, handleClick, setIsOpen, setTas
                 );
               // }
               })
-            : "No Tasks"}!
+            : "No Tasks"}
         </div>
       </div>
     </div>
