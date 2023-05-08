@@ -169,6 +169,7 @@ button{
 /*Tasks*/
 .task {
   margin: 10px 0px 10px 0px;
+  padding: 10px 0px 10px 0px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -193,12 +194,14 @@ button{
 }
 
 .moveBtn{
- width:30%;
+ width:40%;
  display: flex;
- justify-content: space-around
+ justify-content: space-between;
 }
 
 .moveBtn>button{
+  min-width: fit-content;
+  width: 20%;
   padding: 3px;
   border:none;
   border-radius: 5px;

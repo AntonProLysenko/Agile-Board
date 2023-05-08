@@ -8,6 +8,8 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, open, o
   const idpar = useParams();
   const navigation = useNavigate();
 
+  // let[currentBody, setCurrentBody] = useState([])
+
 
 
   useEffect(() => {
@@ -21,6 +23,7 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, open, o
     }
     getTask(idpar.id);
   }, [buttonPressed]);
+
 
   const handleArchivation = async (statusChange, currentStatus, id) => {
     try {
@@ -43,13 +46,25 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, open, o
     }
   };
 
-  // if (!open) return null;
 
-  return task ? (
-    <>
+
+  function loaded(){
+    let arrBody
+    if(task.body){
+       arrBody = task.body.split(".");
+    }
+
+      console.log(arrBody);
+      
+    return  <>
       {/* {task && task.body.split(".")} */}
 
-      {console.log(task.body)}
+      {/* {task.body  &&
+      task.body.split(".")&&
+      
+      console.log(typeof(task.body))
+      }  */}
+
       <Layout />
       <div className="overlay" onClick={onClose}>
         <div className="modalContainer">
@@ -63,21 +78,17 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, open, o
             Last Update: {new Date(task.updatedAt).toLocaleString()}
           </p>
 
-{/* {task.body.length>1? task.body.map((p,idx)=>{
-  <ol>
-    return (
-      <li>
-          <p key = {idx}>{p}</p>
-             </li> 
-          )
-        </ol>
+          <ol>
+          {
+          task.body?(arrBody.map((li,idx)=>{
+             return( <li>
+                {li}
+              </li>)
+          })):<></>}
+          </ol>
         
-        }
-        ):<p>
-          task.body
 
-        </p>
-        } */}
+
       
     
 
@@ -106,8 +117,14 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, open, o
         </div>
       </div>
     </>
-  ) : (
-    <>Loading!</>
+  }
+
+
+
+  return (task? 
+      loaded()
+   : 
+    <>Loading...</>
   );
 }
 
