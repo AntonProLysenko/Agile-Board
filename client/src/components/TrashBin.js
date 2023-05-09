@@ -5,9 +5,9 @@ export default function TrashBin({ tasks, user, handleClick, open, closeIcon, on
   if (!open) return null;
 
   return (
-    <div className="trashOverlay">
+    <div className="trashOverlay"onClick={onClose}>
       <div className="trashModalContainer">
-        <button className="close" onClick={onClose}>
+        <button className="close trashClose" onClick={onClose}>
           x
         </button>
         <div className="section">

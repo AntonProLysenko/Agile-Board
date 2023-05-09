@@ -1,7 +1,7 @@
 import './App.css';
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios'
-import {Routes, Route} from "react-router-dom";
+import {Routes, Route, useNavigate} from "react-router-dom";
 
 import { getUser, logOut } from './utilities/user-service';
 import * as usersService from "./utilities/user-service";
@@ -37,6 +37,8 @@ const TrashBinIcon = <FontAwesomeIcon icon={faTrashCan} />;
 const logOutIcon = <FontAwesomeIcon icon={faRightFromBracket} />;
 const checkListIcon = <FontAwesomeIcon icon={faListCheck} />;
 
+
+
 function App() {
   const [user, setUser] = useState(getUser());
   const [error, setError] = useState("");
@@ -48,13 +50,16 @@ function App() {
   const [emptyData, setEmptyData] = useState(true)//for loading in Lists.js
   const [task, setTask] = useState({}); // for single task in Show
   const [buttonPressed, setButtonPressed] = useState (false)//used for refetching data on status change
-  const [isOpen, setIsOpen] = useState(false)//show create/edit form
+  const [isOpen, setIsOpen] = useState(false)// create/edit form
+  const [showOpen, setShowOpen] = useState(false)//show
   const [showTrashBin, setShowTrashBin] = useState(false)
   const [listStatus, setListStatus]= useState()
 
   const entry = useRef(null)
   const body = useRef(null);
   const statusRef = useRef(null)
+
+  const navigation = useNavigate();
 
 
   useEffect(() => {
@@ -75,7 +80,9 @@ function App() {
     };
 
     if (user) { 
-      fetchTask(); usersService.checkToken(); console.log("fetching");
+      console.log("fetching");
+      fetchTask(); 
+      usersService.checkToken(); 
     }
     
   },[buttonPressed]);
@@ -98,10 +105,40 @@ function App() {
     }
   };
 
-async function handleLogin(evt) {
+  function handleClose(evt){
+    evt.stopPropagation()
+    let formOverlay = document.querySelector(".overlay")
+    let closeBtn = document.querySelector(".close")
+    let editOverlay = document.querySelector(".editOverlay");
+    let editCloseBtn = document.querySelector(".editClose");
+    let showOverlay = document.querySelector(".showOverlay")
+    let trashOverlay = document.querySelector(".trashOverlay")
+    let trashClose = document.querySelector(".trashClose")
+
+    console.log(evt)
+
+    if (evt.target == formOverlay || evt.target == showOverlay||evt.target==closeBtn){
+      setIsOpen(false);
+      setShowOpen(false)
+      navigation("/");
+      // setButtonPressed(!buttonPressed)
+    }if (evt.target == editCloseBtn || evt.target == editOverlay) {
+      // navigation(-1);
+      setIsOpen(false);
+
+      console.log(evt.target);
+    }else if(evt.target == trashOverlay|| evt.target ==trashClose ){
+         setShowTrashBin(false);
+    }
+}
+ 
+
+
+
+
+  async function handleLogin(evt) {
     // Prevent form from being submitted to the server
     evt.preventDefault();
-
     try {
       // The promise returned by the signUp service method
       // will resolve to the user object included in the
@@ -117,10 +154,10 @@ async function handleLogin(evt) {
     }
   }
 
-    function handleChange(evt) {
-      setCredentials({ ...credentials, [evt.target.name]: evt.target.value });
-      setError("");
-    }
+  function handleChange(evt) {
+    setCredentials({ ...credentials, [evt.target.name]: evt.target.value });
+    setError("");
+  }
 
 
   const handleSubmit = async (evt) => {
@@ -148,7 +185,7 @@ async function handleLogin(evt) {
     }
   };
 
-    const handleUpdate = async (evt, id) => {
+  const handleUpdate = async (evt, id) => {
       evt.preventDefault()
       try {
          const { status } = await axios.put(`${BASIC_URL}/tasks/${id}`, {
@@ -157,7 +194,7 @@ async function handleLogin(evt) {
            status: task.status,
            prevStatus: task.prevStatus,
            username: task.usename
-    });     
+        });     
         if (status === 200) {
          
           setButtonPressed(!buttonPressed);
@@ -196,9 +233,10 @@ async function handleLogin(evt) {
           <Routes>
             <Route path ="/" element = {<Layout/>}/>{/*Added "/" to layout to prevent warning, cannot add it to Lists, since it dissapears on Show page */}
             {/* <Route path="/" element={ <Layout userName={user.name} setUser={setUser} logOut={logOut} logOutIcon={logOutIcon}/> }/> */}
-            <Route path=":id" element={ <Show task={task} setTask={setTask} buttonPressed={buttonPressed} setButtonPressed={setButtonPressed} setIsOpen={setIsOpen} BASIC_URL={BASIC_URL}/>}/>
+
+            <Route path=":id" element={ <Show task={task} setTask={setTask} buttonPressed={buttonPressed} setButtonPressed={setButtonPressed} setIsOpen={setIsOpen} open={showOpen} onClose={handleClose} BASIC_URL={BASIC_URL}/>}/>
           </Routes>
-          <Lists tasks={tasks} handleClick={handleClick} plusIcon={plusIcon} checkListIcon={checkListIcon} setIsOpen={setIsOpen} setTask={setTask} emptyData={emptyData}/>
+          <Lists tasks={tasks} handleClick={handleClick} setShowOpen={setShowOpen} plusIcon={plusIcon} checkListIcon={checkListIcon} setIsOpen={setIsOpen} setTask={setTask} emptyData={emptyData}/>
            
 
           
@@ -209,7 +247,7 @@ async function handleLogin(evt) {
           </button>
           </div> */}
 
-          <AddTaskForm open={isOpen} entry={entry} body={body} statusRef={statusRef} handleSubmit={handleSubmit} handleUpdate={handleUpdate}onClose={() => { setIsOpen(false);}}
+          <AddTaskForm open={isOpen} entry={entry} body={body} statusRef={statusRef} handleSubmit={handleSubmit} handleUpdate={handleUpdate} onClose={handleClose} 
             plusIcon={plusIcon}
             closeIcon={closeIcon}
             task={task}
@@ -221,7 +259,7 @@ async function handleLogin(evt) {
             open={showTrashBin}
             handleClick={handleClick}
             closeIcon={closeIcon}
-            onClose={() => setShowTrashBin(false)}
+            onClose={handleClose}
           />
 
           <i className="trashBin" onClick={() => setShowTrashBin(true)}> {TrashBinIcon} </i>

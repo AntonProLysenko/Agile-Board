@@ -4,7 +4,7 @@ import axios from "axios";
 
 import Layout from "../screens/layout/Layout";
 
-function Show({ buttonPressed, setButtonPressed, setIsOpen, task, setTask, BASIC_URL }) {
+function Show({ buttonPressed, setButtonPressed, setIsOpen, open, onClose, task, setTask, BASIC_URL }) {
   const idpar = useParams();
   const navigation = useNavigate();
   
@@ -43,15 +43,18 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen, task, setTask, BASIC
   };
 
 
-
+  // if (!open) return null;
   return (
     <>
       <Layout />
-      <div className="showOverlay">
+      <div className="overlay" onClick={onClose}>
         <div className="modalContainer">
-          <Link className="close" to="/">
-            <button className="close">x</button>
-          </Link>
+
+            <button className="close" onClick={onClose}>
+              x
+            </button>
+
+
           <h1 className="listTitle">{task.entry}</h1>
 
           <p className="date">
@@ -63,8 +66,8 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen, task, setTask, BASIC
           {task.status === "ARCHIVE" ? (
             <button
               onClick={() => {
-                handleArchivation("ARCHIVE", task.status, task._id);
                 navigation(`/`);
+                handleArchivation("ARCHIVE", task.status, task._id);
               }}
             >
               Delete Forever
@@ -79,7 +82,7 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen, task, setTask, BASIC
               >
                 Archivate
               </button>
-              <button onClick={()=>setIsOpen(true)}>Edit</button>
+              <button onClick={() => setIsOpen(true)}>Edit</button>
             </div>
           )}
         </div>

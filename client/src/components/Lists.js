@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 
 
-export default function Lists({ emptyData, tasks, handleClick, setIsOpen, setTask, checkListIcon }) {
+export default function Lists({ emptyData, tasks, setShowOpen, handleClick, setIsOpen, setTask, checkListIcon }) {
     return (
       
 <>
@@ -33,7 +33,7 @@ export default function Lists({ emptyData, tasks, handleClick, setIsOpen, setTas
               // if (task.user === user.email){
                 return (
                   <div className="task" key={id}>
-                     <Link to={`/${task._id}`}>
+                     <Link to={`/${task._id}`} onClick={setShowOpen(true)}>
                       {task.body.length > 0 && <span>{checkListIcon} </span>} {task.entry[0].toUpperCase() + task.entry.slice(1).toLowerCase()}
                    </Link> 
                     <div className="moveBtn">
