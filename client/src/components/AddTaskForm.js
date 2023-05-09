@@ -13,14 +13,11 @@ export default function AddTaskForm({open, entry, body, handleSubmit, handleUpda
           let lastUpdate = moment(task.updatedAt).fromNow();
         return(
           <div className="editOverlay" onClick={onClose}>
-            <div className="modalContainer">
+            <div className="modalContainer editModal">
               <div className="showHeader">
-              <button className="close editClose" onClick={onClose}>
-                 x
-              </button>
-                  <form className="form" onSubmit={(evt)=>{handleUpdate(evt, task._id)}}>
+                <button className="close editClose" onClick={onClose}> x </button>
+                  <form className="form showHeader" onSubmit={(evt)=>{handleUpdate(evt, task._id)}}>
                     <input className="listTitle" type="text" ref={entry} placeholder="Enter title"  defaultValue = {task.entry}/>
-                  </form>
                   <div className="secondaryInfo">
                     <p className="taskStatus">
                       In {task.status.charAt(0).toUpperCase() + task.status.slice(1).toLowerCase()}{" "}list
@@ -28,14 +25,16 @@ export default function AddTaskForm({open, entry, body, handleSubmit, handleUpda
 
                     <p className="date">Updated: {lastUpdate} </p>
                   </div>
+                  </form>
                </div>
                <div className="showInfo">
                   <h3>Instructions:</h3>
-                  <form className="form" onSubmit={(evt)=>{handleUpdate(evt, task._id)}}>
+                  <form className="form showInfo" onSubmit={(evt)=>{handleUpdate(evt, task._id)}}>
                     <textarea className="emptyInstructions" type="text" ref={body}      placeholder="Enter detailed information or hints here" defaultValue = {task.body}/>
-                  <button  type="submit" className="button">
-                    Update
-                  </button>
+                    <div className="moveBtn">
+                    <button  type="submit" className="button">Update</button>
+                    <button   className="button" onClick={onClose}>Cancel</button>
+                    </div>
               </form>
               </div>
               <div className="pseudo"></div>
