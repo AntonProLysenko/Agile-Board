@@ -106,26 +106,29 @@ function App() {
   };
 
   function handleClose(evt){
+    // evt.preventDefault()
     evt.stopPropagation()
     let formOverlay = document.querySelector(".overlay")
     let closeBtn = document.querySelector(".close")
     let editOverlay = document.querySelector(".editOverlay");
-    let editCloseBtn = document.querySelector(".editClose");
+    let editCloseBtn = document.querySelector(".editClose");//sinnce edit and show a kind of same elements on close closes show also
+    // let editCancelBtn = document.querySelector(".")//separately written on close in internal evt
     let showOverlay = document.querySelector(".showOverlay")
     let trashOverlay = document.querySelector(".trashOverlay")
     let trashClose = document.querySelector(".trashClose")
 
     console.log(evt)
 
-    if (evt.target == formOverlay || evt.target == showOverlay||evt.target==closeBtn){
+    if (evt.target == formOverlay || evt.target == showOverlay||evt.target==closeBtn || evt.target == editCloseBtn || evt.target == editOverlay){
       setIsOpen(false);
       setShowOpen(false)
       navigation("/");
-      // setButtonPressed(!buttonPressed)
-    }if (evt.target == editCloseBtn || evt.target == editOverlay) {
-      // navigation(-1);
       setIsOpen(false);
-
+      // setButtonPressed(!buttonPressed)
+    // }if () {
+      // navigation(-1);
+      // setIsOpen(false);
+      // setShowOpen(false);
       console.log(evt.target);
     }else if(evt.target == trashOverlay|| evt.target ==trashClose ){
          setShowTrashBin(false);
@@ -234,7 +237,7 @@ function App() {
             <Route path ="/" element = {<Layout/>}/>{/*Added "/" to layout to prevent warning, cannot add it to Lists, since it dissapears on Show page */}
             {/* <Route path="/" element={ <Layout userName={user.name} setUser={setUser} logOut={logOut} logOutIcon={logOutIcon}/> }/> */}
 
-            <Route path=":id" element={ <Show task={task} setTask={setTask} buttonPressed={buttonPressed} setButtonPressed={setButtonPressed} setIsOpen={setIsOpen} open={showOpen} onClose={handleClose} BASIC_URL={BASIC_URL}/>}/>
+            <Route path=":id" element={ <Show task={task} setTask={setTask} buttonPressed={buttonPressed} setButtonPressed={setButtonPressed} setIsOpen={setIsOpen} open={showOpen} onClose={handleClose} editOpen={isOpen} BASIC_URL={BASIC_URL}/>}/>
           </Routes>
           <Lists tasks={tasks} handleClick={handleClick} setShowOpen={setShowOpen} plusIcon={plusIcon} checkListIcon={checkListIcon} setIsOpen={setIsOpen} setTask={setTask} emptyData={emptyData}/>
            
@@ -250,6 +253,7 @@ function App() {
           <AddTaskForm open={isOpen} entry={entry} body={body} statusRef={statusRef} handleSubmit={handleSubmit} handleUpdate={handleUpdate} onClose={handleClose} 
             plusIcon={plusIcon}
             closeIcon={closeIcon}
+            setIsOpen={setIsOpen}
             task={task}
           />
 

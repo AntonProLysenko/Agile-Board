@@ -5,7 +5,7 @@ import moment from "moment";
 
 import Layout from "../screens/layout/Layout";
 
-function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, open, onClose, BASIC_URL }) {
+function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, editOpen, onClose, BASIC_URL }) {
   const idpar = useParams();
   const navigation = useNavigate();
 
@@ -46,6 +46,20 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, open, o
       alert("Something went wrong!" + error);
     }
   };
+
+ 
+  let buttons =  document.querySelectorAll(".showBtn");
+  buttons.forEach((button) => {
+    if (editOpen) {
+      button.classList.add("pseudo");
+    } else {
+      if (button.classList.contains("pseudo")) {
+        button.classList.remove("pseudo");
+      }
+    }
+  });
+    
+
 
 
 
@@ -115,20 +129,13 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, open, o
                 </button>
                 </div>
               ) : (
-                <div className="moveBtn">
+                <div className="moveBtn showBtn">
                   <button onClick={() => setIsOpen(true)}>Edit</button>
-                  <button
-                    onClick={() => {
-                      handleArchivation("ARCHIVE", task.status, task._id);
-                      navigation(`/`);
-                    }}
-                  >
-                    Archivate
-                  </button>
+                  <button onClick={() => { handleArchivation("ARCHIVE", task.status, task._id);navigation(`/`);}}>Archivate </button>
                 </div>
               )}
             </div>
-            <div clasName="pseudo"></div>
+            <div className="pseudo"></div>
           </div>
         </div>
       </>

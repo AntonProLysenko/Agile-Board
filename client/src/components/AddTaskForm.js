@@ -4,7 +4,7 @@ import moment from "moment";
 
 
 
-export default function AddTaskForm({open, entry, body, handleSubmit, handleUpdate, onClose, plusIcon, task}) {
+export default function AddTaskForm({open, entry, body, handleSubmit, handleUpdate, onClose, setIsOpen, plusIcon, task}) {
 
     if(!open) return null
 
@@ -28,12 +28,12 @@ export default function AddTaskForm({open, entry, body, handleSubmit, handleUpda
                   </form>
                </div>
                <div className="showInfo">
-                  <h3>Instructions:</h3>
                   <form className="form showInfo" onSubmit={(evt)=>{handleUpdate(evt, task._id)}}>
+                  <h3 >Instructions:</h3>
                     <textarea className="emptyInstructions" type="text" ref={body}      placeholder="Enter detailed information or hints here" defaultValue = {task.body}/>
                     <div className="moveBtn">
                     <button  type="submit" className="button">Update</button>
-                    <button   className="button" onClick={onClose}>Cancel</button>
+                    <button  className="button" onClick={(e)=>{e.preventDefault(); setIsOpen(false);}}>Cancel</button>
                     </div>
               </form>
               </div>
