@@ -352,6 +352,12 @@ button{
   margin-bottom: 2.5vh;
   min-height:50px ;
 }
+.instructions>p{
+    text-align: left;
+  align-self: flex-start;
+  font-size: large;
+  line-height: 20px;
+}
 .emptyInstructions{
   padding: 2.5px 10px ;
   border-radius: 5px;

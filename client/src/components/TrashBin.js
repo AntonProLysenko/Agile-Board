@@ -5,20 +5,20 @@ export default function TrashBin({ tasks, user, handleClick, open, closeIcon, on
   if (!open) return null;
 
   return (
-    <div className="trashOverlay"onClick={onClose}>
+    <div className="trashOverlay" onClick={onClose}>
       <div className="trashModalContainer">
-        <button className="close trashClose" onClick={onClose}>
+        <button className="trashClose close " onClick={onClose}>
           x
         </button>
         <div className="section">
           {/* <div className="list"> */}
-            <div className="listTitle">
-              <h2>Archive</h2>
-            </div>
+          <div className="listTitle">
+            <h2>Archive</h2>
+          </div>
 
-            {tasks["ARCHIVE"]
-              ? tasks["ARCHIVE"].map((task, id) => {
-                if (task.user === user.email){
+          {tasks["ARCHIVE"]
+            ? tasks["ARCHIVE"].map((task, id) => {
+                if (task.user === user.email) {
                   return (
                     <div className="task" key={id}>
                       <Link to={`/${task._id}`}>{task.entry}</Link>
@@ -39,11 +39,12 @@ export default function TrashBin({ tasks, user, handleClick, open, closeIcon, on
                         </button> */}
                       </div>
                     </div>
-                  );}
-                })
-              : "No archived tasks"}
-          </div>
+                  );
+                }
+              })
+            : "No archived tasks"}
         </div>
+      </div>
       {/* </div> */}
     </div>
   );

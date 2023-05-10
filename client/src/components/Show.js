@@ -48,13 +48,13 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, editOpe
   };
 
  
-  let buttons =  document.querySelectorAll(".showBtn");
-  buttons.forEach((button) => {
+  let hidebles =  document.querySelectorAll(".showHideble");
+  hidebles.forEach((hideble) => {
     if (editOpen) {
-      button.classList.add("pseudo");
+      hideble.classList.add("pseudo");
     } else {
-      if (button.classList.contains("pseudo")) {
-        button.classList.remove("pseudo");
+      if (hideble.classList.contains("pseudo")) {
+        hideble.classList.remove("pseudo");
       }
     }
   });
@@ -83,9 +83,9 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, editOpe
                 x
               </button>
 
-              <h1 className="listTitle">{task.entry}</h1>
+              <h1 className="listTitle showHideble">{task.entry}</h1>
 
-              <div className="secondaryInfo">
+              <div className="secondaryInfo showHideble">
                 <p className="taskStatus">
                   In{" "}
                   {task.status.charAt(0).toUpperCase() +
@@ -97,41 +97,46 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, editOpe
               </div>
             </div>
 
-            <div className="showInfo">
+            <div className="showInfo showHideble">
               <h3>Instructions:</h3>
 
               {task.body ? (
                 <div className="instructions">
-                  <ol>
                     {arrBody.map((li, idx) => {
                       if (arrBody[arrBody.length - 1] !== "") {
-                        return <li> {li} </li>;
+                        return <p key={idx}> {li} </p>;
                       } else {
                         arrBody.pop();
-                        return <li> {li} </li>;
+                        return <p key={idx}> {li} </p>;
                       }
                     })}
-                  </ol>
                 </div>
               ) : (
-                <div className="emptyInstructions"></div>
+                <div className="emptyInstructions "></div>
               )}
 
               {task.status === "ARCHIVE" ? (
                 <div className="moveBtn">
-                <button
-                  onClick={() => {
-                    navigation(`/`);
-                    handleArchivation("ARCHIVE", task.status, task._id);
-                  }}
-                >
-                  Delete Forever
-                </button>
+                  <button
+                    onClick={() => {
+                      navigation(`/`);
+                      handleArchivation("ARCHIVE", task.status, task._id);
+                    }}
+                  >
+                    Delete Forever
+                  </button>
                 </div>
               ) : (
                 <div className="moveBtn showBtn">
                   <button onClick={() => setIsOpen(true)}>Edit</button>
-                  <button onClick={() => { handleArchivation("ARCHIVE", task.status, task._id);navigation(`/`);}}>Archivate </button>
+                  <button
+                    onClick={() => {
+                      handleArchivation("ARCHIVE", task.status, task._id);
+                      navigation(`/`);
+                    }}
+                  >
+                    Archivate{" "}
+                  </button>
                 </div>
               )}
             </div>

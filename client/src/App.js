@@ -117,7 +117,7 @@ function App() {
     let trashOverlay = document.querySelector(".trashOverlay")
     let trashClose = document.querySelector(".trashClose")
 
-    console.log(evt)
+    // console.log(evt.target)
 
     if (evt.target == formOverlay || evt.target == showOverlay||evt.target==closeBtn || evt.target == editCloseBtn || evt.target == editOverlay){
       setIsOpen(false);
@@ -129,9 +129,9 @@ function App() {
       // navigation(-1);
       // setIsOpen(false);
       // setShowOpen(false);
-      console.log(evt.target);
-    }else if(evt.target == trashOverlay|| evt.target ==trashClose ){
-         setShowTrashBin(false);
+
+    }if (evt.target == trashOverlay || evt.target == trashClose) {
+      setShowTrashBin(false);
     }
 }
  
@@ -190,6 +190,7 @@ function App() {
 
   const handleUpdate = async (evt, id) => {
       evt.preventDefault()
+      // let div = document.querySelector(".editInstr");
       try {
          const { status } = await axios.put(`${BASIC_URL}/tasks/${id}`, {
            entry: entry.current.value,
@@ -198,13 +199,16 @@ function App() {
            prevStatus: task.prevStatus,
            username: task.usename
         });     
+
+        // console.log(div.innerHTML);
+        
         if (status === 200) {
          
           setButtonPressed(!buttonPressed);
           setIsOpen(false);
           entry.current.value = "";
           body.current.value = "";
-        
+
         } else {
           alert("Something went wrong!");
         }
