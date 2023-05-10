@@ -83,6 +83,10 @@ function App() {
       console.log("fetching");
       fetchTask(); 
       usersService.checkToken(); 
+    }else{
+       alert(
+         "The development of this app is ongoing! The backend is completed. However, the work on styles is still in progress. Therefore, I kindly request that you reserve your judgement on the styles until they have been finalized."
+       );
     }
     
   },[buttonPressed]);
@@ -142,6 +146,11 @@ function App() {
   async function handleLogin(evt) {
     // Prevent form from being submitted to the server
     evt.preventDefault();
+         {
+          //  alert(
+          //    "The development of this app is ongoing! The backend is completed. However, the work on styles is still in progress. Therefore, I kindly request that you reserve your judgement on the styles until they have been finalized."
+          //  );
+         }
     try {
       // The promise returned by the signUp service method
       // will resolve to the user object included in the
