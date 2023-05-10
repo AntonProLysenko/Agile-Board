@@ -1,4 +1,4 @@
-import{useState, useEffect} from "react"
+import{ useEffect} from "react"
 import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
@@ -57,14 +57,6 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, open, o
       console.log(arrBody);
       
     return  <>
-      {/* {task && task.body.split(".")} */}
-
-      {/* {task.body  &&
-      task.body.split(".")&&
-      
-      console.log(typeof(task.body))
-      }  */}
-
       <Layout />
       <div className="overlay" onClick={onClose}>
         <div className="modalContainer">
@@ -81,10 +73,22 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, open, o
           <ol>
           {
           task.body?(arrBody.map((li,idx)=>{
-             return( <li>
+            if (arrBody[arrBody.length-1]!== ""){
+             return( 
+                
+                <li>
                 {li}
               </li>)
-          })):<></>}
+            }else{
+              arrBody.pop()
+               return( 
+                
+                <li>
+                {li}
+              </li>)
+            }
+          })):
+          <></>}
           </ol>
         
 
