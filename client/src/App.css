@@ -9,7 +9,7 @@ header,
   margin: 0;
   padding: 0;
 }
-.App {
+.realApp {
   width: 100vw;
   height: 100%;
   margin: 0;
@@ -48,32 +48,7 @@ font-family:'Times New Roman', Times, serif;
 }
 
 
-@media only screen and (max-width: 420px){
-  #root{
-    position: relative;
-    width: 120vw;
-    height:120vh;
-  }
-  body{
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-  }
-  .App{
-    /* position: relative; */
-    width:300%;
-    height:100%;
-    /*  overflow-x: scroll;  */
-  }
-  
-  .container{
-    width:100%;
-    height:100%
-  }
-  .section{
-    width: 95vw;
-  }
-}
+
 
 
 
@@ -707,4 +682,48 @@ ol>li{
 
 .error-message{
   color:rgb(155, 1, 1)
+}
+
+
+
+
+
+
+
+@media only screen and (max-width: 420px){
+  #root{
+    position: relative;
+    width: 120vw;
+    height:120vh;
+  }
+  body{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .realApp{
+    /* position: relative; */
+    width:300%;
+    height:100%;
+    /*  overflow-x: scroll;  */
+  }
+  .AuthApp{
+    height: 100vh;
+    width: 100vw;
+  }
+  
+  .container{
+    width:100%;
+    height:100%
+  }
+
+  .section{
+    width: 95vw;
+  }
+
+  /* .authForm-container{
+    height: 100vh;
+    width:100vw
+  } */
 }

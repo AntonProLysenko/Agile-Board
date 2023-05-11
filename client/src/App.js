@@ -235,7 +235,7 @@ function App() {
   return (
     <div className="App">
       {user ? (
-        <>
+        <div className='realApp'>
          <header>
           <img src={require('./assets/logo.png')} alt='logo'/>
             <div className="title">
@@ -281,9 +281,9 @@ function App() {
           />
 
           <i className="trashBin" onClick={() => setShowTrashBin(true)}> {TrashBinIcon} </i>
-        </>
+        </div>
       ) : (
-        <>
+        <div className='AuthApp'>
           {/* <h1>Please Log-in</h1> */}
           <Routes>
             <Route
@@ -301,7 +301,7 @@ function App() {
               }
             />
           </Routes>
-        </>
+        </div>
       )}
     </div>
   );
