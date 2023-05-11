@@ -1,6 +1,7 @@
 import{ useEffect} from "react"
 import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
+import moment from "moment";
 
 import Layout from "../screens/layout/Layout";
 
@@ -54,78 +55,89 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, open, o
        arrBody = task.body.split(".");
     }
 
-      console.log(arrBody);
-      
-    return  <>
-      <Layout />
-      <div className="overlay" onClick={onClose}>
-        <div className="modalContainer">
-          <button className="close" onClick={onClose}>
-            x
-          </button>
-
-          <h1 className="listTitle">{task.entry}</h1>
-
-          <p className="date">
-            Last Update: {new Date(task.updatedAt).toLocaleString()}
-          </p>
-
-          <ol>
-          {
-          task.body?(arrBody.map((li,idx)=>{
-            if (arrBody[arrBody.length-1]!== ""){
-             return( 
-                
-                <li>
-                {li}
-              </li>)
-            }else{
-              arrBody.pop()
-               return( 
-                
-                <li>
-                {li}
-              </li>)
-            }
-          })):
-          <></>}
-          </ol>
-        
+    let lastUpdate = moment(task.updatedAt).fromNow();
 
 
       
-    
-
-          {task.status === "ARCHIVE" ? (
-            <button
-              onClick={() => {
-                navigation(`/`);
-                handleArchivation("ARCHIVE", task.status, task._id);
-              }}
-            >
-              Delete Forever
-            </button>
-          ) : (
-            <div>
-              <button
-                onClick={() => {
-                  handleArchivation("ARCHIVE", task.status, task._id);
-                  navigation(`/`);
-                }}
-              >
-                Archivate
+    return (
+      <>
+        <Layout />
+        <div className="overlay" onClick={onClose}>
+          <div className="modalContainer">
+            <div className="showHeader">
+              <button className="close" onClick={onClose}>
+                x
               </button>
-              <button onClick={() => setIsOpen(true)}>Edit</button>
+
+              <h1 className="listTitle">{task.entry}</h1>
+
+              <div className="secondaryInfo">
+                <p className="taskStatus">
+                  In{" "}
+                  {task.status.charAt(0).toUpperCase() +
+                    task.status.slice(1).toLowerCase()}{" "}
+                  list{" "}
+                </p>
+
+                <p className="date">Updated: {lastUpdate} </p>
+              </div>
             </div>
-          )}
+
+            <div className="showInfo">
+              <h3>Instructions:</h3>
+
+              {task.body ? (
+                <div className="instructions">
+                  <ol>
+                    {arrBody.map((li, idx) => {
+                      if (arrBody[arrBody.length - 1] !== "") {
+                        return <li> {li} </li>;
+                      } else {
+                        arrBody.pop();
+                        return <li> {li} </li>;
+                      }
+                    })}
+                  </ol>
+                </div>
+              ) : (
+                <div className="emptyInstructions"></div>
+              )}
+
+              {task.status === "ARCHIVE" ? (
+                <div className="moveBtn">
+                <button
+                  onClick={() => {
+                    navigation(`/`);
+                    handleArchivation("ARCHIVE", task.status, task._id);
+                  }}
+                >
+                  Delete Forever
+                </button>
+                </div>
+              ) : (
+                <div className="moveBtn">
+                  <button onClick={() => setIsOpen(true)}>Edit</button>
+                  <button
+                    onClick={() => {
+                      handleArchivation("ARCHIVE", task.status, task._id);
+                      navigation(`/`);
+                    }}
+                  >
+                    Archivate
+                  </button>
+                </div>
+              )}
+            </div>
+            <div clasName="pseudo"></div>
+          </div>
         </div>
-      </div>
-    </>
+      </>
+    );
   }
 
 
 
-  return (task? 
+  return (task.status? 
       loaded()
    : 
     <>Loading...</>

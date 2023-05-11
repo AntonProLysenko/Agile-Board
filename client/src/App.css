@@ -257,17 +257,37 @@ button{
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 3000;
 }
+.showOverlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 100;
+}
+
+.close{
+  align-self: flex-end;
+  border:none;
+  font-size: x-large;
+  background-color: rgba(255, 255, 255, 0);
+  color:rgb(29, 35, 45); 
+}
+
 .modalContainer {
   height: 50vh;
+  min-height: fit-content;
   width: 40vw;
-  overflow-y: scroll;
-  margin: 20px, 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* margin: 20px 0px; */
+  padding: 10px 25px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  /* justify-content: center; */
-  padding: 5px;
-  border-radius: 5px;
+  justify-content: space-between;
+
+  border-radius: 15px;
   background-color: rgba(235, 236, 240, 0.9);
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 
@@ -278,10 +298,78 @@ button{
 
   /* z-index: 1000000001; */
 }
+
+.showHeader{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* align-self: flex-start; */
+}
+.showHeader>.listTitle{
+  margin: 2.5vh 0;
+}
+
+.taskStatus{
+  text-decoration: underline;
+}
+
+.showInfo{
+  margin-top: -5vh;
+  width:100%;
+  justify-self:flex-end;
+  align-self: center;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.showInfo>h3{
+  color:rgb(23 43 78);
+  align-self: flex-start;  
+}
+
+.secondaryInfo{
+  font-size: larger;
+  color:rgb(29, 35, 45); 
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 15px;
+}
+
+.instructions{
+  padding: 2.5px 10px ;
+  border-radius: 5px;
+  background-color: whitesmoke;
+  min-width:99%;
+  margin-bottom: 10px;
+}
+.emptyInstructions{
+  border-radius: 5px;
+  background-color: whitesmoke;
+  min-width:99%;
+  min-height:50px ;
+  margin-bottom: 10px;
+}
+
+ol{
+  text-align: left;
+  align-self: flex-start;
+  list-style-position: inside
+}
+ol>li{
+  font-size: large;
+  line-height: 20px;
+}
+
+
 .trashModalContainer{
   height: 50vh;
   width: 40vw;
-  overflow-y: scroll;
+  overflow-y: auto;
   margin: 20px, 0;
   display: flex;
   flex-direction: column;
@@ -300,12 +388,19 @@ button{
   /* z-index: 100000000; */
 }
 
-.close{
-  align-self: flex-end;
-  border:none;
-  font-size: x-large;
-  background-color: rgba(255, 255, 255, 0.15);
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .trashBin{
   border: none;
@@ -362,15 +457,6 @@ button{
   background-color: burlywood;
   /* z-index: 1000; 
 } */
-.showOverlay{
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  z-index: 100;
-}
 
 /* .taskContainer {
   width: 70vw;
