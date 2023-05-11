@@ -81,8 +81,8 @@ function App() {
 
     if (user) { 
       console.log("fetching");
-      fetchTask(); 
       usersService.checkToken(); 
+      fetchTask(); 
     }else{
        alert(
          "The development of this app is ongoing! The backend is completed. However, the work on styles is still in progress. Therefore, I kindly request that you reserve your judgement on the styles until they have been finalized."
