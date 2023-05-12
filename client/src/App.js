@@ -93,9 +93,7 @@ function App() {
         "The development of this app is ongoing! The backend is completed. However, the work on styles is still in progress. Therefore, I kindly request that you reserve your judgement on the styles until they have been finalized."
       );
     }
-  },[buttonPressed,
-    //  refreshLoad
-    ]);
+  },[buttonPressed, refreshLoad]);
 
 
 

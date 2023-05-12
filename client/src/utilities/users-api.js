@@ -45,7 +45,7 @@ export async function logIn(credentials) {
 // }
 
 
-export async function checkToken() {
+export  function checkToken() {
   return sendRequest(`${BASIC_URL}/api/users/check-token`);
 }
 
