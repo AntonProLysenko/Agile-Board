@@ -86,7 +86,6 @@ function App() {
       console.log("fetching by user" + user.email);
       usersService.checkToken();
       fetchTask();
-
       console.log(refreshLoad);
       
     } else {
@@ -166,7 +165,7 @@ function App() {
       const user = await usersService.logIn(credentials);
       setUser(user);
       usersService.checkToken();
-      setButtonPressed(!buttonPressed);
+      // setButtonPressed(!buttonPressed);
       setCredentials({email:"", password:""})//clearing form
       setError("")
     } catch {
