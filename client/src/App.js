@@ -83,7 +83,7 @@ function App() {
 
 
     if (user || (user && refreshLoad)) {
-      console.log("fetching by user" + user.email);
+      // console.log("fetching by user" + user.email);
       usersService.checkToken();
       fetchTask();
       console.log(refreshLoad);
@@ -93,7 +93,9 @@ function App() {
         "The development of this app is ongoing! The backend is completed. However, the work on styles is still in progress. Therefore, I kindly request that you reserve your judgement on the styles until they have been finalized."
       );
     }
-  },[buttonPressed, refreshLoad]);
+  },[buttonPressed,
+    //  refreshLoad
+    ]);
 
 
 
@@ -133,7 +135,6 @@ function App() {
       setShowOpen(false)
       navigation("/");
       setIsOpen(false);
-      // setButtonPressed(!buttonPressed)
     // }if () {
       // navigation(-1);
       // setIsOpen(false);
@@ -152,11 +153,6 @@ function App() {
   async function handleLogin(evt) {
     // Prevent form from being submitted to the server
     evt.preventDefault();
-         {
-          //  alert(
-          //    "The development of this app is ongoing! The backend is completed. However, the work on styles is still in progress. Therefore, I kindly request that you reserve your judgement on the styles until they have been finalized."
-          //  );
-         }
     try {
       // The promise returned by the signUp service method
       // will resolve to the user object included in the
@@ -164,8 +160,8 @@ function App() {
       // setButtonPressed(!buttonPressed);
       const user = await usersService.logIn(credentials);
       setUser(user);
-      usersService.checkToken();
-      // setButtonPressed(!buttonPressed);
+      // usersService.checkToken();
+      setButtonPressed(!buttonPressed);
       setCredentials({email:"", password:""})//clearing form
       setError("")
     } catch {
