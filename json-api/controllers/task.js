@@ -27,7 +27,10 @@ router.get ('/', (req,res)=>{
 //sorting tasks by the status
 router.get('/table', (req,res)=>{
   Task.find({},  (err, foundTasks) => {
-    if (!err) {  
+    if (!err) { 
+        
+        console.log("All Tasks " + currentUser.email);
+         
         if (currentUser){
             foundTasks =  foundTasks.filter((task) => task.user === currentUser.email); //filtering data by the current user in backend                         
             const formatedData = foundTasks.reduce((accumulator, task) => {
@@ -63,8 +66,11 @@ router.post('/', (req,res)=>{
 
 //READ
 router.get('/:id', (req,res)=>{
+
+    console.log("show Page "+ currentUser.email);
+    
     Task.findById(req.params.id, (err,foundTask)=>{
-        if (foundTask.user== currentUser.email) {
+        if (foundTask.user == currentUser.email) {
           // foundTask =  foundTask.filter((task) => task.user === currentUser.email)
           if (!err) {
             res.status(200).json(foundTask);
