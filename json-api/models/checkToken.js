@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const getCurrentUser = require("../controllers/task");
 
 module.exports = function (req, res, next) {
   // Check for the token being sent in a header or as a query parameter
@@ -13,8 +14,12 @@ module.exports = function (req, res, next) {
       req.user = err ? null : decoded.user;
       // If your app cares... (optional)
       req.exp = err ? null : new Date(decoded.exp * 1000);
-      return next();
+
+      console.log("chek.token"+ JSON.stringify(req.user));
+      
+      return  next()
     });
+    // getCurrentUser.getCurrentUser(req.user);
   } else {
     // No token was sent
     req.user = null;

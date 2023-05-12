@@ -21,7 +21,7 @@ router.post('/', async (req, res)=>{
  try {
     const user = await User.create(req.body)
     const token = createJWT(user)
-    // getCurrentUser.getCurrentUser(user);    
+    getCurrentUser.getCurrentUser(user);    
      res.json(token);
  } 
  catch (error) {
@@ -36,7 +36,7 @@ router.post('/login', async(req,res)=>{
          if (!user) throw new Error();
           const match = await bcrypt.compare(req.body.password, user.password);//comparing entered password to users password
          if(!match) throw new Error()
-          // getCurrentUser.getCurrentUser(user)
+          getCurrentUser.getCurrentUser(user)
          res.json(createJWT(user));
 
     } catch (error) {
