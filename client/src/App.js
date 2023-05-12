@@ -46,6 +46,7 @@ function App() {
     email: "",
     password: "",
   });
+  const[refreshLoad,setRefresh] = useState(true)
   const [tasks, setTasks] = useState({})//for lists of tasks
   const [emptyData, setEmptyData] = useState(true)//for loading in Lists.js
   const [task, setTask] = useState({}); // for single task in Show
@@ -68,9 +69,10 @@ function App() {
         let { data } = await axios.get(`${BASIC_URL}/tasks/table`); //promising to fetch using axios
         setTasks(data);
         setEmptyData(false)
+        setRefresh(false)
         const titleBtn = document.querySelectorAll(".titleBtn");
-        Object.keys(titleBtn).forEach(function (i) {
-          titleBtn[i].addEventListener("click", (evt) => {
+          titleBtn.forEach(function (i) {
+            i.addEventListener("click", (evt) => {
             setListStatus(evt.target.id);
           });
         });
@@ -79,16 +81,20 @@ function App() {
       }
     };
 
-    if (user) { 
-      console.log("fetching" + user.email);
-      usersService.checkToken(); 
-      fetchTask(); 
-    }else{
-       alert(
-         "The development of this app is ongoing! The backend is completed. However, the work on styles is still in progress. Therefore, I kindly request that you reserve your judgement on the styles until they have been finalized."
-       );
+
+    if (user || (user && refreshLoad)) {
+      console.log("fetching by user" + user.email);
+      usersService.checkToken();
+      fetchTask();
+
+      console.log(refreshLoad);
+      
+    } else {
+      alert(
+        "The development of this app is ongoing! The backend is completed. However, the work on styles is still in progress. Therefore, I kindly request that you reserve your judgement on the styles until they have been finalized."
+      );
     }
-  },[buttonPressed]);
+  },[buttonPressed, refreshLoad]);
 
 
 
