@@ -17,11 +17,12 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, editOpe
 
   useEffect(() => {
     async function getTask(id) {
-      usersService.checkToken()
       try {
+        usersService.checkToken()
         const { data } = await axios.get(`${BASIC_URL}/tasks/${id}`);
         setTask(data);
       } catch (error) {
+        navigation("/")
         alert(error);
       }
     }

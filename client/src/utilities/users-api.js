@@ -62,7 +62,7 @@ async function sendRequest(url, method = 'GET', payload = null) {
 
  if (token) {
 
-  console.log(JSON.stringify(token));
+  console.log(atob(token.split(".")[1]));
   
    // Ensure the headers object exists
    options.headers = options.headers || {};
