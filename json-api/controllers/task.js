@@ -72,7 +72,7 @@ router.get('/:id', (req,res)=>{
             res.status(400).send(err);
           }
         } else {
-          res.status(403).send("Acces Denaid"+err);
+          res.status(403).json({message:"Acces Denaid"+err});
         }
     })
 })
