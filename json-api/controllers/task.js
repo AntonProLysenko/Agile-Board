@@ -41,6 +41,8 @@ router.get('/table', (req,res)=>{
             return accumulator; //always return acc in reduce func
             }, {}); //definig that it will be an obj;
             res.status(200).json(formatedData);
+
+        //    getCurrentUser(null);
         }
     } else {
       res.status(404).send(err);
@@ -71,14 +73,14 @@ router.get('/:id', (req,res)=>{
     
     Task.findById(req.params.id, (err,foundTask)=>{
         if (foundTask.user == currentUser.email) {
-          // foundTask =  foundTask.filter((task) => task.user === currentUser.email)
           if (!err) {
             res.status(200).json(foundTask);
+        //   getCurrentUser(null);
           } else {
-            res.status(400).send(err);
+            res.status(404).send(err);
           }
         } else {
-          res.status(403).json({message:"Acces Denaid"+err});
+          res.status(403).json({message:"Acces Denaid "+err});
         }
     })
 })
@@ -112,7 +114,7 @@ router.delete('/:id', (req,res)=>{
 })
 
 
-async function getCurrentUser(user){
+function getCurrentUser(user){
    return currentUser = user
 }
 
