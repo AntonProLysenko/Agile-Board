@@ -61,11 +61,14 @@ async function sendRequest(url, method = 'GET', payload = null) {
     const token = getToken();
 
  if (token) {
+
+  console.log(JSON.stringify(token));
+  
    // Ensure the headers object exists
    options.headers = options.headers || {};
    // Add token to an Authorization header
-   // Prefacing with 'Bearer' is recommended in the HTTP specification
-   options.headers.Authorization = `Bearer ${token}`;
+
+   options.headers.Authorization = `Bearer ${token}`; // Prefacing with 'Bearer' is recommended in the HTTP specification
  }
   const res = await fetch(url, options);
   // res.ok will be false if the status code set to 4xx in the controller action

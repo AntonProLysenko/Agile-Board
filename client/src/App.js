@@ -80,7 +80,7 @@ function App() {
     };
 
     if (user) { 
-      console.log("fetching");
+      console.log("fetching" + user.email);
       usersService.checkToken(); 
       fetchTask(); 
     }else{
@@ -88,7 +88,6 @@ function App() {
          "The development of this app is ongoing! The backend is completed. However, the work on styles is still in progress. Therefore, I kindly request that you reserve your judgement on the styles until they have been finalized."
        );
     }
-    
   },[buttonPressed]);
 
 
@@ -124,6 +123,7 @@ function App() {
     // console.log(evt.target)
 
     if (evt.target == formOverlay || evt.target == showOverlay||evt.target==closeBtn || evt.target == editCloseBtn || evt.target == editOverlay){
+     setButtonPressed(!buttonPressed);
       setIsOpen(false);
       setShowOpen(false)
       navigation("/");
@@ -136,6 +136,7 @@ function App() {
 
     }if (evt.target == trashOverlay || evt.target == trashClose) {
       setShowTrashBin(false);
+      setButtonPressed(!buttonPressed);
     }
 }
  
@@ -158,8 +159,8 @@ function App() {
       // setButtonPressed(!buttonPressed);
       const user = await usersService.logIn(credentials);
       setUser(user);
-      setButtonPressed(!buttonPressed);
       usersService.checkToken();
+      setButtonPressed(!buttonPressed);
       setCredentials({email:"", password:""})//clearing form
       setError("")
     } catch {
@@ -194,7 +195,7 @@ function App() {
       }
      
     } catch (err) {
-      alert("Something went wrong!"+err);
+      alert("Something went wrong!"+ err);
     }
   };
 

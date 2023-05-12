@@ -3,6 +3,8 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
 
+import * as usersService from "../utilities/user-service";
+
 import Layout from "../screens/layout/Layout";
 
 function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, editOpen, onClose, BASIC_URL }) {
@@ -16,6 +18,7 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, editOpe
   useEffect(() => {
     async function getTask(id) {
       try {
+        usersService.checkToken()
         const { data } = await axios.get(`${BASIC_URL}/tasks/${id}`);
         setTask(data);
       } catch (error) {
