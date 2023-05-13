@@ -66,6 +66,7 @@ function App() {
   useEffect(() => {
     const fetchTask = async () => {
       try {
+        await usersService.checkToken();
         let { data } = await axios.get(`${BASIC_URL}/tasks/table`); //promising to fetch using axios
         setTasks(data);
         setEmptyData(false)
@@ -84,7 +85,7 @@ function App() {
 
     if (user || (user && refreshLoad)) {
       // console.log("fetching by user" + user.email);
-      usersService.checkToken();
+     
       fetchTask();
       console.log(refreshLoad);
       
