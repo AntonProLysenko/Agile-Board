@@ -22,8 +22,9 @@ export default function TrashBin({ tasks, user, handleClick, open, closeIcon, on
                   return (
                     <div className="task" key={id}>
                       <Link to={`/${task._id}`}>{task.entry}</Link>
-                      <div className="moveBtn">
+                      
                         <button
+                        className='singleBtn'
                           onClick={() => {
                             handleClick(task.prevStatus, task._id);
                           }}
@@ -37,7 +38,7 @@ export default function TrashBin({ tasks, user, handleClick, open, closeIcon, on
                         >
                         To-Do
                         </button> */}
-                      </div>
+                      
                     </div>
                   );
                 }

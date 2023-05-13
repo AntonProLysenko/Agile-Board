@@ -116,8 +116,9 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, editOpe
               )}
 
               {task.status === "ARCHIVE" ? (
-                <div className="moveBtn">
+                
                   <button
+                  className="singleBtn"
                     onClick={() => {
                       navigation(`/`);
                       handleArchivation("ARCHIVE", task.status, task._id);
@@ -125,7 +126,7 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, editOpe
                   >
                     Delete Forever
                   </button>
-                </div>
+                
               ) : (
                 <div className="moveBtn showBtn">
                   <button onClick={() => setIsOpen(true)}>Edit</button>

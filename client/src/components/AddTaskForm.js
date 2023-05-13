@@ -20,16 +20,8 @@ export default function AddTaskForm({open, entry, body, handleSubmit, handleUpda
           <div className="editOverlay" onClick={onClose}>
             <div className="modalContainer editModal">
               <div className="showHeader">
-                <button className="close editClose" onClick={onClose}>
-                  {" "}
-                  x{" "}
-                </button>
-                <form
-                  className="form showHeader"
-                  onSubmit={(evt) => {
-                    handleUpdate(evt, task._id);
-                  }}
-                >
+                <button className="close editClose" onClick={onClose}>x</button>
+                <form className="form showHeader"onSubmit={(evt) => {handleUpdate(evt, task._id);}} >
                   <input
                     className="listTitle"
                     type="text"
@@ -39,11 +31,7 @@ export default function AddTaskForm({open, entry, body, handleSubmit, handleUpda
                   />
                   <div className="secondaryInfo">
                     <p className="taskStatus">
-                      In{" "}
-                      {task.status.charAt(0).toUpperCase() +
-                        task.status.slice(1).toLowerCase()}{" "}
-                      list
-                    </p>
+                      In{task.status.charAt(0).toUpperCase() + task.status.slice(1).toLowerCase()}list</p>
 
                     <p className="date">Updated: {lastUpdate} </p>
                   </div>
@@ -61,15 +49,10 @@ export default function AddTaskForm({open, entry, body, handleSubmit, handleUpda
                   <textarea className="emptyInstructions" type="text" ref={body} placeholder="Enter detailed information or hints here" defaultValue = {task.body}/>
 
                   <div className="moveBtn">
-                    <button type="submit" className="button">
+                    <button type="submit" >
                       Update
                     </button>
-                    <button
-                      className="button"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setIsOpen(false);
-                      }}
+                    <button onClick={(e) => {e.preventDefault();setIsOpen(false);}}
                     >
                       Cancel
                     </button>
@@ -85,11 +68,11 @@ export default function AddTaskForm({open, entry, body, handleSubmit, handleUpda
 
       return (
         <div className="overlay" onClick={onClose}>
-          <div className="modalContainer">
+          <div className="modalContainer ">
             <button className="close" onClick={onClose}>
               x
             </button>
-            <form className="form" onSubmit={handleSubmit}>
+            <form className="form showHeader" onSubmit={handleSubmit}>
               <input type="text" ref={entry} placeholder="Enter title" />
 
               <textarea
@@ -98,10 +81,11 @@ export default function AddTaskForm({open, entry, body, handleSubmit, handleUpda
                 placeholder="Enter detailed information or hints here"
               />
 
-              <button type="submit" className="button">
+              <button type="submit" className="singleBtn">
                 {plusIcon}
               </button>
             </form>
+            <div className="pseudo"></div>
           </div>
         </div>
       );

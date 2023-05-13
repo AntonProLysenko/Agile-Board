@@ -213,7 +213,21 @@ button{
   font-weight: 400;
 }
 
+
 .moveBtn>button:hover{
+  background-color: rgb(221, 218, 218);
+}
+
+.singleBtn{
+   padding: 3px;
+  border:none;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  background-color: rgba(255, 255, 255, 0.5);
+  color:rgb(23 43 78);
+  font-weight: 400;
+}
+.singleBtn:hover{
   background-color: rgb(221, 218, 218);
 }
 
@@ -273,7 +287,10 @@ button{
   border:none;
   font-size: x-large;
   background-color: rgba(255, 255, 255, 0);
-  color:rgb(29, 35, 45); 
+  color:rgb(62, 72, 90); 
+}
+.close:hover{
+ color:rgb(4, 24, 75); 
 }
 
 .modalContainer {
@@ -511,3 +528,68 @@ ol>li{
   align-items: center;
   flex-direction: column;
 } */
+
+.form-container{
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.authForm{
+  background-color: transparent;
+  backdrop-filter: blur(7px);
+  border-radius: 15px;
+  border: 1px solid whitesmoke;
+
+  padding: 2.5% 2.5%;
+  height: 30vh;
+  width: 35vh;
+  color:white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.authForm>input{
+  width:90%;
+  border: none;
+  border-bottom: 2px solid white;
+  background-color: transparent;
+  transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+  outline:none;
+}
+.authForm>input:focus{
+  border: none;
+  border-bottom: 2px solid blue;
+}
+
+.authForm>label{
+  align-self: flex-start;
+}
+.authBtn{
+  border: none;
+  border-radius: 15px;
+  background-color: beige;
+  color: black;
+  font-size: large;
+  width: 80%;
+  height: 15%;
+}
+
+.formChange{
+  font-weight: bold;
+  cursor:pointer;
+}
+.formChange:hover{
+   transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+  color:blue;
+  /* cursor:progress; */
+}
