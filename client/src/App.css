@@ -20,6 +20,10 @@ header,
   align-items: center;
   font-family:'Times New Roman', Times, serif
 }
+input,textarea{
+color:rgb(23 43 78); 
+font-family:'Times New Roman', Times, serif;
+}
 
 
 
@@ -244,6 +248,10 @@ button{
 
 
 
+
+
+
+
 /*Show*/
 .overlay{
   position: fixed;
@@ -416,42 +424,6 @@ ol>li{
 
   /* z-index: 100000000; */
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.trashBin{
-  border: none;
-  background-color: rgba(0, 0, 0, 0);
-  font-size: xx-large;
-  color: whitesmoke;
-  border-radius: 250%;
-  align-self: flex-end;
-  margin-right: 30px;
-  padding: 0;
-  cursor: pointer;
-}
-
-.fa-trash-can{
-  filter:drop-shadow(1px 1px 10px  rgb(0, 0, 0))
-}
-
-
-/* .fa-trash-can{text-shadow:1px 6px rgba(0, 0, 0, 0.5)}
-
-.fa-trash-can{box-shadow:0 .5rem 1rem 0 rgba(0, 0, 0, 0.5),0 .375rem 1.25rem 0 rgba(0, 0, 0, 0.19)} */
-
 .form {
   margin:0;
   padding:0;
@@ -503,6 +475,60 @@ ol>li{
   border-radius: 5px;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*TrashBin*/
+.trashBin{
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  font-size: xx-large;
+  color: whitesmoke;
+  border-radius: 250%;
+  align-self: flex-end;
+  margin-right: 30px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.fa-trash-can{
+  filter:drop-shadow(1px 1px 10px  rgb(0, 0, 0))
+}
+
+
+/* .fa-trash-can{text-shadow:1px 6px rgba(0, 0, 0, 0.5)}
+
+.fa-trash-can{box-shadow:0 .5rem 1rem 0 rgba(0, 0, 0, 0.5),0 .375rem 1.25rem 0 rgba(0, 0, 0, 0.19)} */
+
+
+
 /* .showPage {
   width: 50vw;
   height: 50vh;
@@ -529,7 +555,17 @@ ol>li{
   flex-direction: column;
 } */
 
-.form-container{
+
+
+
+
+
+
+
+
+
+/*Auth Page*/
+.authForm-container{
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -539,48 +575,71 @@ ol>li{
 }
 
 .authForm{
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(7px);
   -webkit-backdrop-filter: blur(7px);
   border-radius: 15px;
   border: 1px solid whitesmoke;
-
+  color:whitesmoke;
+  font-size: larger;
   padding: 2.5% 2.5%;
   height: 30vh;
+  min-height: 30vh;
   width: 35vh;
-  color:white;
+
+
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
 }
 
+.signUpForm{
+  height: 40vh;
+}
+
 .authForm>input{
+  font-size: larger;
+  color: rgb(255, 255, 255);
+  /* filter:drop-shadow(10px 1px 20px  rgb(0, 0, 0)); */
   width:90%;
   border: none;
-  border-bottom: 2px solid white;
+  border-bottom: 2px solid rgb(202, 200, 200);
+  border-radius: 0%;
   background-color: transparent;
   transition: 0.5s;
     -webkit-transition: 0.5s;
     -moz-transition: 0.5s;
   outline:none;
+  margin-bottom: 25px;
 }
 .authForm>input:focus{
   border: none;
-  border-bottom: 2px solid blue;
+  border-bottom: 2px solid white;
 }
 
 .authForm>label{
+  font-size: larger;
+  filter:drop-shadow(1px 1px 10px  rgb(0, 0, 0));
   align-self: flex-start;
 }
+.authForm>p, h1{
+  filter:drop-shadow(1px 1px 10px  rgb(0, 0, 0));
+}
+
 .authBtn{
   border: none;
   border-radius: 15px;
-  background-color: beige;
-  color: black;
+  background-color:rgb(234, 234, 234);
+  color:rgb(3, 29, 74); 
   font-size: large;
+  font-weight:600;
   width: 80%;
   height: 15%;
+  min-height: 10%;
+}
+.authBtn:hover{
+  background-color:white;
 }
 
 .formChange{
@@ -591,6 +650,11 @@ ol>li{
    transition: 0.5s;
     -webkit-transition: 0.5s;
     -moz-transition: 0.5s;
-  color:blue;
+color:rgb(3, 29, 74); 
+   
   /* cursor:progress; */
+}
+
+.error-message{
+  color:rgb(155, 1, 1)
 }

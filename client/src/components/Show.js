@@ -19,7 +19,7 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, editOpe
         const { data } = await axios.get(`${BASIC_URL}/tasks/${id}`);
         setTask(data);
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     }
     getTask(idpar.id);

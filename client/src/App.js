@@ -161,6 +161,7 @@ function App() {
       setButtonPressed(!buttonPressed);
       usersService.checkToken();
       setCredentials({email:"", password:""})//clearing form
+      setError("")
     } catch {
       setError("Log In Failed - Try Again");
     }
@@ -283,7 +284,7 @@ function App() {
         </>
       ) : (
         <>
-          <h1>Please Log-in</h1>
+          {/* <h1>Please Log-in</h1> */}
           <Routes>
             <Route
               path="/"

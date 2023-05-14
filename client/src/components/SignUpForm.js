@@ -40,8 +40,9 @@ handleNewUser = async (evt) =>{
   const disable = this.state.password !== this.state.confirm
   return (
     <div>
-      <div className="form-container">
-        <form className="authForm" autoComplete="off" onSubmit={this.handleNewUser}>
+      <div className="authForm-container">
+        <form className="authForm signUpForm" autoComplete="off" onSubmit={this.handleNewUser}>
+          <h1 className="listTitile">Sign Up</h1>
           <label>Name</label>
           <input type="text" name="name" onChange={this.handleChange} required />
           <label>Email</label>
@@ -51,7 +52,8 @@ handleNewUser = async (evt) =>{
           <label>Confirm</label>
           <input type="password" name="confirm"  onChange={this.handleChange} required />
           <button  className="authBtn"type="submit" disabled={disable}>SIGN UP</button>
-      <p className="error-message">&nbsp;{this.state.error}</p>
+          <p className="error-message">&nbsp;{this.state.error}</p>
+         <p>Already have an account? &nbsp;<span className="formChange" onClick={() => {this.props.setNewUser(false)}}>Sign In</span></p>
         </form>
       </div>
     </div>
