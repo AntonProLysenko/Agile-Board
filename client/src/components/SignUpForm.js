@@ -41,7 +41,7 @@ handleNewUser = async (evt) =>{
   return (
     <div>
       <div className="form-container">
-        <form autoComplete="off" onSubmit={this.handleNewUser}>
+        <form className="authForm" autoComplete="off" onSubmit={this.handleNewUser}>
           <label>Name</label>
           <input type="text" name="name" onChange={this.handleChange} required />
           <label>Email</label>
@@ -50,10 +50,10 @@ handleNewUser = async (evt) =>{
           <input type="password" name="password"  onChange={this.handleChange} required />
           <label>Confirm</label>
           <input type="password" name="confirm"  onChange={this.handleChange} required />
-          <button type="submit" disabled={disable}>SIGN UP</button>
+          <button  className="authBtn"type="submit" disabled={disable}>SIGN UP</button>
+      <p className="error-message">&nbsp;{this.state.error}</p>
         </form>
       </div>
-      <p className="error-message">&nbsp;{this.state.error}</p>
     </div>
   );
 }
