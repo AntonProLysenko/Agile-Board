@@ -64,10 +64,15 @@ router.post('/', (req,res)=>{
 //READ
 router.get('/:id', (req,res)=>{
     Task.findById(req.params.id, (err,foundTask)=>{
-        if(!err){
-            res.status(200).json(foundTask)
-        }else{
-            res.status(400).send(err)
+        if (foundTask.user== currentUser.email) {
+          // foundTask =  foundTask.filter((task) => task.user === currentUser.email)
+          if (!err) {
+            res.status(200).json(foundTask);
+          } else {
+            res.status(400).send(err);
+          }
+        } else {
+          res.status(403).send("Acces Denaid"+err);
         }
     })
 })
