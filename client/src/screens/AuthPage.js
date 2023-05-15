@@ -6,14 +6,18 @@ export default function AuthPage({setUser,setButtonPressed, buttonPressed, handl
  
   const[newUser, setNewUser] = useState(false)
 
-  return (!newUser?
+  return (
+  <div className='AuthPage'>
+    !newUser?
     <>
     <LoginForm setUser={setUser} setNewUser={setNewUser} setButtonPressed={setButtonPressed} buttonPressed= {buttonPressed} handleLogin={handleLogin} credentials={credentials} handleChange={handleChange} error={error}/>
     </> 
   :(
     <div>
-      <SignUpForm setUser={setUser} setNewUser={setNewUser} setButtonPressed  = {setButtonPressed} buttonPressed= {buttonPressed}/>  
+    <SignUpForm setUser={setUser} setNewUser={setNewUser} setButtonPressed  = {setButtonPressed} buttonPressed= {buttonPressed}/>  
     </div>
-  )
+    )
+    
+  </div>
   )
 }
