@@ -83,9 +83,8 @@ function App() {
     };
 
 
-    if (user || (user && refreshLoad)) {
+    if (user) {
       // console.log("fetching by user" + user.email);
-     
       fetchTask();
       console.log(refreshLoad);
       
