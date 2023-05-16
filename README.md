@@ -2,8 +2,7 @@
 the app has separeted backend deployed on render so on first log in give it a time to wake up
 
 use 
-
-login test@test
+email:test@test
 
 pass:test
 
