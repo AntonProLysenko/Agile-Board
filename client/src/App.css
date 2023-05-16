@@ -583,9 +583,11 @@ ol>li{
   color:whitesmoke;
   font-size: larger;
   padding: 2.5% 2.5%;
+
   height: 30vh;
-  min-height: 30vh;
+  min-height: 380px;
   width: 35vh;
+  min-width: 268px;
 
 
   display: flex;
@@ -595,7 +597,8 @@ ol>li{
 }
 
 .signUpForm{
-  height: 40vh;
+  height: 45vh;
+  min-height: 500px;
 }
 
 .authForm>input{
@@ -623,7 +626,7 @@ ol>li{
   filter:drop-shadow(1px 1px 10px  rgb(0, 0, 0));
   align-self: flex-start;
 }
-.authForm>p, h1{
+.authForm>p,.authForm>h1{
   filter:drop-shadow(1px 1px 10px  rgb(0, 0, 0));
 }
 
@@ -647,12 +650,11 @@ ol>li{
   cursor:pointer;
 }
 .formChange:hover{
-   transition: 0.5s;
+  transition: 0.5s;
     -webkit-transition: 0.5s;
     -moz-transition: 0.5s;
-color:rgb(3, 29, 74); 
+  color:rgb(3, 29, 74); 
    
-  /* cursor:progress; */
 }
 
 .error-message{
