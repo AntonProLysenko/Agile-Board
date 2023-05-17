@@ -159,6 +159,7 @@ button{
 .section {
   display: flex;
   flex-direction: column;
+align-items: center;
 
   height: fit-content;
   max-height: 80vh;
@@ -169,6 +170,8 @@ button{
   border: 1px solid rgb(234,234,234);
   background-color:  rgba(234, 234, 234, 0.5) ;
   backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    -moz-backdrop-filter:blur(3px)
   /* box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; */
 }
 
@@ -449,13 +452,14 @@ ol>li{
   height: 50vh;
   width: 40vw;
   overflow-y: auto;
+  overflow-x: hidden;
   margin: 20px, 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   /* justify-content: center; */
-  padding: 5px;
-  border-radius: 5px;
+  padding: 10px 25px;
+  border-radius: 15px;
   background-color: rgba(235, 236, 240, 0.9);
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 
@@ -463,6 +467,7 @@ ol>li{
   top:50%;
   left: 50%;
   transform: translate(-50%,-50%);
+
 
   /* z-index: 100000000; */
 }
@@ -619,7 +624,8 @@ ol>li{
 .authForm{
   background-color: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(7px);
-  -webkit-backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+    -moz-background-filter:blur(7px) ;
   border-radius: 15px;
   border: 1px solid whitesmoke;
   color:whitesmoke;
