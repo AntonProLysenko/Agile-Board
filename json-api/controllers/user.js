@@ -49,6 +49,9 @@ router.get("/check-token",async (req,res)=>{
   // req.user will always be there for you when a token is sent
   // console.log("req.user", req.user);
   getCurrentUser.getCurrentUser(req.user);
+
+  console.log("routerCheck" + req.user);
+  
   res.json(req.exp);
 });
 
