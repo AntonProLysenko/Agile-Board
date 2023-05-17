@@ -775,4 +775,14 @@ ol>li{
   }
 
 
+
+
+
+
+  .modalContainer, .trashModalContainer, .editModal {
+    width:85vw;
+    height: 80vh;
+  }
+
+
 }
