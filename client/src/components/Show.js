@@ -1,16 +1,17 @@
 import{ useEffect, useState} from "react"
 import { useParams, useNavigate, Link } from "react-router-dom";
-import MDEditor from "@uiw/react-md-editor";
 import axios from "axios";
 import moment from "moment";
 
-import * as usersService from "../utilities/user-service";
+import MDEditor from "@uiw/react-md-editor";
 
+import * as usersService from "../utilities/user-service";
 import Layout from "../screens/layout/Layout";
 
 function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, editOpen, onClose, BASIC_URL }) {
   const idpar = useParams();
   const navigation = useNavigate();
+  const [value, setValue] = useState(task.body);
 
   // let[currentBody, setCurrentBody] = useState([])
 
@@ -21,7 +22,10 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, editOpe
       try {
         await usersService.checkToken()
         const { data } = await axios.get(`${BASIC_URL}/tasks/${id}`);
-        setTask(data);
+        await setTask(data);
+        setValue(data.body)
+
+
       } catch (error) {
         navigation("/")
         alert(error);
@@ -68,7 +72,9 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, editOpe
 
 
 
-  const [value, setValue] = useState(task.body);
+
+
+
   function loaded(){
     let arrBody
     if(task.body){
