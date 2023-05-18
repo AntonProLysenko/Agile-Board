@@ -53,6 +53,7 @@ function App() {
   const [buttonPressed, setButtonPressed] = useState (false)//used for refetching data on status change
   const [isOpen, setIsOpen] = useState(false)// create/edit form
   const [showOpen, setShowOpen] = useState(false)//show
+  const [fetchShow, setFetchShow]=useState(false)//to fetch show
   const [showTrashBin, setShowTrashBin] = useState(false)
   const [listStatus, setListStatus]= useState()
 
@@ -250,9 +251,9 @@ function App() {
             <Route path ="/" element = {<Layout/>}/>{/*Added "/" to layout to prevent warning, cannot add it to Lists, since it dissapears on Show page */}
             {/* <Route path="/" element={ <Layout userName={user.name} setUser={setUser} logOut={logOut} logOutIcon={logOutIcon}/> }/> */}
 
-            <Route path=":id" element={ <Show task={task} setTask={setTask} buttonPressed={buttonPressed} setButtonPressed={setButtonPressed} setIsOpen={setIsOpen} open={showOpen} onClose={handleClose} editOpen={isOpen} BASIC_URL={BASIC_URL}/>}/>
+            <Route path=":id" element={ <Show task={task} setTask={setTask} buttonPressed={buttonPressed} setButtonPressed={setButtonPressed} fetchShow={fetchShow} setIsOpen={setIsOpen} open={setShowOpen} onClose={handleClose} editOpen={isOpen} BASIC_URL={BASIC_URL}/>}/>
           </Routes>
-          <Lists tasks={tasks} handleClick={handleClick} setShowOpen={setShowOpen} plusIcon={plusIcon} checkListIcon={checkListIcon} setIsOpen={setIsOpen} setTask={setTask} emptyData={emptyData}/>
+          <Lists tasks={tasks} handleClick={handleClick} setFetchShow={setFetchShow} plusIcon={plusIcon} checkListIcon={checkListIcon} setIsOpen={setIsOpen} setTask={setTask} emptyData={emptyData}/>
            
 
           

@@ -8,7 +8,7 @@ import MDEditor from "@uiw/react-md-editor";
 import * as usersService from "../utilities/user-service";
 import Layout from "../screens/layout/Layout";
 
-function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, editOpen, onClose, BASIC_URL }) {
+function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask,fetchShow, editOpen,open, onClose, BASIC_URL }) {
   const idpar = useParams();
   const navigation = useNavigate();
   const [value, setValue] = useState(task.body);
@@ -20,19 +20,24 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, editOpe
   useEffect(() => {
     async function getTask(id) {
       try {
-        await usersService.checkToken()
+        await usersService.checkToken();
         const { data } = await axios.get(`${BASIC_URL}/tasks/${id}`);
         await setTask(data);
-        setValue(data.body)
+        setValue(data.body);
+        // setIsOpen(true)
+        if(data){
+          open(true);
 
-
+          console.log("opening");
+          
+        }
       } catch (error) {
-        navigation("/")
+        navigation("/");
         alert(error);
       }
     }
     getTask(idpar.id);
-  }, [buttonPressed]);
+  }, [fetchShow]);
 
 
   const handleArchivation = async (statusChange, currentStatus, id) => {
@@ -160,7 +165,7 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, editOpe
 
 
 
-  return (task.status? 
+  return (task._id===idpar.id? 
       loaded()
    : 
     <>Loading...</>
