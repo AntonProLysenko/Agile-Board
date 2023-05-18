@@ -127,7 +127,7 @@ function App() {
 
     // console.log(evt.target)
 
-    if (evt.target == formOverlay || evt.target == showOverlay||evt.target==closeBtn || evt.target == editCloseBtn || evt.target == editOverlay){
+    if (evt.target === formOverlay || evt.target === showOverlay||evt.target===closeBtn || evt.target === editCloseBtn || evt.target === editOverlay){
      setButtonPressed(!buttonPressed);
       setIsOpen(false);
       setShowOpen(false)
@@ -138,7 +138,7 @@ function App() {
       // setIsOpen(false);
       // setShowOpen(false);
 
-    }if (evt.target == trashOverlay || evt.target == trashClose) {
+    }if (evt.target === trashOverlay || evt.target === trashClose) {
       setShowTrashBin(false);
       setButtonPressed(!buttonPressed);
     }
@@ -243,10 +243,9 @@ function App() {
             </div>
             <div className='logOut'>
               <span  onClick={() => {setUser(null); logOut();}}>Sign Out {logOutIcon}</span>
-
             </div>
-
          </header>
+
           <Routes>
             <Route path ="/" element = {<Layout/>}/>{/*Added "/" to layout to prevent warning, cannot add it to Lists, since it dissapears on Show page */}
             {/* <Route path="/" element={ <Layout userName={user.name} setUser={setUser} logOut={logOut} logOutIcon={logOutIcon}/> }/> */}
