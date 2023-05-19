@@ -1,9 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import moment from "moment";
-
-
-import MDEditor from "@uiw/react-md-editor";
-import { useState } from "react";
+import MDEditor, {commands,ICommand,EditorContext} from "@uiw/react-md-editor";
 
 export default function AddTaskForm({open, entry, body, handleSubmit, handleUpdate, showBodyValue,setBodyValue, onClose, setIsOpen, plusIcon, task}) {
 // const [value, setValue] = useState(task.body);
@@ -11,12 +8,62 @@ export default function AddTaskForm({open, entry, body, handleSubmit, handleUpda
 
 
      if(task._id){  
-{console.log(task.body)}
+// {console.log(task.body)}
           let lastUpdate = moment(task.updatedAt).fromNow();
           let arrBody
     if(task.body){
        arrBody = task.body.split(".");
     }
+
+const Button = () => {
+  const { preview, dispatch } = useContext(EditorContext);
+  const click = () => {
+    dispatch({
+      preview: preview === "edit" ? "preview" : "edit"
+    });
+  };
+  if (preview === "edit") {
+    return (
+      <svg width="12" height="12" viewBox="0 0 520 520" onClick={click}>
+        <polygon
+          fill="currentColor"
+          points="0 71.293 0 122 319 122 319 397 0 397 0 449.707 372 449.413 372 71.293"
+        />
+        <polygon
+          fill="currentColor"
+          points="429 71.293 520 71.293 520 122 481 123 481 396 520 396 520 449.707 429 449.413"
+        />
+      </svg>
+    );
+  }
+  return (
+    <svg width="12" height="12" viewBox="0 0 520 520" onClick={click}>
+      <polygon
+        fill="currentColor"
+        points="0 71.293 0 122 38.023 123 38.023 398 0 397 0 449.707 91.023 450.413 91.023 72.293"
+      />
+      <polygon
+        fill="currentColor"
+        points="148.023 72.293 520 71.293 520 122 200.023 124 200.023 397 520 396 520 449.707 148.023 450.413"
+      />
+    </svg>
+  );
+};
+
+
+const codePreview={
+  name: "preview",
+  keyCommand: "preview",
+  value: "preview",
+  icon: <Button />
+};
+
+
+
+
+
+
+
         return (
           <div className="editOverlay" onClick={onClose}>
             <div className="modalContainer editModal">
@@ -46,24 +93,26 @@ export default function AddTaskForm({open, entry, body, handleSubmit, handleUpda
                   }}
                 >
                   <h3>Instructions:</h3>
-                  <div>
+                  <div data-color-mode="light">
 
                   {/* <textarea className="emptyInstructions" type="text" ref={body} placeholder="Enter detailed information or hints here" defaultValue = {task.body}/> */}
-                  <MDEditor height={200} value={showBodyValue} onChange={setBodyValue} />
+                  <MDEditor height={200} value={showBodyValue} onChange={setBodyValue}  preview="edit" extraCommands={[codePreview, commands.fullscreen]}/>
                   </div>
 
                   <div className="moveBtn">
                     <button type="submit" >
                       Update
                     </button>
-                    <button onClick={(e) => {e.preventDefault();setIsOpen(false);}}
-                    >
+
+                    <button onClick={(e) => {e.preventDefault();setIsOpen(false);}}>
                       Cancel
                     </button>
                   </div>
                 </form>
               </div>
+
               <div className="pseudo"></div>
+
             </div>
           </div>
         );

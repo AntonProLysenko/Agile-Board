@@ -1,5 +1,5 @@
 import './App.css';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, FC } from 'react';
 import axios from 'axios'
 import {Routes, Route, useNavigate} from "react-router-dom";
 
@@ -306,7 +306,7 @@ function App() {
           </button>
           </div> */}
 
-          <AddTaskForm
+          FC <AddTaskForm
             open={isOpen}
             entry={entry}
             body={body}
