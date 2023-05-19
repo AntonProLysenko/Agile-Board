@@ -49,6 +49,23 @@ font-family:'Times New Roman', Times, serif;
 
 
 
+*::-webkit-scrollbar {
+  width: 5px;
+}
+ 
+*::-webkit-scrollbar-track {
+  box-shadow: none;
+}
+
+*-webkit-scrollbar-thumb {
+  background-color: rgb(14, 5, 82);
+  outline: none;
+}
+
+
+
+
+
 
 
 
@@ -747,7 +764,7 @@ ol>li{
   }
   .section{
     min-width: 92vw;
-    height: 80vh;
+    max-height: 80vh;
     scroll-snap-align: center;
     margin:0 10px
   }
