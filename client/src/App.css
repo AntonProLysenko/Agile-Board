@@ -709,7 +709,7 @@ ol>li{
 
 
 
-@media only screen and (max-width: 420px){
+@media only screen and (max-width: 431px){
   /* #root{
     position: relative;
     width: 100vw;
@@ -756,7 +756,8 @@ ol>li{
 
     .container{
     width:100%;
-    min-height:80vh;
+    height: fit-content;
+    max-height:80vh;
     justify-content: flex-start;
     overflow-x: scroll;
     overflow-y: hidden;
@@ -768,8 +769,6 @@ ol>li{
     scroll-snap-align: center;
     margin:0 10px
   }
-.trashBin{
-  /* display: none; */
-}
+
 
 }
