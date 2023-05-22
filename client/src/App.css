@@ -748,7 +748,7 @@ ol>li{
     /* position: relative; */
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     width:100vw;
     height:100vh;
     /*  overflow-x: scroll;  */
@@ -757,7 +757,8 @@ ol>li{
     .container{
     width:100%;
     height: fit-content;
-    max-height:80vh;
+    /* max-height: 85vh; */
+    /* min-height:81vh; */
     justify-content: flex-start;
     overflow-x: scroll;
     overflow-y: hidden;
@@ -765,9 +766,12 @@ ol>li{
   }
   .section{
     min-width: 92vw;
-    max-height: 80vh;
+    max-height: 78vh;
     scroll-snap-align: center;
-    margin:10px
+    margin:0 10px
+  }
+  .list{
+    overflow-x: hidden;
   }
 
 
