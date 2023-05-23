@@ -388,13 +388,14 @@ button{
 }
 
 .showInfo{
+  height: fit-content;
   margin-top: -5vh;
   width:100%;
+  display:flex;
   justify-self:flex-end;
   align-self: center;
-  display:flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -417,10 +418,11 @@ button{
 .instructions{
   padding: 2.5px 10px ;
   border-radius: 5px;
-  background-color: whitesmoke;
+  background-color: transparent;
   min-width:99%;
   margin-bottom: 2.5vh;
   min-height:50px ;
+  height: fit-content;
 }
 .instructions>p{
     text-align: left;
@@ -449,7 +451,8 @@ ol>li{
 
 
 .trashModalContainer{
-  height: 50vh;
+  height: fit-content;
+  min-height: 50vh;
   width: 40vw;
   overflow-y: auto;
   overflow-x: hidden;
@@ -707,6 +710,18 @@ ol>li{
 
 .error-message{
   color:rgb(155, 1, 1)
+}
+
+
+
+/*MD Editor*/
+
+.w-md-editor{
+  height:fit-content;
+  min-height:82px ;
+  width: 99%;
+  margin:0;
+  margin-bottom: 10px;
 }
 
 

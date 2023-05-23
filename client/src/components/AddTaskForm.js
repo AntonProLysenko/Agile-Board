@@ -79,7 +79,7 @@ const codePreview={
                   />
                   <div className="secondaryInfo">
                     <p className="taskStatus">
-                      In{task.status.charAt(0).toUpperCase() + task.status.slice(1).toLowerCase()}list</p>
+                      In {task.status.charAt(0).toUpperCase() + task.status.slice(1).toLowerCase()} list</p>
 
                     <p className="date">Updated: {lastUpdate} </p>
                   </div>
@@ -93,11 +93,10 @@ const codePreview={
                   }}
                 >
                   <h3>Instructions:</h3>
-                  <div data-color-mode="light">
+                  <div className="instructions" data-color-mode="light">
 
                   {/* <textarea className="emptyInstructions" type="text" ref={body} placeholder="Enter detailed information or hints here" defaultValue = {task.body}/> */}
-                  <MDEditor height={200} value={showBodyValue} onChange={setBodyValue}  preview="edit" extraCommands={[codePreview, commands.fullscreen]}/>
-                  </div>
+                  <MDEditor height={"fit-content"} width={"100%"} value={showBodyValue} onChange={setBodyValue}  preview="edit" extraCommands={[codePreview, commands.fullscreen]}/>
 
                   <div className="moveBtn">
                     <button type="submit" >
@@ -107,6 +106,7 @@ const codePreview={
                     <button onClick={(e) => {e.preventDefault();setIsOpen(false);}}>
                       Cancel
                     </button>
+                  </div>
                   </div>
                 </form>
               </div>

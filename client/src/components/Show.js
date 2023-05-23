@@ -127,33 +127,57 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask,fetchSho
                       }
                     })} */}
                   <MDEditor.Markdown source={showBodyValue} />
+                  {task.status === "ARCHIVE" ? (
+                    <button
+                      className="singleBtn"
+                      onClick={() => {
+                        navigation(`/`);
+                        handleArchivation("ARCHIVE", task.status, task._id);
+                      }}
+                    >
+                      Delete Forever
+                    </button>
+                  ) : (
+                    <div className="moveBtn showBtn">
+                      <button onClick={() => setIsOpen(true)}>Edit</button>
+                      <button
+                        onClick={() => {
+                          handleArchivation("ARCHIVE", task.status, task._id);
+                          navigation(`/`);
+                        }}
+                      >
+                        Archivate{" "}
+                      </button>
+                    </div>
+                  )}
                 </div>
               ) : (
-                <div className="emptyInstructions "></div>
-              )}
-
-              {task.status === "ARCHIVE" ? (
-                <button
-                  className="singleBtn"
-                  onClick={() => {
-                    navigation(`/`);
-                    handleArchivation("ARCHIVE", task.status, task._id);
-                  }}
-                >
-                  Delete Forever
-                </button>
-              ) : (
-                <div className="moveBtn showBtn">
-                  <button onClick={() => setIsOpen(true)}>Edit</button>
-                  <button
-                    onClick={() => {
-                      handleArchivation("ARCHIVE", task.status, task._id);
-                      navigation(`/`);
-                    }}
-                  >
-                    Archivate{" "}
-                  </button>
-                </div>
+                <>
+                  <div className="emptyInstructions "></div>
+                  {task.status === "ARCHIVE" ? (
+                    <button
+                      className="singleBtn"
+                      onClick={() => {
+                        navigation(`/`);
+                        handleArchivation("ARCHIVE", task.status, task._id);
+                      }}
+                    >
+                      Delete Forever
+                    </button>
+                  ) : (
+                    <div className="moveBtn showBtn">
+                      <button onClick={() => setIsOpen(true)}>Edit</button>
+                      <button
+                        onClick={() => {
+                          handleArchivation("ARCHIVE", task.status, task._id);
+                          navigation(`/`);
+                        }}
+                      >
+                        Archivate{" "}
+                      </button>
+                    </div>
+                  )}
+                </>
               )}
             </div>
             <div className="pseudo"></div>
