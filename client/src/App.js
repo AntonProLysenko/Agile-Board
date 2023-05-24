@@ -306,7 +306,7 @@ function App() {
           </button>
           </div> */}
 
-          FC <AddTaskForm
+          <AddTaskForm
             open={isOpen}
             entry={entry}
             body={body}
