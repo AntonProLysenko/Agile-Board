@@ -11,10 +11,10 @@ export default function TrashBin({ tasks, user, handleClick, open, closeIcon, on
           x
         </button>
         <div className="section">
-          {/* <div className="list"> */}
           <div className="listTitle">
             <h2>Archive</h2>
           </div>
+          <div className="list">
 
           {tasks["ARCHIVE"]
             ? tasks["ARCHIVE"].map((task, id) => {
@@ -46,7 +46,7 @@ export default function TrashBin({ tasks, user, handleClick, open, closeIcon, on
             : "No archived tasks"}
         </div>
       </div>
-      {/* </div> */}
+      </div>
     </div>
   );
 }

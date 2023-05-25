@@ -114,7 +114,7 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask,fetchSho
               <h3>Instructions:</h3>
 
               {task.body ? (
-                <div className="instructions" onClick={() => setIsOpen(true)} data-color-mode="light">
+                <div className="instructions"  data-color-mode="light">
                   {/* {arrBody.map((li, idx) => {
                       if (arrBody[arrBody.length - 1] !== "") {
                         return <p key={idx}> {li} </p>;
@@ -123,15 +123,9 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask,fetchSho
                         return <p key={idx}> {li} </p>;
                       }
                     })} */}
-                  <MDEditor.Markdown className="editable" source={showBodyValue} style={{borderRadius:"5px"}} />
+                  <MDEditor.Markdown onClick={() => setIsOpen(true)} className="editable"  source={showBodyValue} style={{borderRadius:"5px"}} />
                   {task.status === "ARCHIVE" ? (
-                    <button
-                      className="singleBtn"
-                      onClick={() => {
-                        navigation(`/`);
-                        handleArchivation("ARCHIVE", task.status, task._id);
-                      }}
-                    >
+                    <button className="singleBtn" onClick={() => { navigation(`/`); handleArchivation("ARCHIVE", task.status, task._id); }}>
                       Delete Forever
                     </button>
                   ) : (
