@@ -159,11 +159,11 @@ button{
 .section {
   display: flex;
   flex-direction: column;
-align-items: center;
+  align-items: center;
 
   height: fit-content;
   max-height: 80vh;
-  width: 30vw;
+  width: 25vw;
   min-width: 350px;
   padding: 10px;
   border-radius: 15px;
@@ -734,9 +734,9 @@ ol>li{
   }
   
 
-  .section{
+  /* .section{
     width: 95vw;
-  }
+  } */
 
   .authForm-container{
     height: 100vh;

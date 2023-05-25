@@ -1,5 +1,6 @@
-import{ useEffect} from "react"
+import{ useEffect, useState} from "react"
 import { useParams, useNavigate, Link } from "react-router-dom";
+import MDEditor from "@uiw/react-md-editor";
 import axios from "axios";
 import moment from "moment";
 
@@ -67,6 +68,7 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, editOpe
 
 
 
+  const [value, setValue] = useState(task.body);
   function loaded(){
     let arrBody
     if(task.body){
@@ -74,7 +76,6 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, editOpe
     }
 
     let lastUpdate = moment(task.updatedAt).fromNow();
-
 
       
     return (
@@ -105,32 +106,31 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask, editOpe
               <h3>Instructions:</h3>
 
               {task.body ? (
-                <div className="instructions">
-                    {arrBody.map((li, idx) => {
+                <div className="instructions" data-color-mode="light">
+                  {/* {arrBody.map((li, idx) => {
                       if (arrBody[arrBody.length - 1] !== "") {
                         return <p key={idx}> {li} </p>;
                       } else {
                         arrBody.pop();
                         return <p key={idx}> {li} </p>;
                       }
-                    })}
+                    })} */}
+                  <MDEditor.Markdown source={value} />
                 </div>
               ) : (
                 <div className="emptyInstructions "></div>
               )}
 
               {task.status === "ARCHIVE" ? (
-                
-                  <button
+                <button
                   className="singleBtn"
-                    onClick={() => {
-                      navigation(`/`);
-                      handleArchivation("ARCHIVE", task.status, task._id);
-                    }}
-                  >
-                    Delete Forever
-                  </button>
-                
+                  onClick={() => {
+                    navigation(`/`);
+                    handleArchivation("ARCHIVE", task.status, task._id);
+                  }}
+                >
+                  Delete Forever
+                </button>
               ) : (
                 <div className="moveBtn showBtn">
                   <button onClick={() => setIsOpen(true)}>Edit</button>
