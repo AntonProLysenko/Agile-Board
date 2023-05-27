@@ -16,7 +16,7 @@ module.exports = function (req, res, next) {
       req.exp = err ? null : new Date(decoded.exp * 1000);
 
       console.log("chek.token middleware"+ JSON.stringify(req.user));
-      thisOne = req.user
+      currentUser = req.user
       next()
     });
     // getCurrentUser.getCurrentUser(req.user);

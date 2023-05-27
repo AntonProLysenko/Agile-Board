@@ -1,9 +1,9 @@
 const express  = require ('express')
 const router = express.Router()
 const Task = require('../models/Task')
-const User = require ('../models/user')
+// const User = require ('../models/user')
 
-const checkToken = require ("../models/checkToken")
+// const checkToken = require ("../models/checkToken")
 
 // let thisUser = require("./user")
 // let currentUser
@@ -12,33 +12,33 @@ const checkToken = require ("../models/checkToken")
 //CRUD
 
 // GET
-router.get ('/', (req,res)=>{
-    Task.find({},(err, foundTasks)=>{
-        if(!err){
-                res.status(200).json(foundTasks);            
+// router.get ('/', (req,res)=>{
+//     Task.find({},(err, foundTasks)=>{
+//         if(!err){
+//                 res.status(200).json(foundTasks);            
        
-        }else{
-            res.status(400).send(err)
-        }
+//         }else{
+//             res.status(400).send(err)
+//         }
     
-    })
-});
+//     })
+// });
 
 //sorting tasks by the status
 router.get('/table', (req,res)=>{
 
-    console.log(" thisOne in router  "+ thisOne);
+    // console.log(" currentUser in router  "+ currentUser.email);
 
-    console.log(thisOne);
+    // console.log(currentUser);
     
     
   Task.find({},  (err, foundTasks) => {
     if (!err) { 
         
-        console.log("All Tasks " + thisOne.email);
+        // console.log("All Tasks " + currentUser.email);
          
-        if (thisOne){
-            foundTasks =  foundTasks.filter((task) => task.user === thisOne.email); //filtering data by the current user in backend                         
+        // if (currentUser){
+            foundTasks =  foundTasks.filter((task) => task.user === currentUser.email); //filtering data by the current user in backend                         
             const formatedData = foundTasks.reduce((accumulator, task) => {
             //reduce will return an object instead array with props: status
             accumulator[task.status] = accumulator[task.status]
@@ -49,7 +49,7 @@ router.get('/table', (req,res)=>{
             res.status(200).json(formatedData);
 
         //    getCurrentUser(null);
-        }
+        // }
     } else {
       res.status(404).send(err);
     }
@@ -75,10 +75,10 @@ router.post('/', (req,res)=>{
 //READ
 router.get('/:id', (req,res)=>{
 
-    console.log("show Page "+ thisOne.email);
+    console.log("show Page "+ currentUser.email);
     
     Task.findById(req.params.id, (err,foundTask)=>{
-        if (foundTask.user == thisOne.email) {
+        if (foundTask.user == currentUser.email) {
           if (!err) {
             res.status(200).json(foundTask);
         //   getCurrentUser(null);
@@ -120,8 +120,8 @@ router.delete('/:id', (req,res)=>{
 })
 
 
-function getCurrentUser(user){
-   return currentUser = user
-}
+// function getCurrentUser(user){
+//    return currentUser = user
+// }
 
-module.exports = {getCurrentUser,router}
+module.exports = {router}

@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 // let currentUser
-const getCurrentUser = require("./task");
+// const getCurrentUser = require("./task");
 
 function createJWT(user) {
   return jwt.sign(
@@ -21,7 +21,7 @@ router.post('/', async (req, res)=>{
  try {
     const user = await User.create(req.body)
     const token = createJWT(user)
-    getCurrentUser.getCurrentUser(user);    
+    // getCurrentUser.getCurrentUser(user);    
      res.json(token);
  } 
  catch (error) {
@@ -36,7 +36,7 @@ router.post('/login', async(req,res)=>{
          if (!user) throw new Error();
           const match = await bcrypt.compare(req.body.password, user.password);//comparing entered password to users password
          if(!match) throw new Error()
-          getCurrentUser.getCurrentUser(user)
+          // getCurrentUser.getCurrentUser(user)
          res.json(createJWT(user));
 
     } catch (error) {
@@ -47,10 +47,8 @@ router.post('/login', async(req,res)=>{
 //GET/api/users/check-token
 router.get("/check-token",async (req,res)=>{
   // req.user will always be there for you when a token is sent
-  // console.log("req.user", req.user);
-  getCurrentUser.getCurrentUser(req.user);
 
-  console.log("routerCheck" + req.user);
+  // console.log("routerCheck" + req.user.email);
   
   res.json(req.exp);
 });
