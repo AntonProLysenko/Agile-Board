@@ -46,14 +46,17 @@ function App() {
     email: "",
     password: "",
   });
-  const[refreshLoad,setRefresh] = useState(true)
+  const [buttonPressed, setButtonPressed] = useState (false)//used for refetching data on status change
+  const [refreshLoad,setRefresh] = useState(true)
   const [tasks, setTasks] = useState({})//for lists of tasks
   const [emptyData, setEmptyData] = useState(true)//for loading in Lists.js
   const [task, setTask] = useState({}); // for single task in Show
-  const [buttonPressed, setButtonPressed] = useState (false)//used for refetching data on status change
+  const [showBodyValue, setBodyValue] = useState(task.body);//
   const [isOpen, setIsOpen] = useState(false)// create/edit form
   const [showOpen, setShowOpen] = useState(false)//show
   const [fetchShow, setFetchShow]=useState(false)//to fetch show
+
+
   const [showTrashBin, setShowTrashBin] = useState(false)
   const [listStatus, setListStatus]= useState()
 
@@ -205,11 +208,12 @@ function App() {
       try {
          const { status } = await axios.put(`${BASIC_URL}/tasks/${id}`, {
            entry: entry.current.value,
-           body: body.current.value,
+           body: showBodyValue,
            status: task.status,
            prevStatus: task.prevStatus,
            username: task.usename
-        });     
+          });     
+          setFetchShow(true)
 
         // console.log(div.innerHTML);
         
@@ -218,13 +222,16 @@ function App() {
           setButtonPressed(!buttonPressed);
           setIsOpen(false);
           entry.current.value = "";
-          body.current.value = "";
+          // body.current.value = "";
 
         } else {
           alert("Something went wrong!");
         }
 
       } catch (error) {
+        
+        console.log("here");
+        
         alert(error)
       }
     };
@@ -236,27 +243,62 @@ function App() {
   return (
     <div className="App">
       {user ? (
-        <div className='realApp'>
-         <header>
-          <img src={require('./assets/logo.png')} alt='logo'/>
+        <div className="realApp">
+          <header>
+            <img src={require("./assets/logo.png")} alt="logo" />
             <div className="title">
-              <p>Welcome, {user.name[0].toUpperCase()+user.name.slice(1).toLowerCase()}!</p>
+              <p>
+                Welcome,{" "}
+                {user.name[0].toUpperCase() + user.name.slice(1).toLowerCase()}!
+              </p>
             </div>
-            <div className='logOut'>
-              <span  onClick={() => {setUser(null); logOut();}}>Sign Out {logOutIcon}</span>
+            <div className="logOut">
+              <span
+                onClick={() => {
+                  setUser(null);
+                  logOut();
+                }}
+              >
+                Sign Out {logOutIcon}
+              </span>
             </div>
-         </header>
+          </header>
 
           <Routes>
-            <Route path ="/" element = {<Layout/>}/>{/*Added "/" to layout to prevent warning, cannot add it to Lists, since it dissapears on Show page */}
+            <Route path="/" element={<Layout />} />
+            {/*Added "/" to layout to prevent warning, cannot add it to Lists, since it dissapears on Show page */}
             {/* <Route path="/" element={ <Layout userName={user.name} setUser={setUser} logOut={logOut} logOutIcon={logOutIcon}/> }/> */}
 
-            <Route path=":id" element={ <Show task={task} setTask={setTask} buttonPressed={buttonPressed} setButtonPressed={setButtonPressed} fetchShow={fetchShow} setIsOpen={setIsOpen} open={setShowOpen} onClose={handleClose} editOpen={isOpen} BASIC_URL={BASIC_URL}/>}/>
+            <Route
+              path=":id"
+              element={
+                <Show
+                  task={task}
+                  setTask={setTask}
+                  buttonPressed={buttonPressed}
+                  setButtonPressed={setButtonPressed}
+                  fetchShow={fetchShow}
+                  setIsOpen={setIsOpen}
+                  open={setShowOpen}
+                  showBodyValue={showBodyValue}
+                  setBodyValue={setBodyValue}
+                  onClose={handleClose}
+                  editOpen={isOpen}
+                  BASIC_URL={BASIC_URL}
+                />
+              }
+            />
           </Routes>
-          <Lists tasks={tasks} handleClick={handleClick} setFetchShow={setFetchShow} plusIcon={plusIcon} checkListIcon={checkListIcon} setIsOpen={setIsOpen} setTask={setTask} emptyData={emptyData}/>
-           
-
-          
+          <Lists
+            tasks={tasks}
+            handleClick={handleClick}
+            setFetchShow={setFetchShow}
+            plusIcon={plusIcon}
+            checkListIcon={checkListIcon}
+            setIsOpen={setIsOpen}
+            setTask={setTask}
+            emptyData={emptyData}
+          />
 
           {/* <div className="addButton">
           <button onClick={()=>setIsOpen(true)}>
@@ -264,11 +306,20 @@ function App() {
           </button>
           </div> */}
 
-          <AddTaskForm open={isOpen} entry={entry} body={body} statusRef={statusRef} handleSubmit={handleSubmit} handleUpdate={handleUpdate} onClose={handleClose} 
+          <AddTaskForm
+            open={isOpen}
+            entry={entry}
+            body={body}
+            statusRef={statusRef}
+            handleSubmit={handleSubmit}
+            handleUpdate={handleUpdate}
+            onClose={handleClose}
             plusIcon={plusIcon}
             closeIcon={closeIcon}
             setIsOpen={setIsOpen}
             task={task}
+            showBodyValue={showBodyValue}
+            setBodyValue={setBodyValue}
           />
 
           <TrashBin
@@ -280,10 +331,13 @@ function App() {
             onClose={handleClose}
           />
 
-          <i className="trashBin" onClick={() => setShowTrashBin(true)}> {TrashBinIcon} </i>
+          <i className="trashBin" onClick={() => setShowTrashBin(true)}>
+            {" "}
+            {TrashBinIcon}{" "}
+          </i>
         </div>
       ) : (
-        <div className='AuthApp'>
+        <div className="AuthApp">
           {/* <h1>Please Log-in</h1> */}
           <Routes>
             <Route

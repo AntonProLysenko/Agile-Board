@@ -8,10 +8,10 @@ import MDEditor from "@uiw/react-md-editor";
 import * as usersService from "../utilities/user-service";
 import Layout from "../screens/layout/Layout";
 
-function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask,fetchShow, editOpen,open, onClose, BASIC_URL }) {
+function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask,fetchShow, showBodyValue,setBodyValue, editOpen,open, onClose, BASIC_URL }) {
   const idpar = useParams();
   const navigation = useNavigate();
-  const [value, setValue] = useState(task.body);
+  
 
   // let[currentBody, setCurrentBody] = useState([])
 
@@ -23,7 +23,7 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask,fetchSho
         await usersService.checkToken();
         const { data } = await axios.get(`${BASIC_URL}/tasks/${id}`);
         await setTask(data);
-        setValue(data.body);
+        setBodyValue(data.body);
         // setIsOpen(true)
         if(data){
           open(true);
@@ -81,10 +81,10 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask,fetchSho
 
 
   function loaded(){
-    let arrBody
-    if(task.body){
-       arrBody = task.body.split(".");
-    }
+    // let arrBody
+    // if(task.body){
+    //    arrBody = task.body.split(".");
+    // }
 
     let lastUpdate = moment(task.updatedAt).fromNow();
 
@@ -126,7 +126,7 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask,fetchSho
                         return <p key={idx}> {li} </p>;
                       }
                     })} */}
-                  <MDEditor.Markdown source={value} />
+                  <MDEditor.Markdown source={showBodyValue} />
                 </div>
               ) : (
                 <div className="emptyInstructions "></div>
@@ -167,8 +167,19 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask,fetchSho
 
   return (task._id===idpar.id? 
       loaded()
-   : 
-    <>Loading...</>
+   : <>
+     <Layout />
+        <div className="overlay" onClick={onClose}>
+          <div className="modalContainer">
+            <button className="close" >
+                x
+              </button>
+              <h1 className="listTitle showHideble">Loading...</h1>
+              <div></div>
+          </div>
+        </div>
+   </>
+        
   );
 }
 

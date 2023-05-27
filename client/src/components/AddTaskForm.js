@@ -2,10 +2,11 @@ import React from "react";
 import moment from "moment";
 
 
+import MDEditor from "@uiw/react-md-editor";
+import { useState } from "react";
 
-
-export default function AddTaskForm({open, entry, body, handleSubmit, handleUpdate, onClose, setIsOpen, plusIcon, task}) {
-
+export default function AddTaskForm({open, entry, body, handleSubmit, handleUpdate, showBodyValue,setBodyValue, onClose, setIsOpen, plusIcon, task}) {
+// const [value, setValue] = useState(task.body);
     if(!open) return null
 
 
@@ -45,8 +46,11 @@ export default function AddTaskForm({open, entry, body, handleSubmit, handleUpda
                   }}
                 >
                   <h3>Instructions:</h3>
+                  <div>
 
-                  <textarea className="emptyInstructions" type="text" ref={body} placeholder="Enter detailed information or hints here" defaultValue = {task.body}/>
+                  {/* <textarea className="emptyInstructions" type="text" ref={body} placeholder="Enter detailed information or hints here" defaultValue = {task.body}/> */}
+                  <MDEditor height={200} value={showBodyValue} onChange={setBodyValue} />
+                  </div>
 
                   <div className="moveBtn">
                     <button type="submit" >
