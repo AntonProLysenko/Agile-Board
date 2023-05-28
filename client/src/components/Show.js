@@ -95,7 +95,7 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask,fetchSho
         <div className="overlay" onClick={onClose}>
           <div className="modalContainer">
             <div className="showHeader">
-              <button className="close" onClick={onClose}>
+              <button className="close showHideble" onClick={onClose}>
                 x
               </button>
 
