@@ -99,14 +99,11 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask,fetchSho
                 x
               </button>
 
-              <h1 className="listTitle showHideble">{task.entry}</h1>
+              <h1 className="listTitle showHideble editable" onClick={() => setIsOpen(true)}>{task.entry}</h1>
 
               <div className="secondaryInfo showHideble">
                 <p className="taskStatus">
-                  In{" "}
-                  {task.status.charAt(0).toUpperCase() +
-                    task.status.slice(1).toLowerCase()}{" "}
-                  list{" "}
+                  In {task.status.charAt(0).toUpperCase() + task.status.slice(1).toLowerCase()} list
                 </p>
 
                 <p className="date">Updated: {lastUpdate} </p>
@@ -117,7 +114,7 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask,fetchSho
               <h3>Instructions:</h3>
 
               {task.body ? (
-                <div className="instructions" data-color-mode="light">
+                <div className="instructions" onClick={() => setIsOpen(true)} data-color-mode="light">
                   {/* {arrBody.map((li, idx) => {
                       if (arrBody[arrBody.length - 1] !== "") {
                         return <p key={idx}> {li} </p>;
@@ -126,7 +123,7 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask,fetchSho
                         return <p key={idx}> {li} </p>;
                       }
                     })} */}
-                  <MDEditor.Markdown source={showBodyValue} />
+                  <MDEditor.Markdown className="editable" source={showBodyValue} style={{borderRadius:"5px"}} />
                   {task.status === "ARCHIVE" ? (
                     <button
                       className="singleBtn"
@@ -153,7 +150,7 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask,fetchSho
                 </div>
               ) : (
                 <>
-                  <div className="emptyInstructions "></div>
+                  <div className="emptyInstructions editable" onClick={() => setIsOpen(true)}></div>
                   {task.status === "ARCHIVE" ? (
                     <button
                       className="singleBtn"

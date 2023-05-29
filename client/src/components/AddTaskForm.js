@@ -96,7 +96,7 @@ const codePreview={
                   <div className="instructions" data-color-mode="light">
 
                   {/* <textarea className="emptyInstructions" type="text" ref={body} placeholder="Enter detailed information or hints here" defaultValue = {task.body}/> */}
-                  <MDEditor height={"fit-content"} width={"100%"} value={showBodyValue} onChange={setBodyValue}  preview="edit" extraCommands={[codePreview, commands.fullscreen]}/>
+                  <MDEditor style={{borderRadius:"5px"}} height={"fit-content"} width={"100%"} value={showBodyValue} onChange={setBodyValue}  preview="edit" extraCommands={[codePreview, commands.fullscreen]}/>
 
                   <div className="moveBtn">
                     <button type="submit" >

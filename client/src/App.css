@@ -438,6 +438,12 @@ button{
   min-height:50px ;
   margin-bottom: 2.5vh;
 }
+.editable{
+  cursor:pointer
+}
+.editable:hover{
+  background-color: whitesmoke;
+}
 
 ol{
   text-align: left;
