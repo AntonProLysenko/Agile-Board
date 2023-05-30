@@ -12,17 +12,17 @@ const Task = require('../models/Task')
 //CRUD
 
 // GET
-// router.get ('/', (req,res)=>{
-//     Task.find({},(err, foundTasks)=>{
-//         if(!err){
-//                 res.status(200).json(foundTasks);            
+router.get ('/', (req,res)=>{
+    Task.find({},(err, foundTasks)=>{
+        if(!err){
+                res.status(200).json(foundTasks);            
        
-//         }else{
-//             res.status(400).send(err)
-//         }
+        }else{
+            res.status(400).send(err)
+        }
     
-//     })
-// });
+    })
+});
 
 //sorting tasks by the status
 router.get('/table', (req,res)=>{
