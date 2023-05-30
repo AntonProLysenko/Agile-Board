@@ -31,14 +31,6 @@ export default function TrashBin({ tasks, user, handleClick, open, closeIcon, on
                         >
                           Restore
                         </button>
-                        {/* <button
-                        onClick={() => {
-                            handleClick("TO-DO", task._id);
-                        }}
-                        >
-                        To-Do
-                        </button> */}
-                      
                     </div>
                   );
                 }

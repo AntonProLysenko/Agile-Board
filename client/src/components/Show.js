@@ -123,7 +123,10 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask,fetchSho
                         return <p key={idx}> {li} </p>;
                       }
                     })} */}
-                  <MDEditor.Markdown onClick={() => setIsOpen(true)} className="editable"  source={showBodyValue} style={{borderRadius:"5px"}} />
+                    <div onClick={() => setIsOpen(true)}>
+
+                  <MDEditor.Markdown  className="editable"  source={showBodyValue} style={{borderRadius:"5px"}} />
+                    </div>
                   {task.status === "ARCHIVE" ? (
                     <button className="singleBtn" onClick={() => { navigation(`/`); handleArchivation("ARCHIVE", task.status, task._id); }}>
                       Delete Forever
