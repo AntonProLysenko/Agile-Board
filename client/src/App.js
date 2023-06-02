@@ -14,6 +14,7 @@ import Show from "./components/Show";
 import AddTaskForm from "./components/AddTaskForm";
 import Lists from "./components/Lists";
 import TrashBin from './components/TrashBin';
+import ErrorPage from './screens/ErrorPage';
 // import logo from '../assets/logo.png'
 
 
@@ -288,6 +289,7 @@ function App() {
                 />
               }
             />
+            <Route path="/error" element={<ErrorPage />} />
           </Routes>
           <Lists
             tasks={tasks}
