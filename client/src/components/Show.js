@@ -32,11 +32,9 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask,fetchSho
           
         }
       } catch (error) {
-        navigation("/error");
+        navigation("/");
         console.log(error)
-        alert(
-          `Server responded with code:${error.response.status} message: ${error.response.statusText}${error.response.data.message}`
-        );
+        alert(`Server responded with code:${error.response.status} message: ${error.response.statusText}${error.response.data.message}`);
       }
     }
     getTask(idpar.id);
