@@ -25,11 +25,12 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask,fetchSho
         await setTask(data);
         setBodyValue(data.body);
         // setIsOpen(true)
+
+        console.log(data);
+        
         if(data){
           open(true);
-
           console.log("opening");
-          
         }
       } catch (error) {
         navigation("/");

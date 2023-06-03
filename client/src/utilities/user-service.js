@@ -39,9 +39,15 @@ export function checkToken(){
 }
 
 export async function logIn(credentials) {
-  const token = await usersApi.logIn(credentials);
-  localStorage.setItem("token", token);
-  return getUser();
+    const token = await usersApi.logIn(credentials);
+    if(token){
+      localStorage.setItem("token", token)
+      console.log("seted token");
+      return getUser();
+    }
+    // }else{
+    //   throw new Error('Invalid Login')
+    // }
 }
 
 export function logOut(){

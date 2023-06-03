@@ -94,7 +94,7 @@ function App() {
       // console.log(refreshLoad);
       
     } else {
-      localStorage.removeItem("token");//to prevent bug where token stays undefined and error do not allow to load the app
+      localStorage.clear();//to prevent bug where token stays undefined and error do not allow to load the app
       alert(
         "The development of this app is ongoing! The backend is completed. However, the work on styles is still in progress. Therefore, I kindly request that you reserve your judgement on the styles until they have been finalized."
       );
@@ -161,15 +161,18 @@ function App() {
       // The promise returned by the signUp service method
       // will resolve to the user object included in the
       // payload of the JSON Web Token (JWT)
-      // setButtonPressed(!buttonPressed);
+      // setButtonPressed(!buttonPressed);      
       const user = await usersService.logIn(credentials);
       setUser(user);
       // usersService.checkToken();
       setButtonPressed(!buttonPressed);
       setCredentials({email:"", password:""})//clearing form
       setError("")
-    } catch {
-      setError("Log In Failed - Try Again");
+    } catch(error) {
+
+      console.log(error.message);
+      
+      setError(error.message);
     }
   }
 
@@ -217,23 +220,17 @@ function App() {
           });     
           setFetchShow(true)
 
-        // console.log(div.innerHTML);
-        
         if (status === 200) {
          
           setButtonPressed(!buttonPressed);
           setIsOpen(false);
           entry.current.value = "";
           // body.current.value = "";
-
         } else {
           alert("Something went wrong!");
         }
-
       } catch (error) {
-        
         console.log("here");
-        
         alert(error)
       }
     };

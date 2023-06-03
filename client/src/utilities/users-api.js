@@ -1,4 +1,5 @@
 import { getToken } from "./user-service";
+import axios from "axios";
 
 const BASIC_URL = process.env.REACT_APP_BASIC_URL;
 
@@ -13,21 +14,36 @@ export async function signUp(userData) {
     //if success
     return res.json();
   } else {
+
+    console.log(res);
+    
     throw new Error("Invalid Sign Up");
   }
 }
 
-export async function logIn(credentials) {
-  const res = await fetch(`${BASIC_URL}/api/users/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(credentials),
-  });
-  if (res.ok) {
-    //if success
-    return res.json();
-  } else {
-    throw new Error("Invalid Email or Password");
+// export async function logIn(credentials) {
+//   const res = await fetch(`${BASIC_URL}/api/users/login`, {
+//     method: "POST",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify(credentials),
+//   });
+//   if (res.ok) {
+//     //if success
+//     return res.json();
+//   }else{
+//    throw Error("w");
+//   }
+// }
+
+export async function logIn (credentials){
+  try {
+    const res = await axios.post(`${BASIC_URL}/api/users/login`, {
+      user:credentials,
+    });
+    return res.data;
+  } catch (error) {
+    throw new Error(error.response.data.message)
+    // console.log(error);   
   }
 }
 
