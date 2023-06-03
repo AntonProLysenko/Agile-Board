@@ -25,22 +25,42 @@ router.post('/', async (req, res)=>{
      res.json(token);
  } 
  catch (error) {
+
+  console.log(error.keyPattern.email);
+  if(error.keyPattern.email==1){
+    res.status(401).send({message:"This User Already Exist"});
+  }else{
     res.status(440).json(error)
+  }
  }
 })
 
 // POST /api/users/login
 router.post('/login', async(req,res)=>{
-    try {
-        const user = await User.findOne({email: req.body.email})//finding user based on email
-         if (!user) throw new Error();
-          const match = await bcrypt.compare(req.body.password, user.password);//comparing entered password to users password
-         if(!match) throw new Error()
+    try {        
+        const user = await User.findOne({email: req.body.user.email})//finding user based on email
+
+        if (!user){ 
+          //  res.status(404).send({ message: "We Cound't Find It" });
+           throw new Error("User not Found");
+        }
+          const match = await bcrypt.compare(req.body.user.password, user.password);//comparing entered password to users password
+         if(!match){
+          throw new Error("Pasword incorect");
+          // res.status(200).send({message:"Wrong Pass!"})
+         }
+          //throw new Error("Wrong password")
           // getCurrentUser.getCurrentUser(user)
          res.json(createJWT(user));
 
     } catch (error) {
-        res.status(404).json(error);
+
+      console.log(error.message);
+      
+        res.status(401).send({message:error.message});
+
+        // console.log(res.status);
+        
     }
 })
 
