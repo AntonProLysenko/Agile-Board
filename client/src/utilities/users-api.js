@@ -3,23 +3,38 @@ import axios from "axios";
 
 const BASIC_URL = process.env.REACT_APP_BASIC_URL;
 
-export async function signUp(userData) {
-  //   return sendRequest("/api/users", "POST", userData);
-  const res = await fetch(`${BASIC_URL}/api/users`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(userData),
-  });
-  if (res.ok) {
-    //if success
-    return res.json();
-  } else {
+export async function signUp(userData){
+  try {
+    const res = await axios.post(`${BASIC_URL}/api/users`, {
+      user: userData,
+    });
 
-    console.log(res);
+    console.log(userData);
     
-    throw new Error("Invalid Sign Up");
+    return res.data;
+  } catch (error) {
+    console.log(error.response.data.message);
+    throw new Error(error.response.data.message);
   }
 }
+
+// export async function signUp(userData) {
+//   //   return sendRequest("/api/users", "POST", userData);
+//   const res = await fetch(`${BASIC_URL}/api/users`, {
+//     method: "POST",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify(userData),
+//   });
+//   if (res.ok) {
+//     //if success
+//     return res.json();
+//   } else {
+
+//     console.log(res);
+    
+//     throw new Error("Invalid Sign Up");
+//   }
+// }
 
 // export async function logIn(credentials) {
 //   const res = await fetch(`${BASIC_URL}/api/users/login`, {

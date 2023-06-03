@@ -19,14 +19,17 @@ function createJWT(user) {
 // POST /api/users
 router.post('/', async (req, res)=>{
  try {
-    const user = await User.create(req.body)
+
+  console.log(req.body);
+  
+    const user = await User.create(req.body.user)
     const token = createJWT(user)
     // getCurrentUser.getCurrentUser(user);    
      res.json(token);
  } 
  catch (error) {
 
-  console.log(error.keyPattern.email);
+  console.log(error);
   if(error.keyPattern.email==1){
     res.status(401).send({message:"This User Already Exist"});
   }else{
@@ -39,28 +42,13 @@ router.post('/', async (req, res)=>{
 router.post('/login', async(req,res)=>{
     try {        
         const user = await User.findOne({email: req.body.user.email})//finding user based on email
-
-        if (!user){ 
-          //  res.status(404).send({ message: "We Cound't Find It" });
-           throw new Error("User not Found");
-        }
-          const match = await bcrypt.compare(req.body.user.password, user.password);//comparing entered password to users password
-         if(!match){
-          throw new Error("Pasword incorect");
-          // res.status(200).send({message:"Wrong Pass!"})
-         }
-          //throw new Error("Wrong password")
+          if (!user)throw new Error("User not Found");
+        const match = await bcrypt.compare(req.body.user.password, user.password);//comparing entered password to users password
+          if(!match)throw new Error("Pasword incorect");
           // getCurrentUser.getCurrentUser(user)
-         res.json(createJWT(user));
-
-    } catch (error) {
-
-      console.log(error.message);
-      
+        res.json(createJWT(user));
+    } catch (error) {      
         res.status(401).send({message:error.message});
-
-        // console.log(res.status);
-        
     }
 })
 

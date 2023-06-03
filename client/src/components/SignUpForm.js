@@ -32,8 +32,8 @@ handleNewUser = async (evt) =>{
         const user = await signUp(formData);
         this.props.setUser(user);
         this.props.setButtonPressed(!this.props.buttonPressed);
-      } catch (error) {
-        this.setState({ error: "Sign Up Failed - Try Again" });
+      } catch (err) {
+        this.setState({ error: err.message });
       }
     }
 }
