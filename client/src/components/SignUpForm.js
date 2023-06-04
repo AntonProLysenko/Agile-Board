@@ -15,29 +15,35 @@ state = {
     handleChange = (evt) => {
   this.setState({
     [evt.target.name]: evt.target.value,
-    error: ''
+    error: '',
   });
 };
 
 handleNewUser = async (evt) =>{
     evt.preventDefault();
-    try {
-        const formData = {...this.state}
-        delete formData.error
-        delete formData.confirm
+    if (this.state.password !== this.state.confirm){
+        this.setState({ error: "Passwords doesn't match" });
+    }else{
+      try {
+        const formData = { ...this.state };
+        delete formData.error;
+        delete formData.confirm;
 
-        const user = await signUp(formData)
-       this.props.setUser(user)
-       this.props.setButtonPressed(!this.props.buttonPressed)
-    } catch (error) {      
+        const user = await signUp(formData);
+        this.props.setUser(user);
+        this.props.setButtonPressed(!this.props.buttonPressed);
+      } catch (error) {
         this.setState({ error: "Sign Up Failed - Try Again" });
+      }
     }
 }
 
   
 
   render() {
-  const disable = this.state.password !== this.state.confirm
+  const disable=false
+  //  = this.state.password !== this.state.confirm
+  // if(disable)this.setState({ error: "Password doesn't match" });
   return (
     <div>
       <div className="authForm-container">
@@ -51,7 +57,7 @@ handleNewUser = async (evt) =>{
           <input type="password" name="password"  onChange={this.handleChange} required />
           <label>Confirm</label>
           <input type="password" name="confirm"  onChange={this.handleChange} required />
-          <button  className="authBtn"type="submit" disabled={disable}>SIGN UP</button>
+          <button className="authBtn"type="submit" disabled={disable}>SIGN UP</button>
           <p className="error-message">&nbsp;{this.state.error}</p>
          <p>Already have an account? &nbsp;<span className="formChange" onClick={() => {this.props.setNewUser(false)}}>Sign In</span></p>
         </form>
