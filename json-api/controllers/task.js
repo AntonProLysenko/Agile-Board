@@ -78,15 +78,17 @@ router.get('/:id', (req,res)=>{
     console.log("show Page "+ currentUser.email);
     
     Task.findById(req.params.id, (err,foundTask)=>{
-        if (foundTask.user == currentUser.email) {
+        if (foundTask&&(foundTask.user == currentUser.email)) {
           if (!err) {
             res.status(200).json(foundTask);
-        //   getCurrentUser(null);
+            //   getCurrentUser(null);
           } else {
-            res.status(404).send(err);
+            res.status(400).send({message:"Unexpected Error "+ err});
           }
-        } else {
-          res.status(403).json({message:"Acces Denaid "+err});
+        } else if(!foundTask){
+          res.status(404).send({message: "We Cound't Find It" });
+        }else if(foundTask.user !== currentUser.email){
+            res.status(403).send({ message: "Acces Denaid" });
         }
     })
 })
