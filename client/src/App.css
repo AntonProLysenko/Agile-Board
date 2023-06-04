@@ -751,8 +751,8 @@ ol>li{
 
 /*Auth Page*/
   .AuthApp, .App{
-    height: 100vh;
-    width: 100vw;
+    height: 100dvh;
+    width: 100dvw;
   }
   
 
@@ -761,8 +761,8 @@ ol>li{
   } */
 
   .authForm-container{
-    height: 100vh;
-    width:100vw
+    height: 100dvh;
+    width:100dvw
   }
 
 
@@ -777,8 +777,8 @@ ol>li{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    width:100vw;
-    height:100vh;
+    width:100dvw;
+    height:100dvh;
     /*  overflow-x: scroll;  */
   }
 
@@ -793,8 +793,8 @@ ol>li{
     scroll-snap-type: x mandatory;
   }
   .section{
-    min-width: 92vw;
-    max-height: 78vh;
+    min-width: 92dvw;
+    max-height: 78dvh;
     scroll-snap-align: center;
     margin:0 10px
   }
@@ -808,9 +808,77 @@ ol>li{
 
 
   .modalContainer, .trashModalContainer, .editModal {
-    width:85vw;
-    height: 80vh;
+    width:85dvw;
+    height: 80dvh;
   }
 
 
+}
+
+
+
+/*Error Page*/
+.error-page{
+  height: 100dvh;
+  width:100dvw;
+
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  top:60px;
+  right:0;
+  bottom: 0;
+  left:0;
+
+  z-index:700000 ;
+
+  font-size: 18px;
+  font-family: "Vibur", sans-serif;
+  background-color: #010a01;
+}
+
+.error-page>h1, .error-page>h2,.error-page>h3, .error-page>a{
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 400;
+
+  /* text-decoration: none; */
+
+
+  color: #fff;
+  text-shadow:
+      0 0 7px #fff,
+      0 0 10px #fff,
+      0 0 21px #fff,
+      0 0 42px rgb(0, 229, 255),
+      0 0 82px rgb(0, 229, 255),
+      0 0 92px rgb(0, 229, 255),
+      0 0 102px rgb(0, 229, 255),
+      0 0 151px rgb(0, 229, 255),
+      0 0 181px rgb(0, 229, 255),
+      0 0 211px rgb(0, 229, 255),
+      0 0 221px rgb(0, 229, 255),
+      0 0 241px rgb(0, 229, 255),
+      /* 0 0 270px rgb(0, 229, 255); */
+
+}
+
+
+.error-page>a,.error-page>h2{
+  margin-top: 30px;
+}
+
+ 
+.error-page>h1 {
+    font-size: 4.2rem;
+}
+  
+.error-page>h2{
+    font-size: 1.8rem;
+}
+.error-page>h3{
+  font-size: 1.5rem;
 }
