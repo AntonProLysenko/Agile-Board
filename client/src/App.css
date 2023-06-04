@@ -777,8 +777,8 @@ ol>li{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    width:100vw;
-    height:100vh;
+    width:100dvw;
+    height:100dvh;
     /*  overflow-x: scroll;  */
   }
 
@@ -793,8 +793,8 @@ ol>li{
     scroll-snap-type: x mandatory;
   }
   .section{
-    min-width: 92vw;
-    max-height: 78vh;
+    min-width: 92dvw;
+    max-height: 78dvh;
     scroll-snap-align: center;
     margin:0 10px
   }
@@ -808,8 +808,8 @@ ol>li{
 
 
   .modalContainer, .trashModalContainer, .editModal {
-    width:85vw;
-    height: 80vh;
+    width:85dvw;
+    height: 80dvh;
   }
 
 
