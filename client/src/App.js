@@ -91,9 +91,10 @@ function App() {
     if (user) {
       // console.log("fetching by user" + user.email);
       fetchTask();
-      console.log(refreshLoad);
+      // console.log(refreshLoad);
       
     } else {
+      localStorage.removeItem("token");//to prevent bug where token stays undefined and error do not allow to load the app
       alert(
         "The development of this app is ongoing! The backend is completed. However, the work on styles is still in progress. Therefore, I kindly request that you reserve your judgement on the styles until they have been finalized."
       );
