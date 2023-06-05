@@ -26,13 +26,17 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask,fetchSho
         setBodyValue(data.body);        
         if(data){
           open(true);
-          console.log("opening");
         }
       } catch (error) {
-        console.log(error.response.data.message)
-        setErrorMessage(error.response.data.message);
-        setErrorCode(error.response.status);
-        navigation("*");
+        if(error.response){
+          setErrorMessage(error.response.data.message);
+          setErrorCode(error.response.status);
+          navigation("*");
+        }else{
+          setErrorMessage("Server is not responding");
+          setErrorCode("444");
+          navigation("*")
+        }
         // alert(`Server responded with code:${error.response.status} message: ${error.response.statusText}${error.response.data.message}`);
       }
     }

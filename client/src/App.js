@@ -44,8 +44,9 @@ function App() {
   const [user, setUser] = useState(getUser());
   const [error, setError] = useState("");
 
-  const [errorMessage, setErrorMessage] = useState("")
-  const [errorCode, setErrorCode] = useState("");
+  const [errorMessage, setErrorMessage] = useState("Bad Request");
+  const [errorCode, setErrorCode] = useState("400");
+  const [errorHeight, setErrorHeight]= useState("60px")
   
   const [credentials, setCredentials] = useState({
     email: "",
@@ -89,7 +90,12 @@ function App() {
           });
         });
       } catch (error) {
-        alert("Something went wrong!" + error);
+        // alert("Something went wrong!" + error);
+        navigation("/*");
+        if (error.message.includes("data")) {
+          setErrorMessage("Server is not responding");
+          setErrorCode("444");
+        }
       }
     };
 
@@ -101,9 +107,6 @@ function App() {
       
     } else {
       localStorage.clear();//to prevent bug where token stays undefined and error do not allow to load the app
-      alert(
-        "The development of this app is ongoing! The backend is completed. However, the work on styles is still in progress. Therefore, I kindly request that you reserve your judgement on the styles until they have been finalized."
-      );
     }
   },[buttonPressed, refreshLoad]);
 
@@ -174,11 +177,17 @@ function App() {
       setButtonPressed(!buttonPressed);
       setCredentials({email:"", password:""})//clearing form
       setError("")
-    } catch(error) {
-
-      console.log(error.message);
-      
-      setError(error.message);
+    } catch(error) {      
+      if (error.message.includes("data")){
+        navigation("/*")
+        setErrorMessage("Server is not responding");
+        setErrorCode("444")
+        setError("");
+        setErrorHeight("0");
+        setCredentials({ email: "", password: "" });
+      }else{
+        setError(error.message);
+      }
     }
   }
 
@@ -236,7 +245,6 @@ function App() {
           alert("Something went wrong!");
         }
       } catch (error) {
-        console.log("here");
         alert(error)
       }
     };
@@ -262,6 +270,7 @@ function App() {
                 onClick={() => {
                   setUser(null);
                   logOut();
+                  navigation("/")//for redirecting from error page
                 }}
               >
                 Sign Out {logOutIcon}
@@ -291,7 +300,7 @@ function App() {
                 />
               }
             />
-            <Route path="*"element={<ErrorPage errorMessage={errorMessage} errorCode={errorCode}/>}/>
+            <Route path="*"element={<ErrorPage errorMessage={errorMessage} errorCode={errorCode} errorHeight={errorHeight}/>}/>
           </Routes>
           <Lists
             tasks={tasks}
@@ -343,20 +352,15 @@ function App() {
         <div className="AuthApp">
           {/* <h1>Please Log-in</h1> */}
           <Routes>
-            <Route
-              path="/"
-              element={
-                <AuthPage
+            <Route path="/" element={ <AuthPage
                   setUser={setUser}
                   setButtonPressed={setButtonPressed}
                   buttonPressed={buttonPressed}
                   handleLogin={handleLogin}
                   credentials={credentials}
                   handleChange={handleChange}
-                  error={error}
-                />
-              }
-            />
+                  error={error}/>}/>
+                  <Route path="*"element={<ErrorPage errorMessage={errorMessage} errorCode={errorCode} errorHeight={errorHeight}/>}/>
           </Routes>
         </div>
       )}

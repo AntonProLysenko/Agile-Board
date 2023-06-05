@@ -1,13 +1,16 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 
-export default function ErrorPage({errorMessage, errorCode} ) {
+export default function ErrorPage({errorMessage, errorCode, errorHeight} ) {
   console.log(errorMessage);
-  // console.log(errorMessageCode);
+  console.log(errorCode);
 
+console.log(errorHeight);
+
+let topPadding = {top:`${errorHeight}`}
   return (
     <>
-      <div className='error-page'>
+      <div className='error-page' style={topPadding}>
       <h1>Error</h1>
       <h1> {errorCode} </h1> 
       <h2>{errorMessage}</h2>

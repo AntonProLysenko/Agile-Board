@@ -9,11 +9,11 @@ export async function signUp(userData){
       user: userData,
     });
 
-    console.log(userData);
+    // console.log(userData);
     
     return res.data;
   } catch (error) {
-    console.log(error.response.data.message);
+    // console.log(error.response.data.message);
     throw new Error(error.response.data.message);
   }
 }
@@ -92,7 +92,6 @@ export  function checkToken() {
     const token = getToken();
 
  if (token) {
-  console.log(atob(token.split(".")[1]));
    // Ensure the headers object exists
    options.headers = options.headers || {};
    // Add token to an Authorization header
