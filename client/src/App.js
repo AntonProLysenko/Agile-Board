@@ -43,6 +43,10 @@ const checkListIcon = <FontAwesomeIcon icon={faListCheck} />;
 function App() {
   const [user, setUser] = useState(getUser());
   const [error, setError] = useState("");
+
+  const [errorMessage, setErrorMessage] = useState("")
+  const [errorCode, setErrorCode] = useState("");
+  
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -60,6 +64,8 @@ function App() {
 
   const [showTrashBin, setShowTrashBin] = useState(false)
   const [listStatus, setListStatus]= useState()
+
+  // const[error]
 
   const entry = useRef(null)
   const body = useRef(null);
@@ -247,7 +253,7 @@ function App() {
             <img src={require("./assets/logo.png")} alt="logo" />
             <div className="title">
               <p>
-                Welcome,{" "}
+                Welcome,
                 {user.name[0].toUpperCase() + user.name.slice(1).toLowerCase()}!
               </p>
             </div>
@@ -281,13 +287,11 @@ function App() {
                   open={setShowOpen}
                   showBodyValue={showBodyValue}
                   setBodyValue={setBodyValue}
-                  onClose={handleClose}
-                  editOpen={isOpen}
-                  BASIC_URL={BASIC_URL}
+                  onClose={handleClose} editOpen={isOpen} BASIC_URL={BASIC_URL} setErrorMessage={setErrorMessage} setErrorCode={setErrorCode}
                 />
               }
             />
-            <Route path="/error" element={<ErrorPage />} />
+            <Route path="*"element={<ErrorPage errorMessage={errorMessage} errorCode={errorCode}/>}/>
           </Routes>
           <Lists
             tasks={tasks}
@@ -332,8 +336,7 @@ function App() {
           />
 
           <i className="trashBin" onClick={() => setShowTrashBin(true)}>
-            {" "}
-            {TrashBinIcon}{" "}
+            {TrashBinIcon}
           </i>
         </div>
       ) : (

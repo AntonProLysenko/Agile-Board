@@ -8,7 +8,7 @@ import MDEditor from "@uiw/react-md-editor";
 import * as usersService from "../utilities/user-service";
 import Layout from "../screens/layout/Layout";
 
-function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask,fetchShow, showBodyValue,setBodyValue, editOpen,open, onClose, BASIC_URL }) {
+function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask,fetchShow, showBodyValue,setBodyValue, editOpen,open, setErrorMessage, setErrorCode, onClose, BASIC_URL }) {
   const idpar = useParams();
   const navigation = useNavigate();
   
@@ -23,19 +23,17 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask,fetchSho
         await usersService.checkToken();
         const { data } = await axios.get(`${BASIC_URL}/tasks/${id}`);
         await setTask(data);
-        setBodyValue(data.body);
-        // setIsOpen(true)
-
-        console.log(data);
-        
+        setBodyValue(data.body);        
         if(data){
           open(true);
           console.log("opening");
         }
       } catch (error) {
-        navigation("/");
-        console.log(error)
-        alert(`Server responded with code:${error.response.status} message: ${error.response.statusText}${error.response.data.message}`);
+        console.log(error.response.data.message)
+        setErrorMessage(error.response.data.message);
+        setErrorCode(error.response.status);
+        navigation("*");
+        // alert(`Server responded with code:${error.response.status} message: ${error.response.statusText}${error.response.data.message}`);
       }
     }
     getTask(idpar.id);
@@ -83,14 +81,7 @@ function Show({ buttonPressed, setButtonPressed, setIsOpen,task,setTask,fetchSho
 
 
   function loaded(){
-    // let arrBody
-    // if(task.body){
-    //    arrBody = task.body.split(".");
-    // }
-
     let lastUpdate = moment(task.updatedAt).fromNow();
-
-      
     return (
       <>
         <Layout />
