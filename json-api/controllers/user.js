@@ -19,17 +19,12 @@ function createJWT(user) {
 // POST /api/users
 router.post('/', async (req, res)=>{
  try {
-
-  console.log(req.body);
-  
     const user = await User.create(req.body.user)
     const token = createJWT(user)
     // getCurrentUser.getCurrentUser(user);    
      res.json(token);
  } 
  catch (error) {
-
-  console.log(error);
   if(error.keyPattern.email==1){
     res.status(401).send({message:"This User Already Exist"});
   }else{
@@ -55,9 +50,6 @@ router.post('/login', async(req,res)=>{
 //GET/api/users/check-token
 router.get("/check-token",async (req,res)=>{
   // req.user will always be there for you when a token is sent
-
-  // console.log("routerCheck" + req.user.email);
-  
   res.json(req.exp);
 });
 
