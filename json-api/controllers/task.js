@@ -83,12 +83,12 @@ router.get('/:id', (req,res)=>{
             res.status(200).json(foundTask);
             //   getCurrentUser(null);
           } else {
-            res.status(400).send({message:"Unexpected Error "+ err});
+            res.status(400).send({message:"Unexpected Error "});
           }
         } else if(!foundTask){
           res.status(404).send({message: "We Cound't Find It" });
         }else if(foundTask.user !== currentUser.email){
-            res.status(403).send({ message: "Acces Denaid" });
+            res.status(403).send({ message: "Acces Denied" });
         }
     })
 })
