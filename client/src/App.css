@@ -848,22 +848,54 @@ ol>li{
   /* text-decoration: none; */
 
 
-  color: #fff;
-  text-shadow:
-      0 0 7px #fff,
-      0 0 10px #fff,
-      0 0 21px #fff,
-      0 0 42px rgb(0, 229, 255),
+  
+  
+   animation: blinking 1.5s infinite alternate;
+}
+
+@keyframes blinking{
+  0%, 18%, 22%, 25%, 53%, 57%,84%, 100% {
+    color: #fff;
+    text-shadow:
+      0 0 7px #fecbcb,
+      /* 0 0 10px #fff, */
+      0 0 21px #fecbcb,
+      /* 0 0 42px rgb(0, 255, 234), 
       0 0 82px rgb(0, 229, 255),
-      0 0 92px rgb(0, 229, 255),
-      0 0 102px rgb(0, 229, 255),
-      0 0 151px rgb(0, 229, 255),
+      0 0 92px rgb(0, 229, 255); */
+      0 0 42px rgb(255, 0, 153), 
+      0 0 82px rgb(255, 0, 153),
+      0 0 92px rgb(255, 0, 153),
+      0 0 102px rgb(255, 0, 153);
+      /*0 0 151px rgb(0, 229, 255),
       0 0 181px rgb(0, 229, 255),
       0 0 211px rgb(0, 229, 255),
       0 0 221px rgb(0, 229, 255),
       0 0 241px rgb(0, 229, 255),
-      /* 0 0 270px rgb(0, 229, 255); */
-
+      0 0 270px rgb(0, 229, 255); */
+  }
+   20%, 24%, 55%,70% { 
+    color: #fff;       
+    text-shadow:
+      0 0 7px #fecbcb,
+      /* 0 0 10px #fff, */
+      0 0 21px #fecbcb,
+      0 0 42px rgb(255, 0, 153), 
+      0 0 82px rgb(255, 0, 153);
+  } 
+  10%,60%,82%{
+    color: #fecbcb;
+    text-shadow:  
+    0 0 7px #fecbcb,
+    0 0 10px #fecbcb,
+    0 0 21px #fecbcb,
+    0 0 102px rgb(255, 0, 153);
+    /* 0 0 42px rgb(255, 0, 153); */
+  }
+  12%,92%{
+    color: #010a01;
+    text-shadow: none;
+  }
 }
 
 
