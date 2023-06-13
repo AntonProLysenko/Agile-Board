@@ -1,5 +1,5 @@
 # Task-Tacker
-the app has separeted backend deployed on render so on first log in give it a time to wake up
+
 
 use 
 email:test@test
