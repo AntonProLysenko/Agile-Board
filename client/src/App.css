@@ -182,6 +182,7 @@ button{
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  width: 100%;
 }
 
 .listTitle{
@@ -208,11 +209,6 @@ color:white;
 }
 
 
-
-
-
-
-
 /*Tasks*/
 .task {
   margin: 10px 0px ;
@@ -223,7 +219,7 @@ color:white;
   align-items: center;
   height: 8dvh;
   min-height: 55px;
-  width: 95%;
+  width: 85%;
   min-width: 340px;
   border-radius: 15px;
   background-color: rgba(239, 238, 255, 0.8) ;
@@ -800,6 +796,7 @@ ol>li{
   }
   .list{
     overflow-x: hidden;
+    /* width:100% */
   }
 
 
