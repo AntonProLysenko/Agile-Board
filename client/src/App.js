@@ -82,65 +82,18 @@ function App() {
       try {
         await usersService.checkToken();
         let {data} = await axios.get(`${BASIC_URL}/tasks/table`, { headers: { reqUser: user.email } })
-        // .then( (res) => {
-          
-        //   let data  = res.data
-        //   console.log("DATA", data);
-        //   console.log(res.data);
-          
-        //   if (res.data == "Refetch"){
-        //     // fetchTask()
+        
+       if (data !== "Refetch"){
 
-        //     console.log("Wrong Data");
-            
-        //   }else{
-        //     // {data}  = res.data;
-
-        //     console.log(res.data);
-            
-        //     console.log("DATA",data);
-        //     setTasks({data});
-
-        //     console.log(tasks);
-            
-        //   }
-
-        //   })
-
-        //   console.log("TASKS",tasks);
-
-
-
-          
-          // let {destructData} = data
-
-            // console.log(data);
-            
-            // if (data == "Refetch") {
-            //   // fetchTask()
-            //   console.log("inTHEN");
-
-            //  await axios.get(`${BASIC_URL}/tasks/table`, {
-            //     headers: { reqUser: user.email },
-            //   });
-            // } else setTasks(data);
-          // }); //promising to fetch using axios
-      
-        // if(data == "Refetch"){
-        //   let refetchTimeout = setTimeout(async()=>{
-        //     console.log("die");
-        //     let { data } = await axios.get(`${BASIC_URL}/tasks/table`, {headers:{ reqUser: user.email}})
-        //    
-        //   ;}, 5000)
-        //   clearTimeout(refetchTimeout)
-        // }
-
-
-        setTasks(data);
-        // console.log(data);
-        if (data !== "Refetch") setEmptyData(false);
-        setRefresh(false)
-
+        console.log("Correct Loading");
+        
+        setTasks(data)
+        setEmptyData(false)
+        setRefresh(false);
+       }else{
+        console.log("Refetching");
+        fetchTask()
+       }
         const titleBtn = document.querySelectorAll(".titleBtn");
           titleBtn.forEach(function (i) {
             i.addEventListener("click", (evt) => {
@@ -150,8 +103,6 @@ function App() {
       } catch (error) {
 
         console.log("ERROR",error);
-        
-        // alert("Something went wrong!" + error);
         navigation("/*");
         if (error.message.includes("data")) {
           setErrorMessage("Server is not responding");
