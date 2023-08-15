@@ -89,7 +89,9 @@ export  function checkToken() {
     options.headers = { 'Content-Type': 'application/json' };
     options.body = JSON.stringify(payload);
   }
-    const token = getToken();
+
+
+  const token = getToken();
 
  if (token) {
    // Ensure the headers object exists

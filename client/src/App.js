@@ -76,6 +76,8 @@ function App() {
 
 
   useEffect(() => {
+
+
     const fetchTask = async () => {
       try {
         await usersService.checkToken();
@@ -104,7 +106,6 @@ function App() {
       // console.log("fetching by user" + user.email);
       fetchTask();
       // console.log(refreshLoad);
-      
     } else {
       localStorage.clear();//to prevent bug where token stays undefined and error do not allow to load the app
     }
