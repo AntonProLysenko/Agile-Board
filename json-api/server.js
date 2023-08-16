@@ -24,6 +24,7 @@ app.use(express.json())
 
 app.use(express.static(path.join(__dirname, "build")));
 app.use(token);
+app.use(token);
 
 // function authenticateToken(req,res,next){
 //     const authHeader = req.headers['authorization']

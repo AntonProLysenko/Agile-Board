@@ -38,7 +38,7 @@ router.get('/table', (req,res)=>{
         // console.log("All Tasks " + currentUser.email);
          
         // if (currentUser){
-            foundTasks =  foundTasks.filter((task) => task.user === currentUser.email); //filtering data by the current user in backend                         
+            foundTasks =  foundTasks.filter((task) => task.user === currentUser.email); //filtering data by the current user(asigning value in middleware) in backend                         
             const formatedData = foundTasks.reduce((accumulator, task) => {
             //reduce will return an object instead array with props: status
             accumulator[task.status] = accumulator[task.status]

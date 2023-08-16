@@ -13,7 +13,7 @@ module.exports = function (req, res, next) {
       // If invalid token, err will be set
       req.user = err ? null : decoded.user;
       // If your app cares... (optional)
-      req.exp = err ? null : new Date(decoded.exp * 1000);
+      req.exp = err ? null : new Date(decoded.exp * 1000);//renewing token exp date
 
       console.log("chek.token middleware"+ JSON.stringify(req.user));
       currentUser = req.user
