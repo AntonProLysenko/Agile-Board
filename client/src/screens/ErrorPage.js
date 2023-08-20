@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 
-export default function ErrorPage({errorMessage, errorCode, errorHeight} ) {
+export default function ErrorPage({errorMessage, errorCode, errorHeight,setButtonPressed, buttonPressed} ) {
   console.log(errorMessage);
   console.log(errorCode);
 
@@ -14,7 +14,7 @@ let topPadding = {top:`${errorHeight}`}
       <h1>Error</h1>
       <h1> {errorCode} </h1> 
       <h2>{errorMessage}</h2>
-      <Link to ="/"><h3>Go back to main page</h3></Link>
+      <Link to ="/" onClick={()=>setButtonPressed(!buttonPressed)}><h3>Go back to main page</h3></Link>
 
       </div>
     </>

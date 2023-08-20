@@ -271,7 +271,7 @@ function App() {
                 onClick={() => {
                   setUser(null);
                   logOut();
-                  navigation("/")//for redirecting from error page
+                  navigation("/"); //for redirecting from error page
                 }}
               >
                 Sign Out {logOutIcon}
@@ -297,11 +297,24 @@ function App() {
                   open={setShowOpen}
                   showBodyValue={showBodyValue}
                   setBodyValue={setBodyValue}
-                  onClose={handleClose} editOpen={isOpen} BASIC_URL={BASIC_URL} setErrorMessage={setErrorMessage} setErrorCode={setErrorCode}
+                  onClose={handleClose}
+                  editOpen={isOpen}
+                  BASIC_URL={BASIC_URL}
+                  setErrorMessage={setErrorMessage}
+                  setErrorCode={setErrorCode}
                 />
               }
             />
-            <Route path="*"element={<ErrorPage errorMessage={errorMessage} errorCode={errorCode} errorHeight={errorHeight}/>}/>
+            <Route
+              path="*"
+              element={
+                <ErrorPage
+                  errorMessage={errorMessage}
+                  errorCode={errorCode}
+                  errorHeight={errorHeight}
+                />
+              }
+            />
           </Routes>
           <Lists
             tasks={tasks}
@@ -353,15 +366,32 @@ function App() {
         <div className="AuthApp">
           {/* <h1>Please Log-in</h1> */}
           <Routes>
-            <Route path="/" element={ <AuthPage
+            <Route
+              path="/"
+              element={
+                <AuthPage
                   setUser={setUser}
                   setButtonPressed={setButtonPressed}
                   buttonPressed={buttonPressed}
                   handleLogin={handleLogin}
                   credentials={credentials}
                   handleChange={handleChange}
-                  error={error}/>}/>
-                  <Route path="*"element={<ErrorPage errorMessage={errorMessage} errorCode={errorCode} errorHeight={errorHeight}/>}/>
+                  error={error}
+                />
+              }
+            />
+            <Route
+              path="*"
+              element={
+                <ErrorPage
+                  errorMessage={errorMessage}
+                  errorCode={errorCode}
+                  errorHeight={errorHeight}
+                  setButtonPressed={setButtonPressed}
+                  buttonPressed={buttonPressed}
+                />
+              }
+            />
           </Routes>
         </div>
       )}
