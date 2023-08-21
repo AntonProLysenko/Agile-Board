@@ -86,6 +86,7 @@ function App() {
        if (data !== "Refetch"){
 
         console.log("Correct Loading");
+         
         
         setTasks(data)
         setEmptyData(false)
