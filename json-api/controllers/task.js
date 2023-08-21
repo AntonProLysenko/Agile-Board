@@ -1,6 +1,7 @@
 const express  = require ('express')
 const router = express.Router()
 const Task = require('../models/Task')
+// const token = require("../models/checkToken");
 // const User = require ('../models/user')
 
 // const checkToken = require ("../models/checkToken")
@@ -25,31 +26,27 @@ router.get ('/', (req,res)=>{
 });
 
 //sorting tasks by the status
-router.get('/table', (req,res)=>{
-
-    // console.log(" currentUser in router  "+ currentUser.email);
-
-    // console.log(currentUser);
-    
-    
+router.get('/table', (req,res)=>{    
   Task.find({},  (err, foundTasks) => {
     if (!err) { 
-        
-        // console.log("All Tasks " + currentUser.email);
-         
-        // if (currentUser){
-            foundTasks =  foundTasks.filter((task) => task.user === currentUser.email); //filtering data by the current user(asigning value in middleware) in backend                         
-            const formatedData = foundTasks.reduce((accumulator, task) => {
-            //reduce will return an object instead array with props: status
-            accumulator[task.status] = accumulator[task.status]
-                ? [...accumulator[task.status], task]
-                : [task];
-            return accumulator; //always return acc in reduce func
-            }, {}); //definig that it will be an obj;
-            res.status(200).json(formatedData);
 
-        //    getCurrentUser(null);
-        // }
+        // if (currentUser){
+            if (currentUser.email === req.headers.requser) {
+                foundTasks =  foundTasks.filter((task) => task.user === currentUser.email); //filtering data by the current user(asigning value in middleware) in backend                         
+                const formatedData = foundTasks.reduce((accumulator, task) => {
+                    //reduce will return an object instead array with props: status
+                    accumulator[task.status] = accumulator[task.status]
+                    ? [...accumulator[task.status], task]
+                    : [task];
+                    return accumulator; //always return acc in reduce func
+                }, {}); //definig that it will be an obj;
+                res.status(200).json(formatedData);
+            }
+            else{
+                refetchReq = "Refetch"
+                res.status(200).json(refetchReq);
+            }
+
     } else {
       res.status(404).send(err);
     }

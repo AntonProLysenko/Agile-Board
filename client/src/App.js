@@ -81,10 +81,66 @@ function App() {
     const fetchTask = async () => {
       try {
         await usersService.checkToken();
-        let { data } = await axios.get(`${BASIC_URL}/tasks/table`); //promising to fetch using axios
+        let {data} = await axios.get(`${BASIC_URL}/tasks/table`, { headers: { reqUser: user.email } })
+        // .then( (res) => {
+          
+        //   let data  = res.data
+        //   console.log("DATA", data);
+        //   console.log(res.data);
+          
+        //   if (res.data == "Refetch"){
+        //     // fetchTask()
+
+        //     console.log("Wrong Data");
+            
+        //   }else{
+        //     // {data}  = res.data;
+
+        //     console.log(res.data);
+            
+        //     console.log("DATA",data);
+        //     setTasks({data});
+
+        //     console.log(tasks);
+            
+        //   }
+
+        //   })
+
+        //   console.log("TASKS",tasks);
+
+
+
+          
+          // let {destructData} = data
+
+            // console.log(data);
+            
+            // if (data == "Refetch") {
+            //   // fetchTask()
+            //   console.log("inTHEN");
+
+            //  await axios.get(`${BASIC_URL}/tasks/table`, {
+            //     headers: { reqUser: user.email },
+            //   });
+            // } else setTasks(data);
+          // }); //promising to fetch using axios
+      
+        // if(data == "Refetch"){
+        //   let refetchTimeout = setTimeout(async()=>{
+        //     console.log("die");
+        //     let { data } = await axios.get(`${BASIC_URL}/tasks/table`, {headers:{ reqUser: user.email}})
+        //    
+        //   ;}, 5000)
+        //   clearTimeout(refetchTimeout)
+        // }
+
+
         setTasks(data);
-        setEmptyData(false)
+        // console.log(data);
+        if (data !== "Refetch") setEmptyData(false);
         setRefresh(false)
+
         const titleBtn = document.querySelectorAll(".titleBtn");
           titleBtn.forEach(function (i) {
             i.addEventListener("click", (evt) => {
@@ -92,6 +148,9 @@ function App() {
           });
         });
       } catch (error) {
+
+        console.log("ERROR",error);
+        
         // alert("Something went wrong!" + error);
         navigation("/*");
         if (error.message.includes("data")) {
@@ -103,13 +162,14 @@ function App() {
 
 
     if (user) {
-      // console.log("fetching by user" + user.email);
-      fetchTask();
-      // console.log(refreshLoad);
-    } else {
+      // while(emptyData){
+        fetchTask();
+        console.log(emptyData);
+        
+      } else {
       localStorage.clear();//to prevent bug where token stays undefined and error do not allow to load the app
     }
-  },[buttonPressed, refreshLoad]);
+  },[buttonPressed]);
 
 
 
@@ -170,8 +230,7 @@ function App() {
     try {
       // The promise returned by the signUp service method
       // will resolve to the user object included in the
-      // payload of the JSON Web Token (JWT)
-      // setButtonPressed(!buttonPressed);      
+      // payload of the JSON Web Token (JWT)  
       const user = await usersService.logIn(credentials);
       setUser(user);
       // usersService.checkToken();
