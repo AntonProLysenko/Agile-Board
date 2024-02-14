@@ -36,7 +36,7 @@ export default function LoginForm({ setUser, setButtonPressed, buttonPressed, se
           </p>
         </form>
       </div>
-       {alert("Email: test@test Password: test")}
+       
     </div>
   );
 }
