@@ -18,7 +18,6 @@ export default function AuthPage({setUser,setButtonPressed, buttonPressed, handl
   };
 
   useEffect(() => {
-    // call api or anything
     showToastMessage()
  },[]);
 
@@ -26,10 +25,7 @@ export default function AuthPage({setUser,setButtonPressed, buttonPressed, handl
 
     !newUser?
     <>
-    {/* <button onClick={}>Notify</button> */}
-
-      <ToastContainer />
-    {/* {alert("Email: test@test Password: testis")} */}
+    <ToastContainer/>{/* alert */}
     <LoginForm setUser={setUser} setNewUser={setNewUser} setButtonPressed={setButtonPressed} buttonPressed= {buttonPressed} handleLogin={handleLogin} credentials={credentials} handleChange={handleChange} error={error}/>
     </> 
   :(
