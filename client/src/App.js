@@ -77,79 +77,83 @@ function App() {
   const navigation = useNavigate();
 
 
-  useEffect(() => {
-    const fetchTask = async () => {
-      try {
-        await usersService.checkToken();
-        let {data} = await axios.get(`${BASIC_URL}/tasks/table`, { headers: { reqUser: user.email } })
-        
-        if (data !== "Refetch"){
 
+
+  const checkIfBackroundImageISLoaded = ()=>{
+    const body = document.body
+    const backgroundImage = window.getComputedStyle(body).backgroundImage
+    //To check if image is loaded we need to asign it to the BackgroundImg and than check if the BackgroundImg is loaded 
+    //But since the url is redirecting eachtime we need to match it and load exactly the same image
+      
+    const urlMatch = backgroundImage.match(/url\(["']?(.*?)["']?\)/);
+ 
+    
+    //Checking if image was loaded,
+    //if not setting lockal image to source and loading it again
+    const checkImageLoad = (imgUrl) =>{
+      const img = new Image()
+      img.src = imgUrl
+
+      img.onload = () =>{
+        console.log("BG is fully loaded");
+        setIsBecgroundImgLoaded(true); // Set state to indicate it's loaded
+      }
+      img.onerror = () =>{
+        console.error("Failed to load BG image");
+        if(img.src = urlMatch[1]){
+          document.body.style.backgroundImage  = 'url(/img/standart_bg.jpg)'
+          console.log("Trying local BG image...");
+          //Recursive call with lockal sourse
+          checkImageLoad('/img/standart_bg.jpg');
+        }else{
+          console.log("Local image also failed, no further fallback.");
+          setIsBecgroundImgLoaded(true);
+        }
+      }
+    }
+    //Calling function with current internet image sourse
+    checkImageLoad(urlMatch[1])
+  }
+
+  const fetchTask = async () => {
+    try {
+      await usersService.checkToken();
+      let {data} = await axios.get(`${BASIC_URL}/tasks/table`, { headers: { reqUser: user.email } })
+      
+      if (data !== "Refetch"){
         console.log("Correct Loading");
-          
-        
+      
         setTasks(data)
         setEmptyData(false)
         setRefresh(false);
-        }else{
+      }else{
         console.log("Refetching");
         fetchTask()
-        }
-        const titleBtn = document.querySelectorAll(".titleBtn");
-          titleBtn.forEach(function (i) {
-            i.addEventListener("click", (evt) => {
-            setListStatus(evt.target.id);
-          });
+      }
+      const titleBtn = document.querySelectorAll(".titleBtn");
+      titleBtn.forEach(function (i) {
+        i.addEventListener("click", (evt) => {
+          setListStatus(evt.target.id);
         });
-      } catch (error) {
+      });
 
-        console.log("ERROR",error);
-        navigation("/*");
-        if (error.message.includes("data")) {
-          setErrorMessage("Server is not responding");
-          setErrorCode("444");
-        }
+    } catch (error) {
+      console.log("ERROR",error);
+      navigation("/*");
+      if (error.message.includes("data")) {
+        setErrorMessage("Server is not responding");
+        setErrorCode("444");
       }
-    };
-
-    const checkIfBackroundImageISLoaded = ()=>{
-      const body = document.body
-      const backgroundImage = window.getComputedStyle(body).backgroundImage
-      //To check if image is loaded we need to asign it to the BackgroundImg and than check if the BackgroundImg is loaded 
-      //But since the url is redirecting eachtime we need to match it and load exactly the same image
-        
-      const urlMatch = backgroundImage.match(/url\(["']?(.*?)["']?\)/);
-   
-      
-      //Checking if image was loaded,
-      //if not setting lockal image to source and loading it again
-      const checkImageLoad = (imgUrl) =>{
-        const img = new Image()
-        img.src = imgUrl
-
-        img.onload = () =>{
-          console.log("BG is fully loaded");
-          setIsBecgroundImgLoaded(true); // Set state to indicate it's loaded
-        }
-        img.onerror = () =>{
-          console.error("Failed to load BG image");
-          if(img.src = urlMatch[1]){
-            document.body.style.backgroundImage  = 'url(/img/standart_bg.jpg)'
-            console.log("Trying local BG image...");
-            //Recursive call with lockal sourse
-            checkImageLoad('/img/standart_bg.jpg');
-          }else{
-            console.log("Local image also failed, no further fallback.");
-            setIsBecgroundImgLoaded(true);
-          }
-        }
-      }
-      //Calling function with current internet image sourse
-      checkImageLoad(urlMatch[1])
     }
+  };
 
+
+  //Use Effect onMount
+  useEffect(()=>{
     checkIfBackroundImageISLoaded()
-
+  },[])
+//Use Effect For button Click 
+  useEffect(() => {
     if (user) {
       // while(emptyData){
         fetchTask();

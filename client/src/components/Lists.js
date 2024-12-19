@@ -58,7 +58,7 @@ export default function Lists({ emptyData, tasks, setFetchShow, handleClick, set
                 );
               // }
             })
-            : "No Tasks"}
+            : "No Tickets"}
         </div>
       </div>
 

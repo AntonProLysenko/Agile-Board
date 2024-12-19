@@ -125,13 +125,14 @@ const codePreview={
             <button className="close" onClick={onClose}>
               x
             </button>
+            <h1 className="listTitle">Add Ticket</h1>
             <form className="form showHeader" onSubmit={handleSubmit}>
               <input type="text" ref={entry} placeholder="Enter title" />
 
               <textarea
                 type="text"
                 ref={body}
-                placeholder="Enter detailed information or hints here"
+                placeholder="Enter user storie, check list or detailed information or hints here"
               />
 
               <button type="submit" className="singleBtn">

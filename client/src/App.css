@@ -420,6 +420,7 @@ button{
   background-color: transparent;
   min-width:99%;
   /* margin-bottom: 2.5dvh; */
+  /* height: 100%; */
   min-height:50px ;
   height: fit-content;
 }
@@ -483,7 +484,7 @@ ol>li{
   margin:0;
   padding:0;
   width: 100%;
-  height: 50%;
+  height: 80%;
   display: flex;
   flex-direction: column;
   /* justify-content: space-between; */
@@ -492,6 +493,7 @@ ol>li{
 .form>textarea{
   height: fit-content;
   min-height:50px ;
+  height: 70%;
   width:99%;
 
 
