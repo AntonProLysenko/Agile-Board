@@ -439,7 +439,8 @@ button{
   margin-bottom: 2.5dvh;
 }
 .editable{
-  cursor:pointer
+  cursor:pointer;
+  text-align: left;
 }
 .editable:hover{
   background-color: whitesmoke;
