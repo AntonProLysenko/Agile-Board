@@ -26,6 +26,7 @@ import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { faListCheck } from "@fortawesome/free-solid-svg-icons";
 // import { faPersonFromPortal } from "@fortawesome/free-solid-svg-icons";
 
+// import {bgImage} from"../public/img/standart_bg.jpg"
 
 
 
@@ -41,6 +42,7 @@ const checkListIcon = <FontAwesomeIcon icon={faListCheck} />;
 
 
 function App() {
+  const [isBacgroundImgLoaded, setIsBecgroundImgLoaded] = useState(false)
   const [user, setUser] = useState(getUser());
   const [error, setError] = useState("");
 
@@ -76,25 +78,23 @@ function App() {
 
 
   useEffect(() => {
-
-
     const fetchTask = async () => {
       try {
         await usersService.checkToken();
         let {data} = await axios.get(`${BASIC_URL}/tasks/table`, { headers: { reqUser: user.email } })
         
-       if (data !== "Refetch"){
+        if (data !== "Refetch"){
 
         console.log("Correct Loading");
-         
+          
         
         setTasks(data)
         setEmptyData(false)
         setRefresh(false);
-       }else{
+        }else{
         console.log("Refetching");
         fetchTask()
-       }
+        }
         const titleBtn = document.querySelectorAll(".titleBtn");
           titleBtn.forEach(function (i) {
             i.addEventListener("click", (evt) => {
@@ -112,6 +112,43 @@ function App() {
       }
     };
 
+    const checkIfBackroundImageISLoaded = ()=>{
+      const body = document.body
+      const backgroundImage = window.getComputedStyle(body).backgroundImage
+      //To check if image is loaded we need to asign it to the BackgroundImg and than check if the BackgroundImg is loaded 
+      //But since the url is redirecting eachtime we need to match it and load exactly the same image
+        
+      const urlMatch = backgroundImage.match(/url\(["']?(.*?)["']?\)/);
+   
+      
+      //Checking if image was loaded,
+      //if not setting lockal image to source and loading it again
+      const checkImageLoad = (imgUrl) =>{
+        const img = new Image()
+        img.src = imgUrl
+
+        img.onload = () =>{
+          console.log("BG is fully loaded");
+          setIsBecgroundImgLoaded(true); // Set state to indicate it's loaded
+        }
+        img.onerror = () =>{
+          console.error("Failed to load BG image");
+          if(img.src = urlMatch[1]){
+            document.body.style.backgroundImage  = 'url(/img/standart_bg.jpg)'
+            console.log("Trying local BG image...");
+            //Recursive call with lockal sourse
+            checkImageLoad('/img/standart_bg.jpg');
+          }else{
+            console.log("Local image also failed, no further fallback.");
+            setIsBecgroundImgLoaded(true);
+          }
+        }
+      }
+      //Calling function with current internet image sourse
+      checkImageLoad(urlMatch[1])
+    }
+
+    checkIfBackroundImageISLoaded()
 
     if (user) {
       // while(emptyData){
@@ -266,148 +303,154 @@ function App() {
   
   
   return (
-    <div className="App">
-      {user ? (
-        <div className="realApp">
-          <header>
-            <img src={require("./assets/logo.png")} alt="logo" />
-            <div className="title">
-              <p>
-                Welcome,
-                {user.name[0].toUpperCase() + user.name.slice(1).toLowerCase()}!
-              </p>
+    isBacgroundImgLoaded?(
+      <div className="App">
+        {user ? (
+          // isBacgroundImgLoaded ? (
+            <div className="realApp">
+              <header>
+                <img src={require("./assets/logo.png")} alt="logo" />
+                <div className="title">
+                  <p>
+                    Welcome,
+                    {user.name[0].toUpperCase() + user.name.slice(1).toLowerCase()}!
+                  </p>
+                </div>
+                <div className="logOut">
+                  <span
+                    onClick={() => {
+                      setUser(null);
+                      logOut();
+                      navigation("/"); //for redirecting from error page
+                    }}
+                  >
+                    Sign Out {logOutIcon}
+                  </span>
+                </div>
+              </header>
+
+              <Routes>
+                <Route path="/" element={<Layout />} />
+                {/*Added "/" to layout to prevent warning, cannot add it to Lists, since it dissapears on Show page */}
+                {/* <Route path="/" element={ <Layout userName={user.name} setUser={setUser} logOut={logOut} logOutIcon={logOutIcon}/> }/> */}
+
+                <Route
+                  path=":id"
+                  element={
+                    <Show
+                      task={task}
+                      setTask={setTask}
+                      buttonPressed={buttonPressed}
+                      setButtonPressed={setButtonPressed}
+                      fetchShow={fetchShow}
+                      setIsOpen={setIsOpen}
+                      open={setShowOpen}
+                      showBodyValue={showBodyValue}
+                      setBodyValue={setBodyValue}
+                      onClose={handleClose}
+                      editOpen={isOpen}
+                      BASIC_URL={BASIC_URL}
+                      setErrorMessage={setErrorMessage}
+                      setErrorCode={setErrorCode}
+                    />
+                  }
+                />
+                <Route
+                  path="*"
+                  element={
+                    <ErrorPage
+                      errorMessage={errorMessage}
+                      errorCode={errorCode}
+                      errorHeight={errorHeight}
+                    />
+                  }
+                />
+              </Routes>
+              <Lists
+                tasks={tasks}
+                handleClick={handleClick}
+                setFetchShow={setFetchShow}
+                plusIcon={plusIcon}
+                checkListIcon={checkListIcon}
+                setIsOpen={setIsOpen}
+                setTask={setTask}
+                emptyData={emptyData}
+              />
+
+              {/* <div className="addButton">
+              <button onClick={()=>setIsOpen(true)}>
+              {plusIcon} Add New Task
+              </button>
+              </div> */}
+
+              <AddTaskForm
+                open={isOpen}
+                entry={entry}
+                body={body}
+                statusRef={statusRef}
+                handleSubmit={handleSubmit}
+                handleUpdate={handleUpdate}
+                onClose={handleClose}
+                plusIcon={plusIcon}
+                closeIcon={closeIcon}
+                setIsOpen={setIsOpen}
+                task={task}
+                showBodyValue={showBodyValue}
+                setBodyValue={setBodyValue}
+              />
+
+              <TrashBin
+                tasks={tasks}
+                user={user}
+                open={showTrashBin}
+                handleClick={handleClick}
+                closeIcon={closeIcon}
+                onClose={handleClose}
+              />
+
+              <i className="trashBin" onClick={() => setShowTrashBin(true)}>
+                {TrashBinIcon}
+              </i>
             </div>
-            <div className="logOut">
-              <span
-                onClick={() => {
-                  setUser(null);
-                  logOut();
-                  navigation("/"); //for redirecting from error page
-                }}
-              >
-                Sign Out {logOutIcon}
-              </span>
-            </div>
-          </header>
-
-          <Routes>
-            <Route path="/" element={<Layout />} />
-            {/*Added "/" to layout to prevent warning, cannot add it to Lists, since it dissapears on Show page */}
-            {/* <Route path="/" element={ <Layout userName={user.name} setUser={setUser} logOut={logOut} logOutIcon={logOutIcon}/> }/> */}
-
-            <Route
-              path=":id"
-              element={
-                <Show
-                  task={task}
-                  setTask={setTask}
-                  buttonPressed={buttonPressed}
-                  setButtonPressed={setButtonPressed}
-                  fetchShow={fetchShow}
-                  setIsOpen={setIsOpen}
-                  open={setShowOpen}
-                  showBodyValue={showBodyValue}
-                  setBodyValue={setBodyValue}
-                  onClose={handleClose}
-                  editOpen={isOpen}
-                  BASIC_URL={BASIC_URL}
-                  setErrorMessage={setErrorMessage}
-                  setErrorCode={setErrorCode}
-                />
-              }
-            />
-            <Route
-              path="*"
-              element={
-                <ErrorPage
-                  errorMessage={errorMessage}
-                  errorCode={errorCode}
-                  errorHeight={errorHeight}
-                />
-              }
-            />
-          </Routes>
-          <Lists
-            tasks={tasks}
-            handleClick={handleClick}
-            setFetchShow={setFetchShow}
-            plusIcon={plusIcon}
-            checkListIcon={checkListIcon}
-            setIsOpen={setIsOpen}
-            setTask={setTask}
-            emptyData={emptyData}
-          />
-
-          {/* <div className="addButton">
-          <button onClick={()=>setIsOpen(true)}>
-          {plusIcon} Add New Task
-          </button>
-          </div> */}
-
-          <AddTaskForm
-            open={isOpen}
-            entry={entry}
-            body={body}
-            statusRef={statusRef}
-            handleSubmit={handleSubmit}
-            handleUpdate={handleUpdate}
-            onClose={handleClose}
-            plusIcon={plusIcon}
-            closeIcon={closeIcon}
-            setIsOpen={setIsOpen}
-            task={task}
-            showBodyValue={showBodyValue}
-            setBodyValue={setBodyValue}
-          />
-
-          <TrashBin
-            tasks={tasks}
-            user={user}
-            open={showTrashBin}
-            handleClick={handleClick}
-            closeIcon={closeIcon}
-            onClose={handleClose}
-          />
-
-          <i className="trashBin" onClick={() => setShowTrashBin(true)}>
-            {TrashBinIcon}
-          </i>
-        </div>
-      ) : (
-        <div className="AuthApp">
-          {/* <h1>Please Log-in</h1> */}
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <AuthPage
-                  setUser={setUser}
-                  setButtonPressed={setButtonPressed}
-                  buttonPressed={buttonPressed}
-                  handleLogin={handleLogin}
-                  credentials={credentials}
-                  handleChange={handleChange}
-                  error={error}
-                />
-              }
-            />
-            <Route
-              path="*"
-              element={
-                <ErrorPage
-                  errorMessage={errorMessage}
-                  errorCode={errorCode}
-                  errorHeight={errorHeight}
-                  setButtonPressed={setButtonPressed}
-                  buttonPressed={buttonPressed}
-                />
-              }
-            />
-          </Routes>
-        </div>
-      )}
-    </div>
-  );
+              // ):(<h6>Loading...</h6>)
+        ) : (
+          
+          <div className="AuthApp">
+            {/* <h1>Please Log-in</h1> */}
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <AuthPage
+                    setUser={setUser}
+                    setButtonPressed={setButtonPressed}
+                    buttonPressed={buttonPressed}
+                    handleLogin={handleLogin}
+                    credentials={credentials}
+                    handleChange={handleChange}
+                    error={error}
+                  />
+                }
+              />
+              <Route
+                path="*"
+                element={
+                  <ErrorPage
+                    errorMessage={errorMessage}
+                    errorCode={errorCode}
+                    errorHeight={errorHeight}
+                    setButtonPressed={setButtonPressed}
+                    buttonPressed={buttonPressed}
+                  />
+                }
+              />
+            </Routes>
+          </div>
+    
+        )}
+      </div>
+    ):(<h6>Loading...</h6>)
+  )
 
 
 }
