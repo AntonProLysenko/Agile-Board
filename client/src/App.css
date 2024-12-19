@@ -11,19 +11,8 @@ header,
 }
 
 
-.realApp {
-  width: 100dvw;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  /* justify-content: center; */
-  align-items: center;
-  font-family:'Times New Roman', Times, serif;
-  /* overflow: auto; */
-  /* overflow-y: none; */
-}
+
+
 
 body{
   height: 100dvh;
@@ -177,6 +166,8 @@ button{
     -moz-backdrop-filter:blur(3px)
   /* box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; */
 }
+
+
 
 
 .list {
@@ -738,7 +729,7 @@ ol>li{
 
 
 
-
+/* Mobile Phone */
 @media only screen and (max-width: 431px){
   /* #root{
     position: relative;
@@ -779,6 +770,7 @@ ol>li{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    /* min-width: 100dvw; */
     width:100dvw;
     height:100dvh;
     /*  overflow-x: scroll;  */
@@ -796,6 +788,7 @@ ol>li{
   }
   .section{
     min-width: 92dvw;
+    max-width: 92dvw;
     max-height: 78dvh;
     scroll-snap-align: center;
     margin:0 10px
@@ -814,8 +807,56 @@ ol>li{
     width:85dvw;
     height: 80dvh;
   }
+}
+
+/*  */
+
+@media screen and (max-width: 1500px) and (min-width: 432px) and (orientation: portrait) {
+  .AuthApp, .App{
+    height: 100dvh;
+    width: 100dvw;
+  }
+
+  .realApp{
+    /* position: relative; */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width:100dvw;
+    height:100dvh;
+    /*  overflow-x: scroll;  */
+  }
+
+    .container{
+    width:100%;
+    height: fit-content;
+    /* max-height: 85vh; */
+    /* min-height:81vh; */
+    justify-content: flex-start;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+  }
+  .section{
+    min-width: 50dvw;
+    max-height: 78dvh;
+    scroll-snap-align: center;
+    margin:0 10px
+  }
+  .list{
+    overflow-x: hidden;
+    /* width:100% */
+  }
 
 
+
+
+
+
+  .modalContainer, .trashModalContainer, .editModal {
+    width:85dvw;
+    height: 80dvh;
+  }
 }
 
 
