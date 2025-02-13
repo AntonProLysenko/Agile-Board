@@ -379,7 +379,8 @@ button{
 
 .showInfo{
   height: fit-content;
-  margin-top: -5dvh;
+  /* margin-top: -5dvh; */
+  margin-top: 5%;
   width:100%;
   display:flex;
   justify-self:flex-end;
